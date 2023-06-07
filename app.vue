@@ -1,5 +1,22 @@
+<script setup lang="ts">
+import TheHeader from "~/components/common/TheHeader.vue";
+</script>
+
 <template>
-  <div>
-    <NuxtWelcome />
-  </div>
+  <NuxtLayout>
+    <div class="content">
+      <TheHeader />
+      <NuxtPage />
+    </div>
+  </NuxtLayout>
+
 </template>
+
+<style scoped lang="scss">
+  .content {
+    width: 1312px;
+    margin: 0 auto;
+    padding: 48px 64px;
+  }
+
+</style>

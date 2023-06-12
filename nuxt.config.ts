@@ -4,11 +4,13 @@ export default defineNuxtConfig({
     modules: [
         'nuxt-icons',
         '@nuxtjs/i18n',
+        '@nuxtjs/color-mode',
+        '@nuxt/image',
     ],
 
     css: [
         'normalize.css/normalize.css',
-        '~/assets/styles/global.scss'
+        '~/assets/styles/global.scss',
     ],
 
     i18n: {
@@ -25,6 +27,9 @@ export default defineNuxtConfig({
         langDir: "locales",
         defaultLocale: "en",
     },
+    image: {
+        // Options
+    }
 
 
 });

@@ -28,7 +28,7 @@ export default defineNuxtConfig({
         defaultLocale: "en",
     },
     image: {
-        // Options
+        dir: 'assets/images'
     }
 
 

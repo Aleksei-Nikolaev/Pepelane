@@ -17,7 +17,7 @@ import TheColorModeSwitcher from "~/components/common/TheColorModeSwitcher.vue";
 </template>
 
 <style scoped lang="scss">
-  .header {
-    display: flex;
-  }
+.header {
+  display: flex;
+}
 </style>

@@ -3,23 +3,33 @@
 </script>
 
 <template>
-<div class="user__container">
-  <span class="">User Name</span>
   <client-only>
-    <TheImage />
+    <div class="user-info__container">
+      <span class="user-info__name">Biba Boba</span>
+      <TheImage class="user-info__image"/>
+    </div>
   </client-only>
-</div>
 </template>
 
 <style scoped lang="scss">
 
-    .user__container {
-      width: 200px;
-      height: 100px;
+    .user-info {
+      &__container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin-left: 60px;
+      }
+
+      &__image {
+        max-width: 56px;
+        width: 100vh;
+        height: 100%;
+        border-radius: 50%;
+        margin-left: 16px;
+      }
     }
-    .image__container {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-    }
+
+
+
 </style>

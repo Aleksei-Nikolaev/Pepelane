@@ -22,6 +22,7 @@ const onImageLoad = () => {
 </template>
 
 <style scoped lang="scss">
+
   .image__container {
     position: relative;
 
@@ -31,8 +32,8 @@ const onImageLoad = () => {
       object-fit: cover;
       position: absolute;
       border-radius: inherit;
-
     }
+
     &__skeleton {
       width: 100%;
       height: 100%;

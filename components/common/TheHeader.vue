@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import TheColorModeSwitcher from "~/components/common/TheColorModeSwitcher.vue";
+import TheImage from "~/components/common/TheImage.vue";
+import TheUserInfo from "~/components/common/TheUserInfo.vue";
+
 
 </script>
 
@@ -12,6 +15,10 @@ import TheColorModeSwitcher from "~/components/common/TheColorModeSwitcher.vue";
     <nuxt-icon name="Chat" filled />
     <nuxt-icon name="Bell" filled />
 
+    <TheUserInfo />
+
+
+
 
   </header>
 </template>
@@ -20,4 +27,9 @@ import TheColorModeSwitcher from "~/components/common/TheColorModeSwitcher.vue";
 .header {
   display: flex;
 }
+
+
+
+
+
 </style>

@@ -18,7 +18,7 @@
 </script>
 
 <template>
-<div>{{ count }}</div>
+<!--<div>{{ count }}</div>-->
 <!--  <button @click="handleClick">Click</button>-->
 <!--  <p>{{ obj.name }} {{ obj.age }}</p>-->
 <!--  <p>{{ firtsComp }}</p>-->

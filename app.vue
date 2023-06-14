@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TheHeader from "~/components/common/TheHeader.vue";
+import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
 </script>
 
 <template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import TheLightModeTemplate from "~/components/common/header/TheLightModeTemplate.vue";
-import TheDarkModeTemplate from "~/components/common/header/TheDarkModeTemplate.vue";
+
 
 const colorMode = useColorMode()
 

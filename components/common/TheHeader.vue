@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TheColorModeSwitcher from "~/components/common/header/TheColorModeSwitcher.vue";
-import TheImage from "~/components/common/TheImage.vue";
 import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
 
 
@@ -55,7 +54,7 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
     color: var(--base_300);
     font-size: var(--font_size_default);
     font-weight: var(--font_weight_medium);
-    margin-right: 288px;
+    margin-right: 420px;
   }
 
   &__icon {

@@ -1,5 +1,9 @@
 {
   "header": {
-    "slogan": "World's first affordable airsharing"
+    "slogan": "World's first affordable airsharing",
+    "colorMode": {
+      "light": "Night mode",
+      "dark": "Day mode"
+    }
   }
 }

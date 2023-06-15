@@ -2,21 +2,23 @@
 import { Skeletor } from 'vue-skeletor';
 import 'vue-skeletor/dist/vue-skeletor.css';
 
+defineProps<{
+  url: string
+}>()
+
 const isImageLoaded = ref(false)
+
 const onImageLoad = () => {
   setTimeout(() => {
     isImageLoaded.value = true
-  }, 5000)
-
-  // console.log("check")
-
+  }, 100000)
 }
 
 </script>
 
 <template>
   <div class="image__container">
-    <img class="image__container__image" src="~/assets/images/face.jpg" @load="onImageLoad" />
+    <img class="image__container__image" :src=url @load="onImageLoad" />
     <Skeletor v-show="!isImageLoaded" class="image__container__skeleton" />
   </div>
 </template>
@@ -25,6 +27,7 @@ const onImageLoad = () => {
 
   .image__container {
     position: relative;
+    flex-shrink: 0;
 
     &__image {
       width: 100%;
@@ -37,6 +40,7 @@ const onImageLoad = () => {
     &__skeleton {
       width: 100%;
       height: 100%;
+      border-radius: inherit;
     }
   }
 

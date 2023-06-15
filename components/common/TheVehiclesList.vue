@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import TheVehicleCard from "~/components/common/vehicleList/TheVehicleCard.vue";
+
+
+
 const kaka = {
   id: "5f1aef00534144be0089d6cc",
   name: "PORTALIS",

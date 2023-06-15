@@ -6,6 +6,7 @@ export default defineNuxtConfig({
         '@nuxtjs/i18n',
         '@nuxtjs/color-mode',
         '@nuxt/image',
+        '@pinia/nuxt',
     ],
 
     css: [

@@ -1,12 +1,14 @@
 <script setup lang="ts">
     import TheImage from "~/components/common/TheImage.vue";
+    const image = "/assets/images/face.jpg"
+
 </script>
 
 <template>
   <client-only>
     <div class="user-info__container">
       <span class="user-info__name">Biba Boba</span>
-      <TheImage class="user-info__image"/>
+      <TheImage class="user-info__image" :url="image" />
     </div>
   </client-only>
 </template>

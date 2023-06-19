@@ -6,8 +6,11 @@ import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
 <template>
   <NuxtLayout>
     <div class="content">
-      <TheHeader />
-      <NuxtPage />
+      <TheHeader/>
+      <div class="page">
+        <NuxtPage/>
+      </div>
+
     </div>
   </NuxtLayout>
 
@@ -18,6 +21,9 @@ import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
     width: 1312px;
     margin: 0 auto;
     padding: 48px 64px;
+  }
+  .page {
+    padding-top: 40px;
   }
 
 </style>

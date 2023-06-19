@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import appConfig from "./core/config";
+
 export default defineNuxtConfig({
     devtools: {enabled: true},
+
     modules: [
         'nuxt-icons',
         '@nuxtjs/i18n',
@@ -28,8 +31,24 @@ export default defineNuxtConfig({
         langDir: "locales",
         defaultLocale: "en",
     },
+
     image: {
         dir: 'assets/images'
-    }
+    },
+
+    runtimeConfig: {
+        public: {
+            baseUrl: appConfig.FRONTEND_API_BASE_URL,
+        },
+    },
+
+    pinia: {
+        autoImports: [
+            "defineStore",
+        ],
+    },
+
+
+
 });
 

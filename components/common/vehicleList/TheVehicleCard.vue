@@ -34,7 +34,7 @@ defineProps<{
   box-sizing: border-box;
 
 
-  &:not(:last-child) {
+  &:not(:nth-child(3n)) {
     margin-right: var(--margin_card_horizontal);
   }
 

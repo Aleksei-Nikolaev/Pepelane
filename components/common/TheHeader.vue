@@ -31,6 +31,7 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
   height: 56px;
   align-items: center;
 
+
   &__left-part,
   &__right-part {
     display: flex;

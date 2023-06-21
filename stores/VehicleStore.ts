@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
 import { $api } from "~/plugins/api";
 import { vehicleStoreState } from "~/types/store/vehicleStoreState";
-import {getVehiclesRequestParams} from "~/services/vehicle.service";
-
+import {getVehiclesRequestParams} from "~/services/types/vehicles";
 
 
 export const useVehicleStore = defineStore('VehicleStore', () => {

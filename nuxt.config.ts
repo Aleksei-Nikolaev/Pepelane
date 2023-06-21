@@ -10,6 +10,7 @@ export default defineNuxtConfig({
         '@nuxtjs/color-mode',
         '@nuxt/image',
         '@pinia/nuxt',
+        '@vueuse/nuxt',
     ],
 
     css: [
@@ -47,6 +48,9 @@ export default defineNuxtConfig({
             "defineStore",
         ],
     },
+    plugins: [
+        '@/plugins/antd'
+    ]
 
 
 

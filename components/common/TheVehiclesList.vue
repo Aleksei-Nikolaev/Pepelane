@@ -1,27 +1,17 @@
 <script setup lang="ts">
 import TheVehicleCard from "~/components/common/vehicleList/TheVehicleCard.vue";
-import {useVehicleStore} from "~/stores/VehicleStore";
+import {IVehicle} from "~/types/vehicle";
 
-const vehicleStore = useVehicleStore();
-
-const { data: vehicles } = await useAsyncData("vehicles", async () => {
-      await vehicleStore.getVehicles({
-        page: 5,
-        pageSize: 12,
-        sortBy: "rent",
-        sortType: "ascending"
-      })
-      return vehicleStore.vehicles
-    }
-);
-
+defineProps<{
+  vehicles: IVehicle
+}>()
 
 </script>
 
 <template>
-    <div v-if="!vehicleStore.isEmptyList" class="list-container">
+    <div class="list-container">
       <TheVehicleCard
-          v-for="vehicle in vehicles.data"
+          v-for="vehicle in vehicles"
           :key="vehicle.id"
           :vehicle="vehicle"
           class="list-container__card"

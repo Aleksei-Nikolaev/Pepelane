@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
+import TheVehicleWrapper from "~/components/common/TheVehicleWrapper.vue";
 
 
 
@@ -7,7 +8,7 @@ import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
 
 <template>
 <div>
-  <TheVehiclesList />
+  <TheVehicleWrapper/>
 
 </div>
 </template>

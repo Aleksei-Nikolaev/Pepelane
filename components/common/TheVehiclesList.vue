@@ -3,7 +3,7 @@ import TheVehicleCard from "~/components/common/vehicleList/TheVehicleCard.vue";
 import {IVehicle} from "~/types/vehicle";
 
 defineProps<{
-  vehicles: IVehicle
+  vehicles: IVehicle[]
 }>()
 
 </script>

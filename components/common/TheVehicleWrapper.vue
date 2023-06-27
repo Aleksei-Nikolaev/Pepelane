@@ -1,43 +1,43 @@
 <script setup lang="ts">
 import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
 import TheListFilter from "~/components/common/TheListFilter.vue";
-import { useVehicleStore } from "~/stores/VehicleStore";
 import { FilterParams, sortName, sortType } from "~/types/FilterParams";
+import { $api } from "~/plugins/api";
 
-const vehicleStore = useVehicleStore();
-const filtersParams = ref<FilterParams>({
+const initFiltersParams = {
   page: 1,
   pageSize: 12,
   sortBy: sortName.RENT,
   sortType: sortType.DESCENDING
-})
-
-const fetchVehicles = async () => {
-  await vehicleStore.getVehicles(filtersParams.value)
 }
 
-watch(
-    () => filtersParams.value,
-    async () => {
-      console.log('X')
-      await fetchVehicles()
-    },
-    {
-      deep: true,
-    }
-)
+const route = useRoute()
+const router = useRouter()
+
+const filtersParams = ref<FilterParams>({
+  ...initFiltersParams,
+  ...route.query,
+})
+
 
 const { data: vehicles } = await useAsyncData("vehicles", async () => {
-      await fetchVehicles()
-      return vehicleStore.vehicles
+      router.push({ query: filtersParams.value })
+      return await $api.vehicleService.getVehicles(filtersParams.value)
+    }, {
+      watch: [filtersParams.value]
     }
 );
+
+const isEmptyList = computed(() => {
+  return !vehicles.value?.data.length
+})
+
 
 </script>
 
 <template>
   <TheListFilter :filter="filtersParams" />
-  <TheVehiclesList v-if="!vehicleStore.isEmptyList" :vehicles="vehicles.data" />
+  <TheVehiclesList v-if="!isEmptyList" :vehicles="vehicles.data" />
 </template>
 
 <style scoped lang="scss">

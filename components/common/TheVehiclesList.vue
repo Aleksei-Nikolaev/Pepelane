@@ -9,14 +9,14 @@ defineProps<{
 </script>
 
 <template>
-    <div class="list-container">
-      <TheVehicleCard
-          v-for="vehicle in vehicles"
-          :key="vehicle.id"
-          :vehicle="vehicle"
-          class="list-container__card"
-      />
-    </div>
+  <div class="list-container">
+    <TheVehicleCard
+        v-for="vehicle in vehicles"
+        :key="vehicle.id"
+        :vehicle="vehicle"
+        class="list-container__card"
+    />
+  </div>
 </template>
 
 <style scoped lang="scss">

@@ -9,5 +9,6 @@ export enum sortType {
     DESCENDING = 'descending'
 }
 
+
 export type FilterParams = getVehiclesRequestParams;
 

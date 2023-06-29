@@ -3,21 +3,22 @@ import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
 import TheListFilter from "~/components/common/TheListFilter.vue";
 import { FilterParams, sortName, sortType } from "~/types/FilterParams";
 import { $api } from "~/plugins/api";
+import {mergeFilterParams} from "~/utils/mergeFilterParams";
 
 const initFiltersParams = {
   page: 1,
   pageSize: 12,
   sortBy: sortName.RENT,
-  sortType: sortType.DESCENDING
+  sortType: sortType.DESCENDING,
+  type: "rocket"
 }
 
 const route = useRoute()
 const router = useRouter()
 
-const filtersParams = ref<FilterParams>({
-  ...initFiltersParams,
-  ...route.query,
-})
+const filtersParams = ref<FilterParams>(mergeFilterParams(initFiltersParams, route.query))
+
+
 
 
 const { data: vehicles } = await useAsyncData("vehicles", async () => {

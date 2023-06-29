@@ -29,7 +29,7 @@ const options: SelectProps['options'] = [
       :value="value"
       :options="options"
       @change="emits(eventNames.UPDATE_VALUE, $event)"
-  ></a-select>
+  />
 
 </template>
 

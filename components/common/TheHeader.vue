@@ -12,13 +12,12 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
       <nuxt-icon class="header__icon-logo" name="Logo" filled />
       <h1 class="header__name">Pepelane</h1>
       <h2 class="header__slogan">{{ $t('header.slogan') }}</h2>
-      <TheColorModeSwitcher />
     </div>
     <div class="header__right-part">
       <TheUserInfo />
       <nuxt-icon class="header__icon-bell" name="Bell" filled />
       <nuxt-icon class="header__icon-chat" name="Chat" filled />
-
+      <TheColorModeSwitcher />
     </div>
   </header>
 </template>
@@ -30,7 +29,7 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
   display: flex;
   height: 56px;
   align-items: center;
-
+  text-wrap: nowrap;
 
   &__left-part,
   &__right-part {
@@ -55,7 +54,7 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
     color: var(--base_300);
     font-size: var(--font_size_default);
     font-weight: var(--font_weight_medium);
-    margin-right: 420px;
+    margin-right: 286px;
   }
 
   &__icon {

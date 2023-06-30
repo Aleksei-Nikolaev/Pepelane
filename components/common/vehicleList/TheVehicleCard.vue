@@ -25,13 +25,13 @@ defineProps<{
 
 .card-container {
   //width: calc((100% - 2*var(--margin_card_horizontal)) / 3);
-  height: 164px;
+  //height: calc(164 - 2*var(--margin_card_vertical));
   background: var(--base_0);
   border-radius: var(--border_radius_medium);
   //margin-bottom: var(--margin_card_vertical);
   display: flex;
   padding: 24px 32px;
-  box-sizing: border-box;
+  //box-sizing: border-box;
 
 
   &:not(:nth-child(3n)) {
@@ -50,7 +50,7 @@ defineProps<{
     position: relative;
     display: flex;
     flex-direction: column;
-    padding-top: 16px;
+    //padding-top: 16px;
 
 
     &__name {
@@ -64,7 +64,7 @@ defineProps<{
       color: var(--base_300);
       font-size: var(--font_size_smallest);
       font-weight: var(--font_weight_medium);
-      height:2.4em;
+      //height:2.4em;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -76,6 +76,7 @@ defineProps<{
       font-size: var(--font_size_tiny);
       font-weight: var(--font_weight_bold);
       margin-top: auto;
+      margin-bottom: 0;
     }
   }
 }

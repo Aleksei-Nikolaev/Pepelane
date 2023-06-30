@@ -10,14 +10,17 @@ defineProps<{
   vehicles: IVehicle[]
 }>()
 
-const container = ref<HTMLElement | null>(null)
+const container = ref< HTMLElement | null >(null)
 
-const containerWidth = ref<null | number>(null)
+const containerWidth = ref< number | null >(null)
 
 onMounted(() => {
   if (!container.value) return
-  containerWidth.value = container.value.clientWidth
-}) // высчитать без паддингов
+  const styles = getComputedStyle(container.value);
+  const paddingLeft = parseFloat(styles.paddingLeft);
+  const paddingRight = parseFloat(styles.paddingRight);
+  containerWidth.value = container.value.clientWidth - paddingLeft - paddingRight;
+})
 
 const cardWidth = computed(() => {
   if (!containerWidth.value) return
@@ -32,7 +35,7 @@ const cardWidth = computed(() => {
       <RecycleScroller
           class="scroller"
           :items="vehicles"
-          :item-size="164"
+          :item-size="196"
           :item-secondary-size="cardWidth"
           :grid-items="3"
           :type-field="null"
@@ -67,22 +70,25 @@ const cardWidth = computed(() => {
   background: var(--base_50);
   border-radius: var(--border_radius_big);
   width: 100%;
-  padding: 64px 64px 56px 64px;
+  padding: calc(var(--padding_list) - var(--margin_card_horizontal));
   display: flex;
   flex-wrap: wrap;
 }
+:deep {
+  .scroller {
+    width: 100%;
+    display: flex;
 
-.scroller {
-  width: 100%;
-  //display: flex;
+    &__list {
+      display: flex;
 
-  //&__list {
-  //  display: flex;
-  //
-  //  &-item {
-  //    display: flex;
-  //  }
-  //}
+      &-item {
+        display: flex;
+        padding: calc(var(--margin_card_vertical) /2) calc(var(--margin_card_horizontal) /2);
+      }
+    }
+  }
+
 }
 
 

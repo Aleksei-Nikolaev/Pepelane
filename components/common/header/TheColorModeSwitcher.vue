@@ -26,9 +26,11 @@ const switchColor = () => {
 .color-mode {
   &__container {
     height: 100%;
+    width: 130px;
     display: flex;
     align-items: center;
     cursor: pointer;
+    margin-right: 106px;
   }
 
   &__label {
@@ -40,7 +42,7 @@ const switchColor = () => {
   &__icon {
     width: 22px;
     height: 22px;
-    margin-right: 16px;
+    margin-right: 18px;
   }
 }
 </style>

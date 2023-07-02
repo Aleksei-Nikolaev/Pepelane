@@ -3,5 +3,5 @@ import {PaginationMeta} from "~/types/server/pagination";
 
 export type vehicleStoreState = {
     data: IVehicle[],
-    meta: PaginationMeta
+    meta: PaginationMeta | null
 }

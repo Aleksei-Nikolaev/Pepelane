@@ -24,7 +24,7 @@ defineProps<{
 <style scoped lang="scss">
 
 .card-container {
-  //width: calc((100% - 2*var(--margin_card_horizontal)) / 3);
+  width: 100%;
   //height: calc(164 - 2*var(--margin_card_vertical));
   background: var(--base_0);
   border-radius: var(--border_radius_medium);
@@ -34,9 +34,9 @@ defineProps<{
   //box-sizing: border-box;
 
 
-  &:not(:nth-child(3n)) {
-    //margin-right: var(--margin_card_horizontal);
-  }
+  //&:not(:nth-child(3n)) {
+  //  //margin-right: var(--margin_card_horizontal);
+  //}
 
   &__image {
     width: 88px;

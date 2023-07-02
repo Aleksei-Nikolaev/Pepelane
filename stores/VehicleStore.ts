@@ -37,15 +37,11 @@ export const useVehicleStore = defineStore('VehicleStore', () => {
 
     const getVehicles = async (params: getVehiclesRequestParams) => {
         const { data, meta } = await $api.vehicleService.getVehicles(params)
-        vehicles.value.data = [...vehicles.value.data, ...data]
+        vehicles.value.data = data
         vehicles.value.meta = meta
     };
 
-    const addVehiclesBefore = async (params: getVehiclesRequestParams) => {
-        const { data, meta } = await $api.vehicleService.getVehicles(params)
-        vehicles.value.data = [...data, ...vehicles.value.data]
-        vehicles.value.meta = meta
-    };
+
 
     // const addVehiclesToEnd = async (params: getVehiclesRequestParams) =>{
     //     if (!vehicles.value) return
@@ -62,7 +58,6 @@ export const useVehicleStore = defineStore('VehicleStore', () => {
     return {
         vehicles,
         getVehicles,
-        addVehiclesBefore,
         isEmptyList
     }
 });

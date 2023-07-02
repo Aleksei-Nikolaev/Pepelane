@@ -24,19 +24,24 @@ defineProps<{
 <style scoped lang="scss">
 
 .card-container {
-  width: 100%;
-  //height: calc(164 - 2*var(--margin_card_vertical));
+  width: calc((100% - 2*var(--margin_card_horizontal)) / 3);
+  height: 164px;
   background: var(--base_0);
   border-radius: var(--border_radius_medium);
-  //margin-bottom: var(--margin_card_vertical);
   display: flex;
   padding: 24px 32px;
+
+  &:not(:nth-child(3n)) {
+    margin-right: var(--margin_card_horizontal);
+  }
+
+  &:not(:nth-last-child(-n+3)) {
+    margin-bottom: var(--margin_card_horizontal);
+  }
+
   //box-sizing: border-box;
 
 
-  //&:not(:nth-child(3n)) {
-  //  //margin-right: var(--margin_card_horizontal);
-  //}
 
   &__image {
     width: 88px;
@@ -50,8 +55,6 @@ defineProps<{
     position: relative;
     display: flex;
     flex-direction: column;
-    //padding-top: 16px;
-
 
     &__name {
       color: var(--base_500);

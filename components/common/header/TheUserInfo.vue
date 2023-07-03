@@ -7,7 +7,7 @@
 <template>
   <client-only>
     <div class="user-info__container">
-      <span class="user-info__name">Biba Boba</span>
+      <span class="user-info__name">Alexey Nikolaev</span>
       <TheImage class="user-info__image" :url="image" />
     </div>
   </client-only>

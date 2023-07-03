@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import TheVehicleCard from "~/components/common/vehicleList/TheVehicleCard.vue";
 import {IVehicle} from "~/types/vehicle";
-import { RecycleScroller } from 'vue-virtual-scroller'
-import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
-import {eventNames} from "~/constants/events";
 import {useHandleWheel} from "~/composables/useHandleWheel";
+
 
 
 const props = defineProps<{
@@ -12,60 +10,45 @@ const props = defineProps<{
 }>()
 
 
-const emits = defineEmits<{
-  (eventName: eventNames.SCROLL_END): void;
-  (eventName: eventNames.SCROLL_START): void;
-}>()
+
 
 const { handleWheel } = useHandleWheel()
 
-const container = ref< HTMLElement | null >(null)
 
-const containerWidth = ref< number | null >(null)
 
-onMounted(() => {
-  if (!container.value) return
-  const styles = getComputedStyle(container.value);
-  const paddingLeft = parseFloat(styles.paddingLeft);
-  const paddingRight = parseFloat(styles.paddingRight);
-  containerWidth.value = container.value.clientWidth - paddingLeft - paddingRight;
-})
-
-const cardWidth = computed(() => {
-  if (!containerWidth.value) return
-  return containerWidth.value / 3
-})
+// const container = ref< HTMLElement | null >(null)
+//
+// const containerWidth = ref< number | null >(null)
+//
+// const cardWidth = computed(() => {
+//   if (!containerWidth.value) return
+//   return containerWidth.value / 3
+// })
 
 const test = (event: WheelEvent) => {
   console.log(handleWheel(event))
 }
 
-const handleScrollEnd = () => {
-  console.log("trigger")
-}
+
+// onMounted(() => {
+//   if (!container.value) return
+//   const styles = getComputedStyle(container.value);
+//   const paddingLeft = parseFloat(styles.paddingLeft);
+//   const paddingRight = parseFloat(styles.paddingRight);
+//   containerWidth.value = container.value.clientWidth - paddingLeft - paddingRight;
+// })
 
 
 </script>
 
 <template>
-  <div ref="container" class="list-container">
-      <RecycleScroller
-          class="scroller"
-          :items="vehicles"
-          :item-size="196"
-          :item-secondary-size="cardWidth"
-          :grid-items="3"
-          :type-field="null"
-          list-class="scroller__list"
-          item-class="scroller__list-item"
-          v-slot="{ item }"
-          @wheel="test"
-      >
+  <div ref="container" class="list-container" @wheel="test">
         <TheVehicleCard
-            :vehicle="item"
+            v-for="vehicle in vehicles"
+            :key="vehicle.id"
+            :vehicle="vehicle"
             class="list-container__card"
         />
-      </RecycleScroller>
   </div>
 </template>
 
@@ -74,31 +57,16 @@ const handleScrollEnd = () => {
   background: var(--base_50);
   border-radius: var(--border_radius_big);
   width: 100%;
-  padding: calc(var(--padding_list) - var(--margin_card_horizontal));
+  padding: var(--padding_list);
   display: flex;
   flex-wrap: wrap;
-  height: 700px;
-
-
-
+  min-height: 700px;
 }
-:deep {
-  .scroller {
-    width: 100%;
-    height: 100%;
-    display: flex;
 
-    &__list {
-      display: flex;
 
-      &-item {
-        display: flex;
-        padding: calc(var(--margin_card_vertical) /2) calc(var(--margin_card_horizontal) /2);
-      }
-    }
-  }
 
-}
+
+
 
 
 

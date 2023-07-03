@@ -18,9 +18,8 @@ const initFiltersParams = {
 const route = useRoute()
 const router = useRouter()
 
+// const isPageInc = ref(true)
 
-
-const isPageInc = ref(true)
 
 
 const filtersParams = ref<FilterParams>(mergeFilterParams(initFiltersParams, route.query))
@@ -28,13 +27,11 @@ const filtersParams = ref<FilterParams>(mergeFilterParams(initFiltersParams, rou
 const vehicleStore = useVehicleStore()
 
 const { vehicles } = storeToRefs(vehicleStore)
-const { getVehicles, isEmptyList, addVehiclesBefore } = vehicleStore
+const { getVehicles, isEmptyList } = vehicleStore
 
 const { data } = useAsyncData("vehicles", async () => {
       router.push({ query: filtersParams.value })
-      isPageInc.value
-          ? await getVehicles(filtersParams.value)
-          : await addVehiclesBefore(filtersParams.value)
+      await getVehicles(filtersParams.value)
       return vehicles.value
     }
     , {
@@ -44,23 +41,7 @@ const { data } = useAsyncData("vehicles", async () => {
 
 const page = computed(() => Number(filtersParams?.value?.page))
 
-const handleScrollEnd = async () => {
-  if (vehicles.value.meta && page.value >= vehicles.value.meta.totalPages) return
 
-  isPageInc.value = true
-  filtersParams.value.page = page.value + 1
-
-}
-const handleScrollStart = async () => {
-  if (page.value <= 1) return
-
-  isPageInc.value = false
-  filtersParams.value.page = page.value - 1
-}
-
-
-const debouncedHandleScrollEnd = debounce(handleScrollEnd, 1000)
-const debouncedHandleScrollStart = debounce(handleScrollStart, 1000)
 
 
 
@@ -71,8 +52,6 @@ const debouncedHandleScrollStart = debounce(handleScrollStart, 1000)
   <TheVehiclesList
       v-if="!isEmptyList"
       :vehicles="vehicles.data"
-      @scroll-end="debouncedHandleScrollEnd"
-      @scroll-start="debouncedHandleScrollStart"
   />
 </template>
 

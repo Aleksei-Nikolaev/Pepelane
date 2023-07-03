@@ -2,8 +2,10 @@
 import TheVehicleCard from "~/components/common/vehicleList/TheVehicleCard.vue";
 import {IVehicle} from "~/types/vehicle";
 import { RecycleScroller } from 'vue-virtual-scroller'
-import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 import {eventNames} from "~/constants/events";
+import {useHandleWheel} from "~/composables/useHandleWheel";
+
 
 const props = defineProps<{
   vehicles: IVehicle[]
@@ -14,6 +16,8 @@ const emits = defineEmits<{
   (eventName: eventNames.SCROLL_END): void;
   (eventName: eventNames.SCROLL_START): void;
 }>()
+
+const { handleWheel } = useHandleWheel()
 
 const container = ref< HTMLElement | null >(null)
 
@@ -32,7 +36,9 @@ const cardWidth = computed(() => {
   return containerWidth.value / 3
 })
 
-
+const test = (event: WheelEvent) => {
+  console.log(handleWheel(event))
+}
 
 const handleScrollEnd = () => {
   console.log("trigger")
@@ -53,8 +59,7 @@ const handleScrollEnd = () => {
           list-class="scroller__list"
           item-class="scroller__list-item"
           v-slot="{ item }"
-          @scroll-end="emits(eventNames.SCROLL_END)"
-          @scroll-start="emits(eventNames.SCROLL_START)"
+          @wheel="test"
       >
         <TheVehicleCard
             :vehicle="item"

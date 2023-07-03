@@ -6,6 +6,7 @@ import {mergeFilterParams} from "~/utils/mergeFilterParams";
 import debounce from "lodash.debounce";
 import {useVehicleStore} from "~/stores/VehicleStore";
 import {storeToRefs} from "pinia";
+import {useHandleWheel} from "~/composables/useHandleWheel";
 
 const initFiltersParams = {
   page: 1,
@@ -16,6 +17,9 @@ const initFiltersParams = {
 
 const route = useRoute()
 const router = useRouter()
+
+
+
 const isPageInc = ref(true)
 
 

@@ -30,7 +30,6 @@ const switchColor = () => {
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-right: 106px;
   }
 
   &__label {

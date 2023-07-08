@@ -11,5 +11,5 @@ export type getVehiclesRequestParams = {
     pageSize?: number,
     sortBy?: string
     sortType?: string,
-    type?: string,
+    type?: string | null,
 }

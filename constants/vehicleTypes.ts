@@ -15,4 +15,8 @@ export const vehicleTypes = [
         value: "plane",
         label: "Plane"
     },
+    {
+        value: null,
+        label: "All"
+    },
 ]

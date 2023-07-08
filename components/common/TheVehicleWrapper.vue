@@ -3,24 +3,19 @@ import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
 import TheListFilter from "~/components/common/TheListFilter.vue";
 import { FilterParams, sortName, sortType } from "~/types/FilterParams";
 import {mergeFilterParams} from "~/utils/mergeFilterParams";
-import debounce from "lodash.debounce";
 import {useVehicleStore} from "~/stores/VehicleStore";
 import {storeToRefs} from "pinia";
-import {useHandleWheel} from "~/composables/useHandleWheel";
+
 
 const initFiltersParams = {
   page: 1,
-  pageSize: 15,
+  pageSize: 9,
   sortBy: sortName.RENT,
   sortType: sortType.DESCENDING,
 }
 
 const route = useRoute()
 const router = useRouter()
-
-// const isPageInc = ref(true)
-
-
 
 const filtersParams = ref<FilterParams>(mergeFilterParams(initFiltersParams, route.query))
 
@@ -39,10 +34,19 @@ const { data } = useAsyncData("vehicles", async () => {
     }
 );
 
-const page = computed(() => Number(filtersParams?.value?.page))
+watch(
+    () => filtersParams.value.type,
+    () => filtersParams.value.page = initFiltersParams.page
+)
 
+// watch(filtersParams.value.type, (newValue, oldValue) => {
+//   if (newValue.type === oldValue.type) return
+//   filtersParams.value.page = initFiltersParams.page
+// })
 
-
+const handlePageChange = (changedFilterParams: FilterParams) => {
+  filtersParams.value.page = changedFilterParams.page
+}
 
 
 </script>
@@ -52,6 +56,9 @@ const page = computed(() => Number(filtersParams?.value?.page))
   <TheVehiclesList
       v-if="!isEmptyList"
       :vehicles="vehicles.data"
+      :meta="vehicles.meta"
+      :filter="filtersParams"
+      @updateFilter="handlePageChange"
   />
 </template>
 

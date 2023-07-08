@@ -11,5 +11,5 @@ export const mergeFilterParams = (initFiltersParams: FilterParams, routeQuery: L
         type: routeQuery.type,
     }
 
-    return merge(initFiltersParams, queryParams)
+    return merge({...initFiltersParams}, queryParams)
 }

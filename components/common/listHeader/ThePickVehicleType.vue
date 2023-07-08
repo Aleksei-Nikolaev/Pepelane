@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  (eventName: eventNames.UPDATE_VALUE, value: string): void;
+  (eventName: eventNames.UPDATE_VALUE, value: string | null): void;
 }>()
 
 </script>

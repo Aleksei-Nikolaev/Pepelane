@@ -30,6 +30,7 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
   height: 56px;
   align-items: center;
   text-wrap: nowrap;
+  width: 100%;
 
   &__left-part,
   &__right-part {
@@ -54,7 +55,7 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
     color: var(--base_300);
     font-size: var(--font_size_default);
     font-weight: var(--font_weight_medium);
-    margin-right: 286px;
+    margin-left: 64px;
   }
 
   &__icon {
@@ -76,6 +77,7 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
       cursor: pointer;
       width: 20px;
       height: 18px;
+      margin-left: 106px;
     }
   }
 }

@@ -20,6 +20,3 @@ const model = useModel(props, "filter")
   </div>
 </template>
 
-<style scoped lang="scss">
-
-</style>

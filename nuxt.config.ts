@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import appConfig from "./core/config";
-
 export default defineNuxtConfig({
     devtools: {enabled: true},
 
@@ -11,11 +10,14 @@ export default defineNuxtConfig({
         '@nuxt/image',
         '@pinia/nuxt',
         '@vueuse/nuxt',
+        '@ant-design-vue/nuxt',
     ],
 
     css: [
+
         'normalize.css/normalize.css',
         '~/assets/styles/global.scss',
+
     ],
 
     i18n: {
@@ -48,11 +50,16 @@ export default defineNuxtConfig({
             "defineStore",
         ],
     },
-    plugins: [
-        '@/plugins/antd'
-    ]
 
-
+    vite: {
+        css: {
+            preprocessorOptions: {
+                less: {
+                    javascriptEnabled: true,
+                },
+            }
+        }
+    }
 
 });
 

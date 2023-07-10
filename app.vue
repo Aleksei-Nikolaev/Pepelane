@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import TheHeader from "~/components/common/TheHeader.vue";
-import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
+
 </script>
 
 <template>
+  
   <NuxtLayout>
     <div class="content">
       <TheHeader/>
@@ -17,6 +18,8 @@ import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
 </template>
 
 <style scoped lang="scss">
+
+
   .content {
     width: 1312px;
     margin: 0 auto;
@@ -25,5 +28,6 @@ import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
   .page {
     padding-top: 40px;
   }
+
 
 </style>

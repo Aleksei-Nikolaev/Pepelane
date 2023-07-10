@@ -7,7 +7,6 @@ import {PaginationMeta} from "~/types/server/pagination";
 import {eventNames} from "~/constants/events";
 import {FilterParams} from "~/types/FilterParams";
 
-
 const props = defineProps<{
   vehicles: IVehicle[];
   filter: FilterParams;
@@ -27,7 +26,6 @@ const pageEmit = (page: number) => {
   })
 }
 
-
 const pageInc = (currentPage?: number) => {
   if (!currentPage || currentPage >= props.meta.totalPages) return
   currentPage++
@@ -39,15 +37,6 @@ const pageDec = (currentPage?: number) => {
   currentPage--
   pageEmit(currentPage)
 }
-// const container = ref< HTMLElement | null >(null)
-//
-// const containerWidth = ref< number | null >(null)
-//
-// const cardWidth = computed(() => {
-//   if (!containerWidth.value) return
-//   return containerWidth.value / 3
-// })
-
 
 const handleScroll = (event: WheelEvent) => {
   if (!props.filter.page) return
@@ -57,17 +46,7 @@ const handleScroll = (event: WheelEvent) => {
      : pageInc(props.filter.page)
 }
 
-const debouncedHandleScroll = debounce(handleScroll, 500)
-
-
-// onMounted(() => {
-//   if (!container.value) return
-//   const styles = getComputedStyle(container.value);
-//   const paddingLeft = parseFloat(styles.paddingLeft);
-//   const paddingRight = parseFloat(styles.paddingRight);
-//   containerWidth.value = container.value.clientWidth - paddingLeft - paddingRight;
-// })
-
+const debouncedHandleScroll = debounce(handleScroll, 300)
 
 </script>
 

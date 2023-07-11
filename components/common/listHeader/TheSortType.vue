@@ -19,19 +19,37 @@ const handleClick = () => {
 </script>
 
 <template>
-  <DownOutlined
-      class="sort-type-icon"
-      :class="{ '--asc': value === sortType.ASCENDING}"
-      @click="handleClick"
-  />
+  <div class="sort-type-container" @click="handleClick">
+    <SortAscendingOutlined
+        class="sort-type-icon"
+        :class="{ '--hidden': value === sortType.DESCENDING}"
+    />
+    <SortDescendingOutlined
+        class="sort-type-icon"
+        :class="{ '--hidden': value === sortType.ASCENDING}"
+    />
+  </div>
+
 </template>
 
 <style scoped lang="scss">
-.sort-type-icon {
 
-  &.--asc {
-    transform: rotate(180deg);
+.sort-type {
+  &-container {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
   }
+
+  &-icon {
+    font-size: 1.4em;
+    color: var(--main_400)
+  }
+}
+
+.--hidden {
+  display: none;
 }
 
 </style>

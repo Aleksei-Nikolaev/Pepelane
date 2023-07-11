@@ -22,6 +22,21 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
+@keyframes disappearance {
+  0%{
+
+    transform: rotateX(90deg);
+  }
+  50%{
+    opacity: 0.5;
+    transform: rotateX(0deg);
+  }
+  100%{
+    display: none;
+    opacity: 0;
+    transform: rotateX(90deg);
+  }
+}
 
 .card-container {
   width: calc((100% - 2*var(--margin_card_horizontal)) / 3);

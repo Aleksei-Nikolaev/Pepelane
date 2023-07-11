@@ -29,10 +29,15 @@ const options: SelectProps['options'] = [
       :value="value"
       :options="options"
       @change="emits(eventNames.UPDATE_VALUE, $event)"
+      class="filter-container__sort-by"
   />
 
 </template>
 
 <style scoped lang="scss">
+
+.filter-container__sort-by {
+  min-width: 100px;
+}
 
 </style>

@@ -14,10 +14,8 @@ export default defineNuxtConfig({
     ],
 
     css: [
-
         'normalize.css/normalize.css',
         '~/assets/styles/global.scss',
-
     ],
 
     i18n: {
@@ -60,6 +58,5 @@ export default defineNuxtConfig({
             }
         }
     }
-
 });
 

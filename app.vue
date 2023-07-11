@@ -26,7 +26,7 @@ import TheHeader from "~/components/common/TheHeader.vue";
     padding: 48px 64px;
   }
   .page {
-    padding-top: 40px;
+    padding-top: 20px;
   }
 
 

@@ -11,6 +11,7 @@ defineProps<{
 </script>
 
 <template>
+
   <div class="card-container">
     <TheImage :url="vehicle.preview" class="card-container__image"/>
     <div class="card-container__info">
@@ -19,24 +20,11 @@ defineProps<{
       <p class="card-container__info__rent">{{ vehicle.rent + " $/h" }}</p>
     </div>
   </div>
+
 </template>
 
 <style scoped lang="scss">
-@keyframes disappearance {
-  0%{
 
-    transform: rotateX(90deg);
-  }
-  50%{
-    opacity: 0.5;
-    transform: rotateX(0deg);
-  }
-  100%{
-    display: none;
-    opacity: 0;
-    transform: rotateX(90deg);
-  }
-}
 
 .card-container {
   width: calc((100% - 2*var(--margin_card_horizontal)) / 3);
@@ -54,7 +42,6 @@ defineProps<{
     margin-bottom: var(--margin_card_horizontal);
   }
 
-  //box-sizing: border-box;
 
 
 
@@ -98,5 +85,7 @@ defineProps<{
     }
   }
 }
+
+
 
 </style>

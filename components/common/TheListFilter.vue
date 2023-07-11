@@ -3,7 +3,7 @@ import {FilterParams} from "~/types/FilterParams";
 import TheVehicleSortBy from "~/components/common/listHeader/TheVehicleSortBy.vue";
 import TheSortType from "~/components/common/listHeader/TheSortType.vue";
 import ThePickVehicleType from "~/components/common/listHeader/ThePickVehicleType.vue";
-import CloseOutlined from "@ant-design/icons-vue/es/icons/CloseOutlined";
+
 
 const props = defineProps<{
   filter: FilterParams
@@ -41,10 +41,6 @@ const model = useModel(props, "filter")
     display: flex;
     align-items: center;
     color: var(--base_500)
-
-    //&-by {
-    //  min-width: 150px;
-    //}
   }
 
 

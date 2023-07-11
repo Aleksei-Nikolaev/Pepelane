@@ -6,9 +6,6 @@ import {mergeFilterParams} from "~/utils/mergeFilterParams";
 import {useVehicleStore} from "~/stores/VehicleStore";
 import {storeToRefs} from "pinia";
 
-
-
-
 const initFiltersParams = {
   page: 1,
   pageSize: 9,
@@ -27,14 +24,25 @@ const vehicleStore = useVehicleStore()
 const { vehicles } = storeToRefs(vehicleStore)
 const { getVehicles, isEmptyList } = vehicleStore
 
+const refreshState = ref(false)
+
+const delayedHandleState = () => {
+  setTimeout(handleState, 200)
+}
+const handleState = () => {
+  refreshState.value = !refreshState.value
+}
+
 watch(
     () => filtersParams.value.type,
     () => filtersParams.value.page = initFiltersParams.page,
 )
 
 const { data, refresh } = useAsyncData("vehicles", async () => {
+      handleState()
       router.push({ query: filtersParams.value })
       await getVehicles(filtersParams.value)
+      delayedHandleState()
       return vehicles.value
     }
     , {
@@ -43,8 +51,9 @@ const { data, refresh } = useAsyncData("vehicles", async () => {
 );
 
 const clearClicked = () => {
-  filtersParams.value = {...initFiltersParams}
-  refresh()
+  filtersParams.value = Object.assign(filtersParams.value, initFiltersParams)
+  // filtersParams.value = {...initFiltersParams}
+  // refresh()
   // UseAsyncData watcher does not work on pass new value to filter instead Object.assign
 }
 
@@ -64,6 +73,7 @@ const handlePageChange = (changedFilterParams: FilterParams) => {
       :vehicles="vehicles.data"
       :meta="vehicles.meta"
       :filter="filtersParams"
+      :refresh="refreshState"
       @updateFilter="handlePageChange"
   />
 </template>

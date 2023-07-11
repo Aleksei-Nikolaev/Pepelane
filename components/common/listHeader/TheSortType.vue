@@ -21,12 +21,12 @@ const handleClick = () => {
 <template>
   <div class="sort-type-container" @click="handleClick">
     <SortAscendingOutlined
+        v-show="value === sortType.ASCENDING"
         class="sort-type-icon"
-        :class="{ '--hidden': value === sortType.DESCENDING}"
     />
     <SortDescendingOutlined
         class="sort-type-icon"
-        :class="{ '--hidden': value === sortType.ASCENDING}"
+        v-show="value === sortType.DESCENDING"
     />
   </div>
 
@@ -48,8 +48,5 @@ const handleClick = () => {
   }
 }
 
-.--hidden {
-  display: none;
-}
 
 </style>

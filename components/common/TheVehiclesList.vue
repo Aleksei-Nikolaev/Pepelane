@@ -7,10 +7,12 @@ import {PaginationMeta} from "~/types/server/pagination";
 import {eventNames} from "~/constants/events";
 import {FilterParams} from "~/types/FilterParams";
 
+
 const props = defineProps<{
   vehicles: IVehicle[];
   filter: FilterParams;
   meta: PaginationMeta;
+  refresh: boolean;
 }>()
 
 const emits = defineEmits<{
@@ -26,16 +28,34 @@ const pageEmit = (page: number) => {
   })
 }
 
+const scrollUp = ref(false)
+const scrollDirection = computed(() => scrollUp.value ? "scroll-up" : "scroll-down")
+
+const test = ref("scroll-up")
+
+const changingDirection = () => {
+  scrollUp.value = !scrollUp.value
+}
+
+// Find a hook without setTimeout
+const handleDirection = () => {
+  changingDirection()
+  setTimeout(changingDirection, 600)
+}
+
 const pageInc = (currentPage?: number) => {
   if (!currentPage || currentPage >= props.meta.totalPages) return
   currentPage++
   pageEmit(currentPage)
+  test.value = "scroll-down"
 }
 
 const pageDec = (currentPage?: number) => {
   if (!currentPage || currentPage <= 1) return
+  handleDirection()
   currentPage--
   pageEmit(currentPage)
+  test.value = "scroll-up"
 }
 
 const handleScroll = (event: WheelEvent) => {
@@ -46,19 +66,24 @@ const handleScroll = (event: WheelEvent) => {
      : pageInc(props.filter.page)
 }
 
-const debouncedHandleScroll = debounce(handleScroll, 300)
+const debouncedHandleScroll = debounce(handleScroll, 600)
 
 </script>
 
 <template>
-  <div ref="container" class="list-container" @wheel="debouncedHandleScroll">
-        <TheVehicleCard
-            v-for="vehicle in vehicles"
-            :key="vehicle.id"
-            :vehicle="vehicle"
-            class="list-container__card"
-        />
-  </div>
+    <div ref="container" class="list-container" @wheel="debouncedHandleScroll">
+      <Transition :name="scrollDirection">
+        <div v-if="!refresh" class="list-container__transition">
+          <TheVehicleCard
+              v-for="vehicle in vehicles"
+              :key="vehicle.id"
+              :vehicle="vehicle"
+              class="list-container__card"
+          />
+        </div>
+      </Transition>
+    </div>
+
 </template>
 
 <style scoped lang="scss">
@@ -68,8 +93,41 @@ const debouncedHandleScroll = debounce(handleScroll, 300)
   width: 100%;
   padding: var(--padding_list);
   display: flex;
-  flex-wrap: wrap;
   min-height: calc(3 * var(--margin_card_horizontal) + 2 * var(--padding_list) + 3 * 164px);
+  height: 700px;
+  overflow: hidden;
+
+  &__transition {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+  }
 }
+
+
+.scroll-down-enter-active,
+.scroll-down-leave-active,
+.scroll-up-enter-active,
+.scroll-up-leave-active,{
+  transition: all 0.3s ease-in-out;
+}
+
+.scroll-down-leave-to,
+.scroll-down-enter-from,
+.scroll-up-leave-to,
+.scroll-down-enter-from {
+  opacity: 0.5;
+}
+
+.scroll-down-leave-to,
+.scroll-up-enter-from {
+  transform: translateY(-700px);
+}
+.scroll-down-enter-from,
+.scroll-up-leave-to {
+  transform: translateY(700px);
+}
+
 
 </style>

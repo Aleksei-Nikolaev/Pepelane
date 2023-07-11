@@ -9,10 +9,12 @@ defineProps<{
 const isImageLoaded = ref(false)
 
 const onImageLoad = () => {
-  setTimeout(() => {
-    isImageLoaded.value = true
-  }, 100000)
+  isImageLoaded.value = true
 }
+
+// setTimeout(() => {
+//   isImageLoaded.value = true
+// }, 100000)
 
 </script>
 

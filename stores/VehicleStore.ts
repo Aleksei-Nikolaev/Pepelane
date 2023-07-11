@@ -7,7 +7,7 @@ import {getVehiclesRequestParams} from "~/services/types/vehicles";
 export const useVehicleStore = defineStore('VehicleStore', () => {
     const vehicles = ref<vehicleStoreState>({
         data: [],
-        meta: null
+        meta: null,
     });
 
     const getVehicles = async (params: getVehiclesRequestParams) => {

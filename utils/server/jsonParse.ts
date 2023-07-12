@@ -1,10 +1,15 @@
-import * as fs from 'fs';
-export const jsonParse = (filePath: string = './db/vehicles.json') => {
-  const jsonString = fs.readFileSync(filePath, 'utf-8');
+import { fileURLToPath } from 'url';
+import * as fs from "fs";
+
+const getModulesPath = fileURLToPath(new URL('../../db/vehicles.json', import.meta.url))
+
+
+export const jsonParse = () => {
+  const jsonString = fs.readFileSync(getModulesPath, "utf-8");
 
   try {
     return JSON.parse(jsonString);
   } catch (error) {
-    console.error('Ошибка при парсинге JSON:', error);
+    console.error("Ошибка при парсинге JSON:", error);
   }
-}
+};

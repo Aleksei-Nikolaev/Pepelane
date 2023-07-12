@@ -1,4 +1,8 @@
-import {vehiclesFilterType} from "~/types/server/vehiclesFilterType";
+import { vehiclesFilterType } from "~/types/server/vehiclesFilterType";
 
-export const availableFilterTypes: vehiclesFilterType[] =  ["rocket", "helicopter", "airship", "plane"]
-
+export const availableFilterTypes: vehiclesFilterType[] = [
+  "rocket",
+  "helicopter",
+  "airship",
+  "plane",
+];

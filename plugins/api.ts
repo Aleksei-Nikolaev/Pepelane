@@ -1,31 +1,28 @@
-import {$fetch} from "ofetch";
-import {VehicleService} from "~/services/vehicle.service";
-
+import { $fetch } from "ofetch";
+import { VehicleService } from "~/services/vehicle.service";
 
 export interface IApi {
-    vehicleService: VehicleService;
+  vehicleService: VehicleService;
 }
 
 let $api: IApi;
 
 export default defineNuxtPlugin(() => {
-    const runtimeConfig = useRuntimeConfig();
+  const runtimeConfig = useRuntimeConfig();
 
-    const fetchWrapper = $fetch.create({
-        baseURL: runtimeConfig.public.baseUrl,
-    });
+  const fetchWrapper = $fetch.create({
+    baseURL: runtimeConfig.public.baseUrl,
+  });
 
-    $api = {
-        vehicleService: new VehicleService(fetchWrapper),
-    };
+  $api = {
+    vehicleService: new VehicleService(fetchWrapper),
+  };
 
-    return {
-        provide: {
-            api: $api
-        },
-    };
+  return {
+    provide: {
+      api: $api,
+    },
+  };
 });
 
-export { $api }
-
-
+export { $api };

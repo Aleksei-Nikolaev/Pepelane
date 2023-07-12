@@ -1,1 +1,1 @@
-export type vehiclesFilterType = "rocket" | "helicopter" | "airship" | "plane"
+export type vehiclesFilterType = "rocket" | "helicopter" | "airship" | "plane";

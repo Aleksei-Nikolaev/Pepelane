@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import TheColorModeSwitcher from "~/components/common/header/TheColorModeSwitcher.vue";
 import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
-
-
-
 </script>
 
 <template>
@@ -11,7 +8,7 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
     <div class="header__left-part">
       <nuxt-icon class="header__icon-logo" name="Logo" filled />
       <h1 class="header__name">Pepelane</h1>
-      <h2 class="header__slogan">{{ $t('header.slogan') }}</h2>
+      <h2 class="header__slogan">{{ $t("header.slogan") }}</h2>
     </div>
     <div class="header__right-part">
       <TheUserInfo />
@@ -25,8 +22,6 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
 </template>
 
 <style scoped lang="scss">
-
-
 .header {
   display: flex;
   height: 56px;

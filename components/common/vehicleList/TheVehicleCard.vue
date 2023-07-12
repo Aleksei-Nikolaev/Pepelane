@@ -1,33 +1,28 @@
 <script setup lang="ts">
-import type {IVehicle} from "~/types/vehicle";
+import type { IVehicle } from "~/types/vehicle";
 import TheImage from "~/components/common/TheImage.vue";
-
 
 defineProps<{
   vehicle: IVehicle;
-}>()
-
-
+}>();
 </script>
 
 <template>
-
   <div class="card-container">
-    <TheImage :url="vehicle.preview" class="card-container__image"/>
+    <TheImage :url="vehicle.preview" class="card-container__image" />
     <div class="card-container__info">
       <p class="card-container__info__name">{{ vehicle.name }}</p>
-      <p class="card-container__info__description">{{ capitalizeFirstLetter(vehicle.description) }}</p>
+      <p class="card-container__info__description">
+        {{ capitalizeFirstLetter(vehicle.description) }}
+      </p>
       <p class="card-container__info__rent">{{ vehicle.rent + " $/h" }}</p>
     </div>
   </div>
-
 </template>
 
 <style scoped lang="scss">
-
-
 .card-container {
-  width: calc((100% - 2*var(--margin_card_horizontal)) / 3);
+  width: calc((100% - 2 * var(--margin_card_horizontal)) / 3);
   height: 164px;
   background: var(--base_0);
   border-radius: var(--border_radius_medium);
@@ -38,12 +33,9 @@ defineProps<{
     margin-right: var(--margin_card_horizontal);
   }
 
-  &:not(:nth-last-child(-n+3)) {
+  &:not(:nth-last-child(-n + 3)) {
     margin-bottom: var(--margin_card_horizontal);
   }
-
-
-
 
   &__image {
     width: 88px;
@@ -85,7 +77,4 @@ defineProps<{
     }
   }
 }
-
-
-
 </style>

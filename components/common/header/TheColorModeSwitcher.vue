@@ -1,25 +1,27 @@
 <script setup lang="ts">
-
-
-const colorMode = useColorMode()
+const colorMode = useColorMode();
 
 const switchColor = () => {
-  colorMode.preference === "dark" ? colorMode.preference = "light" : colorMode.preference = "dark";
-}
-
+  colorMode.preference === "dark"
+    ? (colorMode.preference = "light")
+    : (colorMode.preference = "dark");
+};
 </script>
 
 <template>
   <div class="color-mode__container" @click="switchColor()">
     <client-only>
-      <nuxt-icon v-if="colorMode.value" class="color-mode__icon" :name="colorMode.value" filled></nuxt-icon>
-      <span class="color-mode__label">{{ $t(`header.colorMode.${colorMode.value}`) }}</span>
+      <nuxt-icon
+        v-if="colorMode.value"
+        class="color-mode__icon"
+        :name="colorMode.value"
+        filled
+      ></nuxt-icon>
+      <span class="color-mode__label">{{
+        $t(`header.colorMode.${colorMode.value}`)
+      }}</span>
     </client-only>
   </div>
-
-
-
-
 </template>
 
 <style scoped lang="scss">

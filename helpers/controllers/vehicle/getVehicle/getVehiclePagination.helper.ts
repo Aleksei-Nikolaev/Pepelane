@@ -1,13 +1,13 @@
-import {QueryValue} from "ufo";
-import {VehicleModel} from "~/models/vehicle.model";
-import {PaginationMeta} from "~/types/server/pagination";
+import { QueryValue } from "ufo";
+import { VehicleModel } from "~/models/vehicle.model";
+import { PaginationMeta } from "~/types/server/pagination";
 export const getVehiclePaginationHelper = (
   page: QueryValue,
   pageSize: QueryValue,
   vehicles: VehicleModel[]
 ): {
-  vehicles: VehicleModel[],
-  meta: PaginationMeta
+  vehicles: VehicleModel[];
+  meta: PaginationMeta;
 } => {
   const currentPage = parseInt(String(page)) || 1;
   const currentPageSize = parseInt(String(pageSize)) || 10;
@@ -26,7 +26,7 @@ export const getVehiclePaginationHelper = (
       page: currentPage,
       pageSize: currentPageSize,
       totalItems: totalVehicles,
-      totalPages
-    }
-  }
-}
+      totalPages,
+    },
+  };
+};

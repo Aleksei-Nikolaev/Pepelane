@@ -1,62 +1,57 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import appConfig from "./core/config";
 export default defineNuxtConfig({
-    devtools: {enabled: true},
+  devtools: { enabled: true },
 
-    modules: [
-        'nuxt-icons',
-        '@nuxtjs/i18n',
-        '@nuxtjs/color-mode',
-        '@nuxt/image',
-        '@pinia/nuxt',
-        '@vueuse/nuxt',
-        '@ant-design-vue/nuxt',
+  modules: [
+    "nuxt-icons",
+    "@nuxtjs/i18n",
+    "@nuxtjs/color-mode",
+    "@nuxt/image",
+    "@pinia/nuxt",
+    "@vueuse/nuxt",
+    "@ant-design-vue/nuxt",
+  ],
+
+  css: ["normalize.css/normalize.css", "~/assets/styles/global.scss"],
+
+  i18n: {
+    locales: [
+      {
+        code: "en",
+        file: "en.json",
+      },
+      {
+        code: "ru",
+        file: "ru.json",
+      },
     ],
+    langDir: "locales",
+    defaultLocale: "en",
+  },
 
-    css: [
-        'normalize.css/normalize.css',
-        '~/assets/styles/global.scss',
-    ],
+  image: {
+    dir: "assets/images",
+  },
 
-    i18n: {
-        locales: [
-            {
-                code: "en",
-                file: "en.json",
-            },
-            {
-                code: "ru",
-                file: "ru.json",
-            },
-        ],
-        langDir: "locales",
-        defaultLocale: "en",
+
+  runtimeConfig: {
+    public: {
+      baseUrl: appConfig.FRONTEND_API_BASE_URL,
     },
+  },
 
-    image: {
-        dir: 'assets/images'
-    },
+  pinia: {
+    autoImports: ["defineStore"],
+  },
 
-    runtimeConfig: {
-        public: {
-            baseUrl: appConfig.FRONTEND_API_BASE_URL,
+  vite: {
+    css: {
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
         },
+      },
     },
-
-    pinia: {
-        autoImports: [
-            "defineStore",
-        ],
-    },
-
-    vite: {
-        css: {
-            preprocessorOptions: {
-                less: {
-                    javascriptEnabled: true,
-                },
-            }
-        }
-    }
+  },
 });
-

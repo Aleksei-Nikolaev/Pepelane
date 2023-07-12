@@ -25,24 +25,35 @@ const { vehicles } = storeToRefs(vehicleStore)
 const { getVehicles, isEmptyList } = vehicleStore
 
 const refreshState = ref(false)
+const loadingStatus = ref({
+  dataIsLoaded: false,
+  elementIsRemoved: false
+})
 
-const delayedHandleState = () => {
-  setTimeout(handleState, 200)
-}
 const handleState = () => {
   refreshState.value = !refreshState.value
+  loadingStatus.value.dataIsLoaded = false
+  loadingStatus.value.elementIsRemoved = false
 }
+
+const dataIsLoaded = () => loadingStatus.value.elementIsRemoved
+    ? handleState()
+    : loadingStatus.value.dataIsLoaded = true
+
+const elementIsRemoved = () => loadingStatus.value.dataIsLoaded
+    ? handleState()
+    : loadingStatus.value.elementIsRemoved = true
 
 watch(
     () => filtersParams.value.type,
     () => filtersParams.value.page = initFiltersParams.page,
 )
 
-const { data, refresh } = useAsyncData("vehicles", async () => {
+const { data } = useAsyncData("vehicles", async () => {
       handleState()
       router.push({ query: filtersParams.value })
       await getVehicles(filtersParams.value)
-      delayedHandleState()
+      dataIsLoaded()
       return vehicles.value
     }
     , {
@@ -52,9 +63,6 @@ const { data, refresh } = useAsyncData("vehicles", async () => {
 
 const clearClicked = () => {
   filtersParams.value = Object.assign(filtersParams.value, initFiltersParams)
-  // filtersParams.value = {...initFiltersParams}
-  // refresh()
-  // UseAsyncData watcher does not work on pass new value to filter instead Object.assign
 }
 
 const handlePageChange = (changedFilterParams: FilterParams) => {
@@ -73,8 +81,9 @@ const handlePageChange = (changedFilterParams: FilterParams) => {
       :vehicles="vehicles.data"
       :meta="vehicles.meta"
       :filter="filtersParams"
-      :refresh="refreshState"
+      :refreshState="refreshState"
       @updateFilter="handlePageChange"
+      @elementRemoved="elementIsRemoved"
   />
 </template>
 

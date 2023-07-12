@@ -12,11 +12,12 @@ const props = defineProps<{
   vehicles: IVehicle[];
   filter: FilterParams;
   meta: PaginationMeta;
-  refresh: boolean;
+  refreshState: boolean;
 }>()
 
 const emits = defineEmits<{
   (eventName: eventNames.UPDATE_FILTER, filter: FilterParams): void;
+  (eventName: eventNames.ELEMENT_REMOVED): void;
 }>()
 
 const { handleWheel } = useHandleWheel()
@@ -31,23 +32,24 @@ const pageEmit = (page: number) => {
 const scrollUp = ref(false)
 const scrollDirection = computed(() => scrollUp.value ? "scroll-up" : "scroll-down")
 
-const test = ref("scroll-up")
-
 const changingDirection = () => {
   scrollUp.value = !scrollUp.value
 }
 
-// Find a hook without setTimeout
+const defaultDirection = () => {
+  if (!scrollUp.value) return
+  changingDirection()
+}
+
+
 const handleDirection = () => {
   changingDirection()
-  setTimeout(changingDirection, 600)
 }
 
 const pageInc = (currentPage?: number) => {
   if (!currentPage || currentPage >= props.meta.totalPages) return
   currentPage++
   pageEmit(currentPage)
-  test.value = "scroll-down"
 }
 
 const pageDec = (currentPage?: number) => {
@@ -55,7 +57,6 @@ const pageDec = (currentPage?: number) => {
   handleDirection()
   currentPage--
   pageEmit(currentPage)
-  test.value = "scroll-up"
 }
 
 const handleScroll = (event: WheelEvent) => {
@@ -72,8 +73,14 @@ const debouncedHandleScroll = debounce(handleScroll, 600)
 
 <template>
     <div ref="container" class="list-container" @wheel="debouncedHandleScroll">
-      <Transition :name="scrollDirection">
-        <div v-if="!refresh" class="list-container__transition">
+      <Transition
+          :name="scrollDirection"
+          @after-leave="emits(eventNames.ELEMENT_REMOVED)"
+          @after-enter="defaultDirection"
+
+
+      >
+        <div v-if="!refreshState" class="list-container__transition">
           <TheVehicleCard
               v-for="vehicle in vehicles"
               :key="vehicle.id"

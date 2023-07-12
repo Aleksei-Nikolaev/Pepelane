@@ -19,15 +19,6 @@ export const useVehicleStore = defineStore('VehicleStore', () => {
     };
 
 
-
-    // const addVehiclesToEnd = async (params: getVehiclesRequestParams) =>{
-    //     if (!vehicles.value) return
-    //
-    //     const addVehicles = await $api.vehicleService.getVehicles(params)
-    //     vehicles.value.data.push(...addVehicles.data)
-    //     vehicles.value.meta = addVehicles.meta
-    // }
-
     const isEmptyList = computed(() => {
         return !vehicles.value?.data.length
     })

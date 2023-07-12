@@ -15,8 +15,10 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
     </div>
     <div class="header__right-part">
       <TheUserInfo />
-      <nuxt-icon class="header__icon-bell" name="Bell" filled />
-      <nuxt-icon class="header__icon-chat" name="Chat" filled />
+      <div class="header__icon-container">
+        <nuxt-icon class="header__icon-bell" name="Bell" filled />
+        <nuxt-icon class="header__icon-chat" name="Chat" filled />
+      </div>
       <TheColorModeSwitcher />
     </div>
   </header>
@@ -59,6 +61,11 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
   }
 
   &__icon {
+    &-container {
+      height: 21.5px;
+      margin-left: 100px;
+    }
+
     &-logo {
       cursor: pointer;
       width: 48px;
@@ -68,16 +75,10 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
 
     &-bell {
       cursor: pointer;
-      margin-left: 30px;
-      width: 18px;
-      height: 21.5px;
     }
 
     &-chat {
       cursor: pointer;
-      width: 20px;
-      height: 18px;
-      margin-left: 106px;
     }
   }
 }

@@ -1,83 +1,39 @@
 <script setup lang="ts">
-import debounce from "lodash.debounce";
 import TheVehicleCard from "~/components/common/vehicleList/TheVehicleCard.vue";
-import { IVehicle } from "~/types/vehicle";
-import { useHandleWheel, WheelDirection } from "~/composables/useHandleWheel";
-import { PaginationMeta } from "~/types/server/pagination";
 import { eventNames } from "~/constants/events";
-import { FilterParams } from "~/types/FilterParams";
+import { VehiclesListProps } from "~/composables/useVehicleList/types/vehiclesListProps";
+import { useScrollDirection } from "~/composables/useVehicleList/useCases/useScrollDirection";
+import {vehiclesListEmits} from "~/composables/useVehicleList/types/vehiclesListEmits";
+import {usePageChange} from "~/composables/useVehicleList/useCases/usePageChange";
+import {scrollDirection} from "~/constants/scrollDirection";
+import {usePagePosition} from "~/composables/useVehicleList/useCases/usePagePosition";
 
-const props = defineProps<{
-  vehicles: IVehicle[];
-  filter: FilterParams;
-  meta: PaginationMeta;
-  refreshState: boolean;
-}>();
+const props = defineProps<VehiclesListProps>();
+const emits = defineEmits<vehiclesListEmits>();
 
-const emits = defineEmits<{
-  (eventName: eventNames.UPDATE_FILTER, filter: FilterParams): void;
-  (eventName: eventNames.ELEMENT_REMOVED): void;
-}>();
+const scrollDirectionClass = ref(scrollDirection.DOWN);
 
-const { handleWheel } = useHandleWheel();
+const { defaultDirection } = useScrollDirection(scrollDirectionClass)
+const { debouncedHandleScroll } = usePageChange(props, emits, scrollDirectionClass)
+const { isLastPage, isFirstPage } = usePagePosition(props)
 
-const pageEmit = (page: number) => {
-  emits(eventNames.UPDATE_FILTER, {
-    ...props.filter,
-    page,
-  });
-};
-
-const scrollUp = ref(false);
-const scrollDirection = computed(() =>
-  scrollUp.value ? "scroll-up" : "scroll-down"
-);
-
-const changingDirection = () => {
-  scrollUp.value = !scrollUp.value;
-};
-
-const defaultDirection = () => {
-  if (!scrollUp.value) return;
-  changingDirection();
-};
-
-const handleDirection = () => {
-  changingDirection();
-};
-
-const pageInc = (currentPage?: number) => {
-  if (!currentPage || currentPage >= props.meta.totalPages) return;
-  currentPage++;
-  pageEmit(currentPage);
-};
-
-const pageDec = (currentPage?: number) => {
-  if (!currentPage || currentPage <= 1) return;
-  handleDirection();
-  currentPage--;
-  pageEmit(currentPage);
-};
-
-const handleScroll = (event: WheelEvent) => {
-  if (!props.filter.page) return;
-
-  handleWheel(event) === WheelDirection.UP
-    ? pageDec(props.filter.page)
-    : pageInc(props.filter.page);
-};
-
-const debouncedHandleScroll = debounce(handleScroll, 600);
 </script>
 
 <template>
   <div ref="container" class="list-container" @wheel="debouncedHandleScroll">
+    <Transition name="blur">
+      <div
+          v-if="!isFirstPage"
+          class="list-container__blur-top">
+
+      </div>
+    </Transition>
     <Transition
-      :name="scrollDirection"
+      :name="scrollDirectionClass"
       @after-leave="emits(eventNames.ELEMENT_REMOVED)"
       @after-enter="defaultDirection"
     >
-      <div v-if="!refreshState" class="list-container__transition">
+      <div v-if="renderItems" class="list-container__transition">
         <TheVehicleCard
           v-for="vehicle in vehicles"
           :key="vehicle.id"
@@ -85,6 +41,11 @@ const debouncedHandleScroll = debounce(handleScroll, 600);
           class="list-container__card"
         />
       </div>
+    </Transition>
+    <Transition name="blur">
+      <div
+          v-if="!isLastPage"
+          class="list-container__blur-bottom"></div>
     </Transition>
   </div>
 </template>
@@ -101,6 +62,29 @@ const debouncedHandleScroll = debounce(handleScroll, 600);
   );
   height: 700px;
   overflow: hidden;
+  position: relative;
+
+  &__blur-bottom,
+  &__blur-top {
+    width: 100%;
+    height: 20%;
+    z-index: 2;
+    position: absolute;
+    left: 0px;
+  }
+
+  &__blur-bottom {
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+    bottom: 0px;
+  }
+
+  &__blur-top {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+    bottom: 0px;
+    top: 0px;
+  }
+
+
 
   &__transition {
     display: flex;
@@ -132,4 +116,16 @@ const debouncedHandleScroll = debounce(handleScroll, 600);
 .scroll-up-leave-to {
   transform: translateY(700px);
 }
+
+.blur-enter-active,
+.blur-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+
+.blur-leave-to,
+.blur-enter-from {
+  opacity: 0.5;
+}
+
+
 </style>

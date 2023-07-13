@@ -1,52 +1,16 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
 import TheListFilter from "~/components/common/TheListFilter.vue";
-import { FilterParams, sortName, sortType } from "~/types/FilterParams";
-import { mergeFilterParams } from "~/utils/mergeFilterParams";
-import { useVehicleStore } from "~/stores/VehicleStore";
+import { useHandleListAppearance } from "~/composables/useVehicleWrapper/useCases/useHandleAnimation";
+import { initFiltersParams } from "~/constants/initFilterParams";
+import {useHandlers} from "~/composables/useVehicleWrapper/useCases/useHandlers";
+import {useVehicleWrapper} from "~/composables/useVehicleWrapper/useCases/useVehicleWrapper";
 
-const initFiltersParams = {
-  page: 1,
-  pageSize: 9,
-  sortBy: sortName.RENT,
-  sortType: sortType.DESCENDING,
-  type: null,
-};
-
-const route = useRoute();
 const router = useRouter();
 
-const filtersParams = ref<FilterParams>(
-  mergeFilterParams(initFiltersParams, route.query)
-);
-
-const vehicleStore = useVehicleStore();
-
-const { vehicles } = storeToRefs(vehicleStore);
-const { getVehicles, isEmptyList } = vehicleStore;
-
-const refreshState = ref(false);
-const loadingStatus = ref({
-  dataIsLoaded: false,
-  elementIsRemoved: false,
-});
-
-const handleState = () => {
-  refreshState.value = !refreshState.value;
-  loadingStatus.value.dataIsLoaded = false;
-  loadingStatus.value.elementIsRemoved = false;
-};
-
-const dataIsLoaded = () =>
-  loadingStatus.value.elementIsRemoved
-    ? handleState()
-    : (loadingStatus.value.dataIsLoaded = true);
-
-const elementIsRemoved = () =>
-  loadingStatus.value.dataIsLoaded
-    ? handleState()
-    : (loadingStatus.value.elementIsRemoved = true);
+const { filtersParams, vehicles, getVehicles, isEmptyList } = useVehicleWrapper()
+const { clearClicked, handlePageChange } = useHandlers(filtersParams)
+const { handleState, elementIsRemoved, loadingStatus, renderItems} = useHandleListAppearance()
 
 watch(
   () => filtersParams.value.type,
@@ -59,7 +23,7 @@ useAsyncData(
     handleState();
     router.push({ query: filtersParams.value });
     await getVehicles(filtersParams.value);
-    dataIsLoaded();
+    loadingStatus.value.dataIsLoaded = true;
     return vehicles.value;
   },
   {
@@ -67,13 +31,6 @@ useAsyncData(
   }
 );
 
-const clearClicked = () => {
-  filtersParams.value = Object.assign(filtersParams.value, initFiltersParams);
-};
-
-const handlePageChange = (changedFilterParams: FilterParams) => {
-  filtersParams.value.page = changedFilterParams.page;
-};
 </script>
 
 <template>
@@ -83,7 +40,7 @@ const handlePageChange = (changedFilterParams: FilterParams) => {
     :vehicles="vehicles.data"
     :meta="vehicles.meta"
     :filter="filtersParams"
-    :refresh-state="refreshState"
+    :render-items="renderItems"
     @update-filter="handlePageChange"
     @element-removed="elementIsRemoved"
   />

@@ -1,0 +1,9 @@
+import { defineNuxtPlugin } from "#app";
+import Vue3TouchEvents from "vue3-touch-events";
+
+export default defineNuxtPlugin((nuxtApp) => {
+    nuxtApp.vueApp.use(Vue3TouchEvents, {
+        disableClick: true,
+        swipeTolerance: 15
+    });
+});

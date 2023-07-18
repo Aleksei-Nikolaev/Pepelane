@@ -14,13 +14,20 @@ const emits = defineEmits<vehiclesListEmits>();
 const scrollDirectionClass = ref(scrollDirection.DOWN);
 
 const { defaultDirection } = useScrollDirection(scrollDirectionClass)
-const { debouncedHandleScroll } = usePageChange(props, emits, scrollDirectionClass)
+const { debouncedHandleScroll, debouncedHandleSwipe } = usePageChange(props, emits, scrollDirectionClass)
 const { isLastPage, isFirstPage } = usePagePosition(props)
+
 
 </script>
 
 <template>
-  <div ref="container" class="list-container" @wheel="debouncedHandleScroll">
+  <div
+      v-touch:swipe.top="debouncedHandleSwipe"
+      v-touch:swipe.bottom="debouncedHandleSwipe"
+      ref="container"
+      class="list-container"
+      @wheel="debouncedHandleScroll"
+  >
     <Transition name="blur">
       <div
           v-if="!isFirstPage"

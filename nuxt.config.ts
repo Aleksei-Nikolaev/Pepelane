@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@pinia/nuxt",
     "@vueuse/nuxt",
-    "@ant-design-vue/nuxt",
   ],
 
   css: ["normalize.css/normalize.css", "~/assets/styles/global.scss"],

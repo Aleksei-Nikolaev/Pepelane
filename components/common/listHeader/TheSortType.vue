@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { sortType } from "~/types/FilterParams";
 import { eventNames } from "~/constants/events";
+import {SortAscendingOutlined} from "@ant-design/icons-vue";
+import {SortDescendingOutlined} from "@ant-design/icons-vue";
 
 const props = defineProps<{
   value: sortType;

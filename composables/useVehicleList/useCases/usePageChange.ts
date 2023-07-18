@@ -1,13 +1,12 @@
-import {WheelDirection} from "~/composables/useVehicleList/useCases/useHandleWheel";
+import {useHandleWheel, WheelDirection} from "~/composables/useVehicleList/useCases/useHandleWheel";
 import {VehiclesListProps} from "~/composables/useVehicleList/types/vehiclesListProps";
-import { useScrollDirection } from "~/composables/useVehicleList/useCases/useScrollDirection";
-import {useHandleWheel} from "~/composables/useVehicleList/useCases/useHandleWheel";
+import {useScrollDirection} from "~/composables/useVehicleList/useCases/useScrollDirection";
 import {eventNames} from "~/constants/events";
 import {vehiclesListEmits} from "~/composables/useVehicleList/types/vehiclesListEmits";
 import debounce from "lodash.debounce";
 import {Ref} from "vue";
 import {scrollDirection} from "~/constants/scrollDirection";
-
+import {swipeDirection} from "~/constants/swipeDirection";
 
 
 export const usePageChange = (props: VehiclesListProps, emits: vehiclesListEmits, scrollDirection: Ref<scrollDirection>) => {
@@ -39,9 +38,22 @@ export const usePageChange = (props: VehiclesListProps, emits: vehiclesListEmits
             : pageInc(props.filter.page);
     };
 
+    const handleSwipe = (event: swipeDirection) => {
+        if (event === swipeDirection.TOP) {
+            pageInc(props.filter.page)
+            return
+        }
+        if (event === swipeDirection.BOTTOM) {
+            pageDec(props.filter.page)
+            return
+        }
+    }
+
     const debouncedHandleScroll = debounce(handleScroll, 600);
+    const debouncedHandleSwipe = debounce(handleSwipe, 600);
 
     return {
-        debouncedHandleScroll
+        debouncedHandleScroll,
+        debouncedHandleSwipe,
     }
 }

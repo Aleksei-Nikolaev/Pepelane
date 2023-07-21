@@ -6,6 +6,7 @@ export type getVehiclesResponse = {
   meta: PaginationMeta;
 };
 
+
 export type getVehiclesRequestParams = {
   page?: number;
   pageSize?: number;
@@ -13,3 +14,10 @@ export type getVehiclesRequestParams = {
   sortType?: string;
   type?: string | null;
 };
+
+export type getVehicleByIdResponse = {
+  data: IVehicle;
+}
+
+
+

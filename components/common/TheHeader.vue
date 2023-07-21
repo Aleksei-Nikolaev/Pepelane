@@ -6,8 +6,12 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
 <template>
   <header class="header">
     <div class="header__left-part">
-      <nuxt-icon class="header__icon-logo" name="Logo" filled />
-      <h1 class="header__name">Pepelane</h1>
+      <NuxtLink to="/">
+        <div class="header__logo-container">
+          <nuxt-icon class="header__icon-logo" name="Logo" filled />
+          <h1 class="header__name">Pepelane</h1>
+        </div>
+      </NuxtLink>
       <h2 class="header__slogan">{{ $t("header.slogan") }}</h2>
     </div>
     <div class="header__right-part">
@@ -32,7 +36,7 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
   &__left-part,
   &__right-part {
     display: flex;
-    align-items: inherit;
+    align-items: center;
     height: 100%;
   }
 
@@ -41,11 +45,19 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
     flex-direction: row-reverse;
   }
 
+  &__logo-container {
+    height: 100%;
+    align-items: center;
+    width: auto;
+    display: flex;
+  }
+
   &__name {
     color: var(--base_500);
     font-size: 20px;
     font-weight: var(--font_weight_bold);
     margin-right: 64px;
+    margin-bottom: 0;
   }
 
   &__slogan {
@@ -53,6 +65,7 @@ import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
     font-size: var(--font_size_default);
     font-weight: var(--font_weight_medium);
     margin-left: 64px;
+    margin-bottom: 0;
   }
 
   &__icon {

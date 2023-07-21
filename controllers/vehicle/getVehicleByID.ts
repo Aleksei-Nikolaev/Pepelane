@@ -1,6 +1,7 @@
 import { H3Event } from "h3";
 import { VehicleModel } from "~/models/vehicle.model";
 import { jsonParse } from "~/utils/server/jsonParse";
+
 export const getVehicleByID = (event: H3Event) => {
   const id = event?.context?.params?.id;
 

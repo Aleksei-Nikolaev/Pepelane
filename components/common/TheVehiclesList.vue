@@ -17,7 +17,6 @@ const { defaultDirection } = useScrollDirection(scrollDirectionClass)
 const { debouncedHandleScroll, debouncedHandleSwipe } = usePageChange(props, emits, scrollDirectionClass)
 const { isLastPage, isFirstPage } = usePagePosition(props)
 
-
 </script>
 
 <template>
@@ -32,7 +31,6 @@ const { isLastPage, isFirstPage } = usePagePosition(props)
       <div
           v-if="!isFirstPage"
           class="list-container__blur-top">
-
       </div>
     </Transition>
     <Transition
@@ -40,13 +38,16 @@ const { isLastPage, isFirstPage } = usePagePosition(props)
       @after-leave="emits(eventNames.ELEMENT_REMOVED)"
       @after-enter="defaultDirection"
     >
-      <div v-if="renderItems" class="list-container__transition">
-        <TheVehicleCard
-          v-for="vehicle in vehicles"
-          :key="vehicle.id"
-          :vehicle="vehicle"
-          class="list-container__card"
-        />
+      <div
+          v-if="renderItems"
+          class="list-container__transition"
+          >
+          <TheVehicleCard
+            v-for="vehicle in vehicles"
+            :key="vehicle.id"
+            :vehicle="vehicle"
+            class="list-container__card"
+          />
       </div>
     </Transition>
     <Transition name="blur">
@@ -71,10 +72,11 @@ const { isLastPage, isFirstPage } = usePagePosition(props)
   overflow: hidden;
   position: relative;
 
+
   &__blur-bottom,
   &__blur-top {
     width: 100%;
-    height: 20%;
+    height: 10%;
     z-index: 2;
     position: absolute;
     left: 0px;

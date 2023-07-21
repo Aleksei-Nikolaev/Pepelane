@@ -1,7 +1,10 @@
-<script setup lang="ts"></script>
+<script setup>
+import TheDetailedInfoWrapper from "~/components/common/TheDetailedInfoWrapper.vue";
+
+</script>
 
 <template>
-  <div>about</div>
+
 </template>
 
 <style scoped lang="scss"></style>

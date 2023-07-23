@@ -1,19 +1,16 @@
 import {FilterParams} from "~/types/FilterParams";
-import { initFiltersParams } from "~/constants/initFilterParams";
-import {Ref} from "vue"
+import {useVehicleStore} from "~/stores/VehicleStore";
 
 
-export const useVehicleWrapperFilter = (filtersParams: Ref<FilterParams>) => {
-    const resetFilters = () => {
-        filtersParams.value = Object.assign(filtersParams.value, initFiltersParams);
-    };
-
+export const useVehicleWrapperFilter = (filterParams: Ref<FilterParams>) => {
+    const { updateFilterParams } = useVehicleStore()
     const handlePageChange = (changedFilterParams: FilterParams) => {
-        filtersParams.value.page = changedFilterParams.page;
+        updateFilterParams({
+            page: changedFilterParams.page,
+        })
     };
 
     return {
-        resetFilters,
         handlePageChange
     }
 }

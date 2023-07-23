@@ -4,32 +4,35 @@ import TheListFilter from "~/components/common/TheListFilter.vue";
 import { useHandleListAppearance } from "~/composables/useVehicleWrapper/useCases/useHandleAnimation";
 import { initFiltersParams } from "~/constants/initFilterParams";
 import {useVehicleWrapperFilter} from "~/composables/useVehicleWrapper/useCases/useVehicleWrapperFilter/useCases/useVehicleWrapperFilter";
-import {useVehicleWrapper} from "~/composables/useVehicleWrapper/useCases/useVehicleWrapper";
-import { defineExpose } from 'vue'
+import {useVehicleStore} from "~/stores/VehicleStore";
+import {storeToRefs} from "pinia";
 
+const { data, meta, filterParams } = storeToRefs(useVehicleStore())
+const {getVehicles, resetFilters, updateFilterParams, isEmptyList} = useVehicleStore()
 
 const router = useRouter()
 
-const { filtersParams, vehicles, getVehicles, isEmptyList } = useVehicleWrapper()
-const { resetFilters, handlePageChange } = useVehicleWrapperFilter(filtersParams)
+const {  handlePageChange } = useVehicleWrapperFilter(filterParams)
 const { handleState, elementIsRemoved, loadingStatus, renderItems} = useHandleListAppearance()
 
 watch(
-  () => filtersParams.value.type,
-  () => (filtersParams.value.page = initFiltersParams.page)
+  () => filterParams.value.type,
+  () => updateFilterParams({
+    page: initFiltersParams.page
+  })
 );
 
 useAsyncData(
   "vehicles",
   async () => {
     handleState();
-    router.push({ query: filtersParams.value });
-    await getVehicles(filtersParams.value);
+    router.push({ query: filterParams.value });
+    await getVehicles(filterParams.value);
     loadingStatus.value.dataIsLoaded = true;
-    return vehicles.value;
+    return filterParams.value
   },
   {
-    watch:  [filtersParams.value],
+    watch:  [filterParams.value],
   },
 );
 
@@ -38,19 +41,17 @@ loadingStatus.value.elementIsRemoved = true
 </script>
 
 <template>
-  <TheListFilter :filter="filtersParams" @clear-clicked="resetFilters" />
-  {{route}}
-  <p></p>
-  {{ filtersParams }}
+  <TheListFilter :filter="filterParams" @clear-clicked="resetFilters"/>
   <TheVehiclesList
-    v-if="!isEmptyList"
-    :vehicles="vehicles.data"
-    :meta="vehicles.meta"
-    :filter="filtersParams"
-    :render-items="renderItems"
-    @update-filter="handlePageChange"
-    @element-removed="elementIsRemoved"
+      v-if="!isEmptyList"
+      :vehicles="data"
+      :meta="meta"
+      :filter="filterParams"
+      :render-items="renderItems"
+      @update-filter="handlePageChange"
+      @element-removed="elementIsRemoved"
   />
 </template>
 
 <style scoped lang="scss"></style>
+

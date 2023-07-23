@@ -3,8 +3,8 @@ import { initFiltersParams } from "~/constants/initFilterParams";
 import {Ref} from "vue"
 
 
-export const useHandlers = (filtersParams: Ref<FilterParams>) => {
-    const clearClicked = () => {
+export const useVehicleWrapperFilter = (filtersParams: Ref<FilterParams>) => {
+    const resetFilters = () => {
         filtersParams.value = Object.assign(filtersParams.value, initFiltersParams);
     };
 
@@ -13,7 +13,7 @@ export const useHandlers = (filtersParams: Ref<FilterParams>) => {
     };
 
     return {
-        clearClicked,
+        resetFilters,
         handlePageChange
     }
 }

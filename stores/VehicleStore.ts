@@ -7,11 +7,11 @@ export const useVehicleStore = defineStore("VehicleStore", () => {
   const vehicles = ref<vehicleStoreState>({
     data: [],
     meta: null,
+    filterParams: {},
   });
 
   const getVehicles = async (params: getVehiclesRequestParams) => {
     const { data, meta } = await $api.vehicleService.getVehicles(params);
-
     vehicles.value.data = data;
     vehicles.value.meta = meta;
   };

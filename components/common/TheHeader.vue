@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import TheColorModeSwitcher from "~/components/common/header/TheColorModeSwitcher.vue";
 import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
+import {initFiltersParams} from "~/constants/initFilterParams";
+
 </script>
 
 <template>
   <header class="header">
     <div class="header__left-part">
-      <NuxtLink to="/">
+      <NuxtLink
+          :to="{ path: '/', query: initFiltersParams }"
+      >
         <div class="header__logo-container">
           <nuxt-icon class="header__icon-logo" name="Logo" filled />
           <h1 class="header__name">Pepelane</h1>

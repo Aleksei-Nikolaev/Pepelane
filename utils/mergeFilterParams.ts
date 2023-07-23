@@ -13,6 +13,5 @@ export const mergeFilterParams = (
     sortType: routeQuery.sortType,
     type: routeQuery.type,
   };
-
   return merge({ ...initFiltersParams }, queryParams);
 };

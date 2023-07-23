@@ -1,5 +1,4 @@
 <script setup>
-import TheDetailedInfoWrapper from "~/components/common/TheDetailedInfoWrapper.vue";
 
 </script>
 

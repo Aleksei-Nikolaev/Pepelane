@@ -12,8 +12,8 @@ defineProps<{
   <NuxtLink
       :to="`vehicles/${vehicle.id}`"
       :rel="vehicle.id"
-      :replace="true"
-      class="link-wrapper">
+      class="link-wrapper"
+  >
     <div
         class="card-container"
     >

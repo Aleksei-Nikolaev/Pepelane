@@ -52,6 +52,8 @@ export const usePageChange = (props: VehiclesListProps, emits: vehiclesListEmits
     const debouncedHandleScroll = debounce(handleScroll, 600);
     const debouncedHandleSwipe = debounce(handleSwipe, 600);
 
+
+
     return {
         debouncedHandleScroll,
         debouncedHandleSwipe,

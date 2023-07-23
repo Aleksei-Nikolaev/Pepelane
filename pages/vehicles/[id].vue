@@ -11,20 +11,16 @@ const { data: vehicleData } = useAsyncData("vehicle",
     async () => {
       const {data} = await $api.vehicleService.getVehicleById(id as string)
       return data
-    }
+    },
 )
-
-
 </script>
 
 <template>
-  <div class="vehicle-page__container">
+  <div class="vehicle-page__container" v-if="vehicleData">
     <TheImage :url="vehicleData.image" class="vehicle-page__image" />
     <div class="vehicle-page__info">
       <h1 class="vehicle-page__info-name">{{ vehicleData.name }}</h1>
       <TheDetailedSpec :vehicle-data="vehicleData" />
-
-<!--      Dynamic component-->
     </div>
   </div>
 

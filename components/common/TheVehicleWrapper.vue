@@ -15,6 +15,8 @@ const router = useRouter()
 const {  handlePageChange } = useVehicleWrapperFilter(filterParams)
 const { handleState, elementIsRemoved, loadingStatus, renderItems} = useHandleListAppearance()
 
+
+
 watch(
   () => filterParams.value.type,
   () => updateFilterParams({

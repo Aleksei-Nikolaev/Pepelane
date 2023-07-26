@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import {$api} from "~/plugins/api";
 import TheImage from "~/components/common/TheImage.vue";
-import TheDetailedSpec from "~/components/common/vehicleDetailedPage/TheDetailedSpec.vue";
+import TheSectionSelection from "~/components/common/vehicleDetailedPage/TheSectionSelection.vue";
+import {infoSections} from "~/constants/infoSections";
 
 const route = useRoute()
+const router = useRouter()
 
 const { id } = route.params
 
@@ -13,6 +15,15 @@ const { data: vehicleData } = useAsyncData("vehicle",
       return data
     },
 )
+
+const sectionName = ref<string>(infoSections[0].value)
+
+const changeSection = async (event: any) => {
+  // router.push({ path: `/${event.target?.value}` });
+  await navigateTo(`/${event.target?.value}`)
+  console.log(event.target?.value)
+}
+
 </script>
 
 <template>
@@ -20,7 +31,13 @@ const { data: vehicleData } = useAsyncData("vehicle",
     <TheImage :url="vehicleData.image" class="vehicle-page__image" />
     <div class="vehicle-page__info">
       <h1 class="vehicle-page__info-name">{{ vehicleData.name }}</h1>
-      <TheDetailedSpec :vehicle-data="vehicleData" />
+      <TheSectionSelection
+          :section-name="sectionName"
+          @change="changeSection"
+      />
+      <NuxtPage
+          :vehicle-data="vehicleData"
+      />
     </div>
   </div>
 

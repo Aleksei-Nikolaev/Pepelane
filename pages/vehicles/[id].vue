@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {$api} from "~/plugins/api";
 import TheImage from "~/components/common/TheImage.vue";
-import TheSectionSelection from "~/components/common/vehicleDetailedPage/TheSectionSelection.vue";
-import {infoSections} from "~/constants/infoSections";
+import { useDetailedPageRoutes } from "~/composables/useDetailedPage/useCases/useDetailedPageRoutes.";
 
 const route = useRoute()
 const router = useRouter()
+
 
 const { id } = route.params
 
@@ -16,13 +16,7 @@ const { data: vehicleData } = useAsyncData("vehicle",
     },
 )
 
-const sectionName = ref<string>(infoSections[0].value)
-
-const changeSection = async (event: any) => {
-  // router.push({ path: `/${event.target?.value}` });
-  await navigateTo(`/${event.target?.value}`)
-  console.log(event.target?.value)
-}
+const { sections } = useDetailedPageRoutes()
 
 </script>
 
@@ -31,13 +25,20 @@ const changeSection = async (event: any) => {
     <TheImage :url="vehicleData.image" class="vehicle-page__image" />
     <div class="vehicle-page__info">
       <h1 class="vehicle-page__info-name">{{ vehicleData.name }}</h1>
-      <TheSectionSelection
-          :section-name="sectionName"
-          @change="changeSection"
-      />
-      <NuxtPage
-          :vehicle-data="vehicleData"
-      />
+      <div class="vehicle-page__navigation">
+        <NuxtLink
+            v-for="(section) in sections"
+            :to="{ path: `/vehicles/${id}/${section.value}`}"
+            :rel="section.value"
+            active-class="router-link-active"
+            class="vehicle-page__navigation-link"
+        >
+         {{ section.label }}
+        </NuxtLink>
+      </div>
+        <NuxtPage
+            :vehicle-data="vehicleData"
+        />
     </div>
   </div>
 
@@ -50,6 +51,21 @@ const changeSection = async (event: any) => {
   &__container {
     display: flex;
     width: 100%;
+  }
+
+  &__navigation {
+    display: flex;
+    flex-direction: row;
+
+    &-link {
+      font-weight: var(--font_weight_bold);
+      font-size: var(--font_size_default);
+      color: var(--base_300);
+    }
+
+    &-link:not(:last-child) {
+      margin-right: var(--margin_specification_medium);
+    }
   }
 
   &__image {
@@ -69,6 +85,11 @@ const changeSection = async (event: any) => {
   }
 }
 
+.router-link-active {
+  color: var(--main_400);
+}
+
 
 
 </style>
+

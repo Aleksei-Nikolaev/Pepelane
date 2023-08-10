@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {IVehicle} from "~/types/vehicle";
+import TheCollapsedText from "~/components/common/TheCollapsedText.vue";
 
 defineProps<{
   vehicleData: IVehicle
@@ -8,18 +9,29 @@ defineProps<{
 </script>
 
 <template>
-<p class="specification-text">{{vehicleData.specifications_text}}</p>
+  <TheCollapsedText :detailed-text="vehicleData.specifications_text" />
+  <h2 class="section-heading">
+    {{ $t("detailedPage.subHeadings.features") }}:
+  </h2>
+  <div>
+    <div class="section-element icon-container">
+      <nuxt-icon class="icon" name="goblet" filled />
+    </div>
+
+  </div>
 </template>
 
 <style scoped lang="scss">
+@import "assets/styles/pages/sections.scss";
 
-.specification {
-  &-text {
-    margin-top: var(--margin_specification_medium);
-    font-weight: var(--font_weight_medium);
-    font-size: var(--font_size_tiny);
-    color: var(--base_300);
-    text-align: justify;
+.icon {
+  width: 32px;
+  &-container {
+    width: 64px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 

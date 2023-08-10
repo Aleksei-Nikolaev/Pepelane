@@ -12,6 +12,7 @@ const onImageLoad = () => {
   isImageLoaded.value = true;
 };
 
+
 </script>
 
 <template>

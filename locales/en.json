@@ -5,5 +5,17 @@
       "light": "Night mode",
       "dark": "Day mode"
     }
+  },
+  "detailedPage": {
+    "sections": {
+      "specification": "Specification",
+      "team": "Team",
+      "rentTerms": "Rent terms"
+    },
+    "subHeadings": {
+      "features": "Features",
+      "specialists": "Qualified specialists",
+      "conditions": "Additional conditions"
+    }
   }
 }

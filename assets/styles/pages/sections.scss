@@ -1,0 +1,20 @@
+.section {
+  &-text {
+    font-weight: var(--font_weight_medium);
+    font-size: var(--font_size_tiny);
+    color: var(--base_300);
+    text-align: justify;
+  }
+  &-heading {
+    font-weight: var(--font_weight_bold);
+    font-size: var(--font_size_big);
+    color: var(--base_500);
+    margin-top: var(--margin_specification_medium);
+    margin-bottom: var(--margin_specification_medium);
+  }
+
+  &-element {
+    border-radius: var(--border_radius_tiny);
+    background: var(--base_50);
+  }
+}

@@ -77,7 +77,7 @@ const { isLastPage, isFirstPage } = usePagePosition(props)
   &__blur-top {
     width: 100%;
     height: 10%;
-    z-index: 2;
+    z-index: 1;
     position: absolute;
     left: 0px;
   }

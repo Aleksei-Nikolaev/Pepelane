@@ -17,9 +17,9 @@ const switchColor = () => {
         :name="colorMode.value"
         filled
       ></nuxt-icon>
-      <span class="color-mode__label">{{
-        $t(`header.colorMode.${colorMode.value}`)
-      }}</span>
+      <span class="color-mode__label">
+        {{ $t(`header.colorMode.${colorMode.value}`) }}
+      </span>
     </client-only>
   </div>
 </template>

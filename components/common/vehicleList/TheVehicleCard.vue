@@ -1,16 +1,19 @@
 <script setup lang="ts">
 import type { IVehicle } from "~/types/vehicle";
 import TheImage from "~/components/common/TheImage.vue";
+import {useDetailedPageRoutes} from "~/composables/useDetailedPage/useCases/useDetailedPageRoutes.";
 
 defineProps<{
   vehicle: IVehicle;
 }>();
 
+const { defaultRoute } = useDetailedPageRoutes()
+
 </script>
 
 <template>
   <NuxtLink
-      :to="`vehicles/${vehicle.id}`"
+      :to="`vehicles/${vehicle.id}/${defaultRoute}`"
       :rel="vehicle.id"
       class="link-wrapper"
   >

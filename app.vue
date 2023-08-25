@@ -8,19 +8,28 @@ import TheHeader from "~/components/common/TheHeader.vue";
     <div class="content">
       <TheHeader />
       <div class="page">
-        <NuxtPage />
+        <NuxtLayout>
+          <NuxtPage :transition="{
+        name: 'page',
+        mode: 'out-in'
+      }" />
+        </NuxtLayout>
       </div>
     </div>
   </NuxtLayout>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .content {
-  width: 1312px;
+  width: 1440px;
   margin: 0 auto;
   padding: 48px 64px;
 }
 .page {
-  padding-top: 20px;
+  padding-top: 40px;
 }
+
+
+
+
 </style>

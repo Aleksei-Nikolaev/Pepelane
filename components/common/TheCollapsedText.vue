@@ -18,7 +18,7 @@ const collapseHandle = () => {
       class="text-container"
       :class="{ collapsed: collapsed }"
   >
-    <p class="section-text">{{detailedText}}</p>
+    <p class="section__text">{{detailedText}}</p>
     <div v-show="collapsed" class="blur"></div>
   </div>
   <div class="collapsed__icon-container">

@@ -16,6 +16,10 @@
       "features": "Features",
       "specialists": "Qualified specialists",
       "conditions": "Additional conditions"
+    },
+    "specification" : {
+      "customerSlogan": "A challenge for a true champion",
+      "pilotSlogan": "Pilot's sweaty hands"
     }
   }
 }

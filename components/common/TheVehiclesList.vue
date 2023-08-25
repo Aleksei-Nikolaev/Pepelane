@@ -53,7 +53,8 @@ const { isLastPage, isFirstPage } = usePagePosition(props)
     <Transition name="blur">
       <div
           v-if="!isLastPage"
-          class="list-container__blur-bottom"></div>
+          class="list-container__blur-bottom">
+      </div>
     </Transition>
   </div>
 </template>

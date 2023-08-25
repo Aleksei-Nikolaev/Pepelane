@@ -17,13 +17,12 @@ const onImageLoad = () => {
 
 <template>
   <div class="image__container">
-    <img
-        :src=url
-        loading="lazy"
-        class="image__container__image"
-        @load="onImageLoad"
-    />
-    <Skeletor v-show="!isImageLoaded" class="image__container__skeleton" />
+      <NuxtImg
+          :src="url"
+          class="image__container__image"
+          @load="onImageLoad"
+      />
+      <Skeletor v-show="!isImageLoaded" class="image__container__skeleton" />
   </div>
 </template>
 

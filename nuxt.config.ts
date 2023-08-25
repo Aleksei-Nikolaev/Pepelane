@@ -33,7 +33,6 @@ export default defineNuxtConfig({
     dir: "assets/images",
   },
 
-
   runtimeConfig: {
     public: {
       baseUrl: appConfig.FRONTEND_API_BASE_URL,

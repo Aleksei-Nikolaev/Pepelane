@@ -1,11 +1,17 @@
 .section {
-  &-text {
+  &__text {
     font-weight: var(--font_weight_medium);
     font-size: var(--font_size_tiny);
     color: var(--base_300);
     text-align: justify;
+
+    &-bold {
+      font-weight: var(--font_weight_bold);
+      font-size: var(--font_size_default);
+      color: var(--base_500);
+    }
   }
-  &-heading {
+  &__heading {
     font-weight: var(--font_weight_bold);
     font-size: var(--font_size_big);
     color: var(--base_500);
@@ -13,8 +19,36 @@
     margin-bottom: var(--margin_specification_medium);
   }
 
-  &-element {
+  &__element {
     border-radius: var(--border_radius_tiny);
     background: var(--base_50);
+  }
+
+  &__subHeading {
+    font-size: var(--font_size_default);
+    font-weight: var(--font_weight_bold);
+    color: var(--base_500);
+  }
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px
+  }
+  &__box {
+    display: flex;
+    gap: 24px;
+  }
+}
+
+.icon {
+  height: 30px;
+  &-container {
+    min-width: 80px;
+    height: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 24px;
   }
 }

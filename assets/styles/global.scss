@@ -6,8 +6,30 @@
   font-family: "Codec Pro", sans-serif;
 }
 
-p {
+p,h1,h2 {
   margin: 0;
 }
 
+html {
+  scrollbar-gutter: stable both-edges;
+}
 
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
+.page__nested-enter-active,
+.page__nested-leave-active {
+  transition: all 0.4s;
+}
+.page__nested-enter-from,
+.page__nested-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}

@@ -6,16 +6,18 @@ import { initFiltersParams } from "~/constants/initFilterParams";
 import {useVehicleWrapperFilter} from "~/composables/useVehicleWrapper/useCases/useVehicleWrapperFilter/useCases/useVehicleWrapperFilter";
 import {useVehicleStore} from "~/stores/VehicleStore";
 import {storeToRefs} from "pinia";
+import TheErrorPage from "~/components/common/TheErrorPage.vue";
 
-const { data, meta, filterParams } = storeToRefs(useVehicleStore())
-const {getVehicles, resetFilters, updateFilterParams, isEmptyList} = useVehicleStore()
+const { data, meta, filterParams, isEmptyList } = storeToRefs(useVehicleStore())
+const { getVehicles, resetFilters, updateFilterParams } = useVehicleStore()
 
 const router = useRouter()
+const route = useRoute()
+
+updateFilterParams(route.query)
 
 const {  handlePageChange } = useVehicleWrapperFilter(filterParams)
-const { handleState, elementIsRemoved, loadingStatus, renderItems} = useHandleListAppearance()
-
-
+const { resetStatus, elementIsRemoved, loadingStatus, renderItems} = useHandleListAppearance()
 
 watch(
   () => filterParams.value.type,
@@ -27,7 +29,7 @@ watch(
 useAsyncData(
   "vehicles",
   async () => {
-    handleState();
+    resetStatus();
     router.push({ query: filterParams.value });
     await getVehicles(filterParams.value);
     loadingStatus.value.dataIsLoaded = true;
@@ -37,8 +39,6 @@ useAsyncData(
     watch:  [filterParams.value],
   },
 );
-
-loadingStatus.value.elementIsRemoved = true
 
 </script>
 
@@ -53,6 +53,7 @@ loadingStatus.value.elementIsRemoved = true
       @update-filter="handlePageChange"
       @element-removed="elementIsRemoved"
   />
+  <TheErrorPage v-else/>
 </template>
 
 <style scoped lang="scss"></style>

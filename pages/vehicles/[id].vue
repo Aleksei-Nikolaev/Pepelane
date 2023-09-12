@@ -17,6 +17,7 @@ const { data: vehicleData } = useAsyncData("vehicle",
     },
 )
 
+
 const { sections } = useDetailedPageRoutes()
 
 </script>

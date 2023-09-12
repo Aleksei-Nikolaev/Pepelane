@@ -21,5 +21,9 @@
       "customerSlogan": "A challenge for a true champion",
       "pilotSlogan": "Pilot's sweaty hands"
     }
+  },
+  "errorPage": {
+    "noDataMessage": "There is no data to show",
+    "returnToMain": "Please return to Main page"
   }
 }

@@ -10,16 +10,15 @@ export const useHandleListAppearance = () => {
         return (loadingStatus.value.dataIsLoaded && loadingStatus.value.elementIsRemoved)
     })
 
-    const handleState = () => {
+    const resetStatus = () => {
         loadingStatus.value.dataIsLoaded = false;
         loadingStatus.value.elementIsRemoved = false;
     };
 
     const elementIsRemoved = () => loadingStatus.value.elementIsRemoved = true
 
-
     return {
-        handleState,
+        resetStatus,
         elementIsRemoved,
         loadingStatus,
         renderItems,

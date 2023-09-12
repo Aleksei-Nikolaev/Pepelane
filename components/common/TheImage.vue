@@ -6,23 +6,33 @@ defineProps<{
   url: string;
 }>();
 
+const img = ref();
+
 const isImageLoaded = ref(false);
+onMounted(() => {
+  const element = img.value.$el as HTMLImageElement;
+
+  nextTick(() => {
+    if (!element || !element.complete) return;
+    isImageLoaded.value = true;
+  })
+})
 
 const onImageLoad = () => {
   isImageLoaded.value = true;
 };
-
 
 </script>
 
 <template>
   <div class="image__container">
       <NuxtImg
+          ref="img"
           :src="url"
           class="image__container__image"
           @load="onImageLoad"
       />
-      <Skeletor v-show="!isImageLoaded" class="image__container__skeleton" />
+      <Skeletor v-show="!isImageLoaded" class="image__container__skeleton"/>
   </div>
 </template>
 

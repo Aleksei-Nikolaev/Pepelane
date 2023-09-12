@@ -7,6 +7,9 @@ import {vehiclesListEmits} from "~/composables/useVehicleList/types/vehiclesList
 import {usePageChange} from "~/composables/useVehicleList/useCases/usePageChange";
 import {scrollDirection} from "~/constants/scrollDirection";
 import {usePagePosition} from "~/composables/useVehicleList/useCases/usePagePosition";
+import { onMounted } from 'vue'
+
+
 
 const props = defineProps<VehiclesListProps>();
 const emits = defineEmits<vehiclesListEmits>();
@@ -16,6 +19,10 @@ const scrollDirectionClass = ref(scrollDirection.DOWN);
 const { defaultDirection } = useScrollDirection(scrollDirectionClass)
 const { debouncedHandleScroll, debouncedHandleSwipe } = usePageChange(props, emits, scrollDirectionClass)
 const { isLastPage, isFirstPage } = usePagePosition(props)
+
+onMounted(() => {
+  emits(eventNames.ELEMENT_REMOVED)
+})
 
 </script>
 
@@ -72,7 +79,6 @@ const { isLastPage, isFirstPage } = usePagePosition(props)
   height: 700px;
   overflow: hidden;
   position: relative;
-
 
   &__blur-bottom,
   &__blur-top {

@@ -69,11 +69,12 @@ useDropZone(dropZoneRef, onDrop)
   <div ref="dropZoneRef">
     <div class="drop-zone" ref="imageContainer">
       <label class="drop-zone__button">
-
-        <a-input type="file"
-                 v-model:value="value"
-        @input="onAddFile"
-        ></a-input>
+        <input
+            ref="input"
+            type="file"
+            accept="image/*"
+            required
+        />
         <nuxt-icon name="image_upload" class="drop-zone__icon" filled/>
       </label>
     </div>

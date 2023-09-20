@@ -17,7 +17,6 @@ defineProps<{
         class="rent__button"
     >Rent now
     </a-button>
-
   </div>
 </template>
 

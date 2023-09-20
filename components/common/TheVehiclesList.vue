@@ -9,8 +9,6 @@ import {scrollDirection} from "~/constants/scrollDirection";
 import {usePagePosition} from "~/composables/useVehicleList/useCases/usePagePosition";
 import { onMounted } from 'vue'
 
-
-
 const props = defineProps<VehiclesListProps>();
 const emits = defineEmits<vehiclesListEmits>();
 
@@ -73,10 +71,6 @@ onMounted(() => {
   width: 100%;
   padding: var(--padding_list);
   display: flex;
-  min-height: calc(
-    3 * var(--margin_card_horizontal) + 2 * var(--padding_list) + 3 * 164px
-  );
-  height: 700px;
   overflow: hidden;
   position: relative;
 

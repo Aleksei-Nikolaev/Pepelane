@@ -55,7 +55,7 @@ const model = useModel(props, "filter");
   &__reset-button {
     margin-left: 20px;
     color: var(--main_400);
-    font-size: 1.4em;
+    font-size: 1.6em;
   }
 }
 </style>

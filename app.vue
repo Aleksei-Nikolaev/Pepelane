@@ -6,13 +6,15 @@ import TheHeader from "~/components/common/TheHeader.vue";
 <template>
   <NuxtLayout>
     <div class="content">
-      <TheHeader />
+      <TheHeader/>
       <div class="page">
         <NuxtLayout>
-          <NuxtPage :transition="{
-        name: 'page',
-        mode: 'out-in'
-      }" />
+          <NuxtPage
+            :transition="{
+              name: 'page',
+              mode: 'out-in'
+            }"
+          />
         </NuxtLayout>
       </div>
     </div>
@@ -28,8 +30,4 @@ import TheHeader from "~/components/common/TheHeader.vue";
 .page {
   padding-top: 40px;
 }
-
-
-
-
 </style>

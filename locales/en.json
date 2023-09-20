@@ -22,8 +22,17 @@
       "pilotSlogan": "Pilot's sweaty hands"
     }
   },
-  "errorPage": {
+  "noDataPage": {
     "noDataMessage": "There is no data to show",
-    "returnToMain": "Please return to Main page"
+    "resetMessage": "Please reset vehicle filter",
+    "buttonMessage": "Reset filters"
+  },
+  "errorPage": {
+    "errorMessage": "An error has occured",
+    "reloadMessage": "Please go to the main page",
+    "buttonMessage": "Reload main page"
+  },
+  "addVehicleModal": {
+    "heading":"Add new vehicle"
   }
 }

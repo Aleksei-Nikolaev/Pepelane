@@ -4,25 +4,25 @@ import {useVehicleStore} from "~/stores/VehicleStore";
 const {resetFilters} = useVehicleStore()
 
 </script>
-
 <template>
   <div
-      class="error-container"
+      class="no-data__container"
   >
-    <h1 class="error-container__message-main">{{ $t("errorPage.noDataMessage") }}</h1>
-    <h2 class="error-container__message-minor">{{ $t("errorPage.returnToMain") }}</h2>
+    <h1 class="no-data__container-message-main">{{ $t("noDataPage.noDataMessage") }}</h1>
+    <h2 class="no-data__container-message-minor">{{ $t("noDataPage.resetMessage") }}</h2>
     <a-button
         type="primary"
         size="large"
-        class="error-container__button"
+        class="no-data__container-button"
         @click="resetFilters"
-    >Reload main page
+    >
+      {{ $t("noDataPage.buttonMessage") }}
     </a-button>
   </div>
 </template>
 
 <style scoped lang="scss">
-.error-container {
+.no-data__container {
   background: var(--base_50);
   border-radius: var(--border_radius_big);
   width: 100%;
@@ -31,12 +31,9 @@ const {resetFilters} = useVehicleStore()
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(
-      3 * var(--margin_card_horizontal) + 2 * var(--padding_list) + 3 * 164px
-  );
   height: 700px;
 
-  &__message {
+  &-message {
     &-main {
       color: var(--base_500);
       font-size: var(--font_size_largest);
@@ -54,9 +51,8 @@ const {resetFilters} = useVehicleStore()
   }
 }
 
-:deep(.error-container__button) {
+:deep(.no-data__container-button) {
   width: 180px;
-  height: 48px;
   font-size: var(--font_size_default);
   font-weight: var(--font_weight_bold);
   border-radius: var(--border_radius_mini);

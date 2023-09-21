@@ -13,8 +13,8 @@ const userVehicleData = reactive<UserVehicle>({
   isImage: false,
 })
 
-const regex = /^[A-Za-z]/;
-const checkImage = async (_rule: Rule, value: string) => {
+const regexLetters = /^[A-Za-z]/;
+const checkImage = async (_rule: Rule) => {
   if (!userVehicleData.isImage) {
     return Promise.reject('Please upload JPG or PNG image');
   } else {
@@ -23,6 +23,7 @@ const checkImage = async (_rule: Rule, value: string) => {
 }
 
 const checkRent = async (_rule: Rule, value: number) => {
+  console.log(_rule.validator)
   if (!value) {
     return Promise.reject('Please input the price');
   }
@@ -42,8 +43,8 @@ const validateName = async (_rule: Rule, value: string) => {
   if (value === '') {
     return Promise.reject('Please input the name');
   }
-  if (!regex.test(value)) {
-    return Promise.reject('Name must start with letter');
+  if (!regexLetters.test(value)) {
+    return Promise.reject('Name must start with latin letter');
   }
   if (value.length < 4) {
     return Promise.reject('Name must contain at least 4 characters');
@@ -63,9 +64,9 @@ const validateDescription = async (_rule: Rule, value: string) => {
 };
 
 const rules: Record<string, Rule[]> = {
-  name: [{required: true, validator: validateName, trigger: 'change'}],
-  description: [{required: true, validator: validateDescription, trigger: 'change'}],
-  rent: [{validator: checkRent, trigger: 'change'}],
+  name: [{validator: validateName, trigger: 'change'}],
+  description: [{ validator: validateDescription, trigger: 'change'}],
+  rent: [{ validator: checkRent, trigger: 'change'}],
   isImage: [{validator: checkImage, trigger: 'change'}],
 };
 
@@ -98,18 +99,19 @@ const onFinish = () => {
           v-model:value="userVehicleData.name"
           autocomplete="off"
           :placeholder="$t('imageUpload.inputPlaceholder.name')"
-          class="input"
+          class="form__input "
+          v-maska data-maska="@@@@@@@@@@"
       />
     </a-form-item>
     <a-form-item
         has-feedback
         name="description"
     >
-      <a-input
+      <a-textarea
           v-model:value="userVehicleData.description"
           autocomplete="off"
           :placeholder="$t('imageUpload.inputPlaceholder.description')"
-          class="input"
+          class="form__input "
       />
     </a-form-item>
     <a-form-item
@@ -120,26 +122,43 @@ const onFinish = () => {
           v-model:value="userVehicleData.rent"
           autocomplete="off"
           :placeholder="$t('imageUpload.inputPlaceholder.rent')"
-          class="input"
+          v-maska data-maska="####"
+          class="form__input"
       >
-        <template #suffix class="input">
-          <a-tooltip>
+        <template #suffix class="form__input ">
+          <a-tooltip class="form__input ">
             $/h
           </a-tooltip>
         </template>
       </a-input>
     </a-form-item>
     <a-form-item>
-      <a-button type="primary" html-type="submit">Submit</a-button>
+      <a-button class="form_button" type="primary" html-type="submit">Submit</a-button>
     </a-form-item>
   </a-form>
 </template>
 
 <style scoped lang="scss">
-
-
-.input {
+.form__input {
   height: 56px;
-  background-color: var(--base_50);
 }
+
+.form__input,
+:deep(.ant-input) {
+  background-color: var(--base_50);
+  font-size: var(--font_size_default);
+  font-weight: var(--font_weight_medium);
+  color: var(--base_300);
+  font-family: "Codec Pro", sans-serif;
+}
+
+:deep(.form_button) {
+  width: 100%;
+  height: 56px;
+}
+
+:deep(.ant-form-item-control-input-content) {
+  padding: 0 0;
+}
+
 </style>

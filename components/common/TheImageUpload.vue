@@ -39,9 +39,7 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
         @change="handleChange"
         @remove="handleRemove"
     >
-      <div class="drop-zone__icon-container">
         <nuxt-icon v-if="fileList.length < 1" name="image_upload" class="drop-zone__icon" filled/>
-      </div>
     </a-upload>
 
   </div>
@@ -69,6 +67,7 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 3;
 
     &-container {
       background-color: var(--base_0);
@@ -108,11 +107,6 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
 :deep(.ant-upload-list-item) {
   padding: 0 0;
 }
-//
-//:deep(.ant-upload-select-picture-card) {
-//  width: 100%;
-//  height: 100%;
-//}
 
 
 </style>

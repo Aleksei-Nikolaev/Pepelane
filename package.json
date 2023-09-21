@@ -45,6 +45,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "lodash.debounce": "^4.0.8",
     "lodash.merge": "^4.6.2",
+    "maska": "^2.1.10",
     "normalize.css": "^8.0.1",
     "nuxt-icons": "^3.2.1",
     "pinia": "^2.1.4",

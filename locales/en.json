@@ -34,5 +34,13 @@
   },
   "addVehicleModal": {
     "heading":"Add new vehicle"
+  },
+  "imageUpload": {
+    "errorMessage": "Please, upload JPG or PNG image file",
+    "inputPlaceholder":{
+      "name": "Name",
+      "description": "Description",
+      "rent": "Rent price"
+    }
   }
 }

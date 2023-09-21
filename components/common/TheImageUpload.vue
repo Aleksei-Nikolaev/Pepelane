@@ -1,120 +1,118 @@
 <script setup lang="ts">
-import {Events, ref} from 'vue'
-import { useDropZone } from '@vueuse/core'
+import { ref } from 'vue';
+import type { UploadProps } from 'ant-design-vue';
+import {antdUploadFileEvent} from "~/types/vendors/antd/antdUploadFileEvent";
 
-const filesData = ref<{ name: string; size: number; type: string; lastModified: number }[]>([])
+const emits = defineEmits<{
+  (eventName: "imageUploaded"): void;
+  (eventName: "imageDeleted"): void;
+}>()
 
-const imageContainer = ref<HTMLElement>()
-const dropZoneRef = ref<HTMLElement>()
-const value = ref()
+const fileList = ref([]);
+const isFile = ref<boolean | null>(null)
+const isImage = ref<boolean | null>(null)
 
-const handleFile = (file: File) => {
-  if (file.type.startsWith('image/')) {
-    console.log(file)
-    const filesData = {
-      name: file.name,
-      size: file.size,
-      type: file.type,
-      lastModified: file.lastModified,
-    }
-    console.log(filesData.name)
-    const imageUrl = URL.createObjectURL(file);
-    const image = ref(document.createElement('img'));
-    image.value.src = imageUrl;
-    imageContainer.value?.appendChild(image.value)
-  } else {
-    alert('Выбранный файл не является изображением.');
+
+const handleChange = (event: antdUploadFileEvent) => {
+  if (isImage.value && event.file.status === "done") {
+    emits( "imageUploaded")
   }
 }
 
-const onAddFile = (event: any) => {
-  console.log(event)
-}
+const handleRemove = () => emits("imageDeleted")
 
-const onDrop = (files: File[] | null) => {
-   if (files) {
-     const file = files[0]
-     handleFile(file)
-   }
-}
-
-
-// const onDrop = (files: File[] | null) => {
-//   filesData.value = []
-//   if (files) {
-//     filesData.value = files.map(file => ({
-//       name: file.name,
-//       size: file.size,
-//       type: file.type,
-//       lastModified: file.lastModified,
-//     }))
-//     const file = files[0]
-//     if (file.type.startsWith('image/')) {
-//       const imageUrl = URL.createObjectURL(file);
-//       const image = ref(document.createElement('img'));
-//       image.value.src = imageUrl;
-//       imageContainer.value?.appendChild(image.value)
-//     } else {
-//       alert('Выбранный файл не является изображением.');
-//     }
-//   }
-// }
-
-
-useDropZone(dropZoneRef, onDrop)
-
+const beforeUpload = (file: UploadProps['fileList'][number]) => {
+  isImage.value = file.type === 'image/jpeg' || file.type === 'image/png';
+};
 </script>
 
 <template>
-  <div ref="dropZoneRef">
-    <div class="drop-zone" ref="imageContainer">
-      <label class="drop-zone__button">
-        <input
-            ref="input"
-            type="file"
-            accept="image/*"
-            required
-        />
-        <nuxt-icon name="image_upload" class="drop-zone__icon" filled/>
-      </label>
-    </div>
+  <div class="drop-zone">
+    <a-upload
+        v-model:file-list="fileList"
+        list-type="picture-card"
+        :max-count="1"
+        :show-upload-list="{showPreviewIcon: false, showRemoveIcon: true}"
+        :before-upload="beforeUpload"
+        accept="image/*"
+        class="drop-zone__upload"
+        @change="handleChange"
+        @remove="handleRemove"
+    >
+      <div class="drop-zone__icon-container">
+        <nuxt-icon v-if="fileList.length < 1" name="image_upload" class="drop-zone__icon" filled/>
+      </div>
+    </a-upload>
+
   </div>
+
 </template>
 
 <style scoped lang="scss">
+
+
+
 .drop-zone {
-  width: 100%;
   height: 350px;
-  border-color: black;
+  width: 100%;
   background-color: var(--base_50);
   border-radius: var(--border_radius_small);
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 
-  &__button {
-    cursor: pointer;
-    border-radius: var(--border_radius_tiny);
-    background: var(--base_0);
-    display: inline-block;
-    width: 48px;
-    height: 48px;
-    padding: 12px 12px;
-  }
 
   &__icon {
     color: var(--main_400);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &-container {
+      background-color: var(--base_0);
+      width: 48px;
+      height: 48px;
+      border-radius: var(--border_radius_tiny);
+    }
   }
 }
 
-:deep(.drop-zone > img) {
+:deep(.drop-zone__upload) {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: var(--border_radius_small);
 }
 
-label.drop-zone__button input[type="file"] {
-  display: none;
+:deep(.ant-upload-list-picture-card),
+:deep(.ant-upload-select-picture-card),
+:deep(.ant-upload-list-item-info),
+:deep(.ant-upload-list-picture-card-container),
+:deep(.ant-upload-list-item-list-type-picture-card) {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border_radius_small);
+  background-color: var(--base_50);
 }
+
+:deep(.ant-upload-list-item-progress) {
+  display: none;
+  visibility: hidden;
+}
+
+
+:deep(.ant-upload-list-item) {
+  padding: 0 0;
+}
+//
+//:deep(.ant-upload-select-picture-card) {
+//  width: 100%;
+//  height: 100%;
+//}
+
+
 </style>

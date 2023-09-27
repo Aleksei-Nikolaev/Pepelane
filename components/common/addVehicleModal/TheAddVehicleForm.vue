@@ -2,28 +2,37 @@
 import {reactive, ref} from 'vue';
 import type {Rule} from 'ant-design-vue/es/form';
 import type {FormInstance} from 'ant-design-vue';
+import {UploadFileStatus} from "ant-design-vue/es/upload/interface";
 import {UserVehicle} from "~/types/userVehicle";
 import TheImageUpload from "~/components/common/TheImageUpload.vue";
+import {ImageUploadStatus} from "~/types/vendors/antd/ImageUploadStatus";
 
 const formRef = ref<FormInstance>();
 const userVehicleData = reactive<UserVehicle>({
   name: '',
   description: '',
   rent: null,
-  isImage: false,
+  image: '',
+})
+
+const imageUploadStatus = ref<ImageUploadStatus>({
+  fileUploadStatus: null,
+  isImage: null
 })
 
 const regexLetters = /^[A-Za-z]/;
-const checkImage = async (_rule: Rule) => {
-  if (!userVehicleData.isImage) {
-    return Promise.reject('Please upload JPG or PNG image');
-  } else {
+
+
+const checkImage = async () => {
+  if (imageUploadStatus.value.fileUploadStatus === "uploading") return Promise.resolve();
+  if (imageUploadStatus.value.fileUploadStatus === "done" && imageUploadStatus.value.isImage) {
     return Promise.resolve();
+  } else {
+    return Promise.reject('Please upload JPG or PNG image');
   }
 }
 
 const checkRent = async (_rule: Rule, value: number) => {
-  console.log(_rule.validator)
   if (!value) {
     return Promise.reject('Please input the price');
   }
@@ -67,12 +76,26 @@ const rules: Record<string, Rule[]> = {
   name: [{validator: validateName, trigger: 'change'}],
   description: [{ validator: validateDescription, trigger: 'change'}],
   rent: [{ validator: checkRent, trigger: 'change'}],
-  isImage: [{validator: checkImage, trigger: 'change'}],
+  isImage: [{ validator: checkImage, trigger: 'change'}],
 };
+
+const handleImageStatus = (status: UploadFileStatus) => {
+  imageUploadStatus.value.fileUploadStatus = status
+}
+
+const imageDeleted = () => {
+  userVehicleData.image = ''
+  imageUploadStatus.value.isImage = null;
+}
+
+const handleImageData = (base64: string) => {
+  userVehicleData.image = base64
+}
 
 const onFinish = () => {
   alert("Схавало")
 }
+
 </script>
 
 <template>
@@ -86,9 +109,12 @@ const onFinish = () => {
         name="isImage"
     >
       <TheImageUpload
+          v-model:value="userVehicleData.image"
           class="modal__drop-container"
-          @image-deleted="userVehicleData.isImage = false"
-          @image-uploaded="userVehicleData.isImage = true"
+          @image-deleted="imageDeleted"
+          @image-status="handleImageStatus"
+          @image-added="imageUploadStatus.isImage = true"
+          @emit-base64="handleImageData"
       />
     </a-form-item>
     <a-form-item

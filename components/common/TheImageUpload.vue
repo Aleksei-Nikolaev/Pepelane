@@ -1,29 +1,51 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { UploadProps } from 'ant-design-vue';
-import {antdUploadFileEvent} from "~/types/vendors/antd/antdUploadFileEvent";
+import type { UploadProps, UploadChangeParam } from 'ant-design-vue';
+import {UploadFileStatus} from "ant-design-vue/es/upload/interface";
+
 
 const emits = defineEmits<{
-  (eventName: "imageUploaded"): void;
+  (eventName: "imageStatus", imageStatus: UploadFileStatus | undefined): void;
   (eventName: "imageDeleted"): void;
+  (eventName: "imageAdded"): void;
+  (eventName: "emitBase64", base64: string): void
 }>()
 
 const fileList = ref([]);
 const isFile = ref<boolean | null>(null)
 const isImage = ref<boolean | null>(null)
+const imageUrl = ref<string>("")
 
 
-const handleChange = (event: antdUploadFileEvent) => {
-  if (isImage.value && event.file.status === "done") {
-    emits( "imageUploaded")
+const handleChange = async (info: UploadChangeParam) => {
+  if (isImage.value) emits("imageStatus", info.file.status)
+  if (info.file.status === "done") {
+    imageUrl.value = await getBase64(info.file.originFileObj) as string
+    emits("emitBase64", imageUrl.value)
   }
 }
 
-const handleRemove = () => emits("imageDeleted")
+function getBase64(file: File | undefined) {
+  if (!file) return
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
+
+const handleRemove = () => {
+  isImage.value = null;
+  emits("imageDeleted")
+}
 
 const beforeUpload = (file: UploadProps['fileList'][number]) => {
+  handleRemove()
   isImage.value = file.type === 'image/jpeg' || file.type === 'image/png';
+  if (isImage.value) emits("imageAdded")
 };
+
 </script>
 
 <template>
@@ -41,9 +63,7 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
     >
         <nuxt-icon v-if="fileList.length < 1" name="image_upload" class="drop-zone__icon" filled/>
     </a-upload>
-
   </div>
-
 </template>
 
 <style scoped lang="scss">

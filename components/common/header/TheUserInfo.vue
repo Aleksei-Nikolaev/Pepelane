@@ -18,7 +18,7 @@ const image = "/face.jpg";
     height: 100%;
     display: flex;
     align-items: center;
-    margin-left: 60px;
+    margin-left: 20px;
   }
 
   &__image {

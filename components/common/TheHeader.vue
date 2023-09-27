@@ -26,7 +26,6 @@ const {resetFilters} = useVehicleStore()
       <TheUserInfo />
       <div class="header__icon-container">
         <nuxt-icon class="header__icon-bell" name="Bell" filled />
-        <nuxt-icon class="header__icon-chat" name="Chat" filled />
       </div>
       <TheColorModeSwitcher />
     </div>
@@ -90,10 +89,6 @@ const {resetFilters} = useVehicleStore()
     }
 
     &-bell {
-      cursor: pointer;
-    }
-
-    &-chat {
       cursor: pointer;
     }
   }

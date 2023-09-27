@@ -2,10 +2,10 @@
 import { OnClickOutside } from '@vueuse/components'
 import TheAddVehicleForm from "~/components/common/addVehicleModal/TheAddVehicleForm.vue";
 
-
 const emits = defineEmits<{
   (eventName: "closeModal"): void;
 }>()
+
 </script>
 
 <template>
@@ -25,6 +25,7 @@ const emits = defineEmits<{
       </div>
       <TheAddVehicleForm />
     </OnClickOutside>
+
   </div>
 </template>
 

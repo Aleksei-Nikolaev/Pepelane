@@ -21,18 +21,17 @@ onMounted(() => {
 const onImageLoad = () => {
   isImageLoaded.value = true;
 };
-
 </script>
 
 <template>
   <div class="image__container">
-      <NuxtImg
-          ref="img"
-          :src="url"
-          class="image__container__image"
-          @load="onImageLoad"
-      />
-      <Skeletor v-show="!isImageLoaded" class="image__container__skeleton"/>
+    <NuxtImg
+        ref="img"
+        :src="url"
+        class="image__container__image"
+        @load="onImageLoad"
+    />
+    <Skeletor v-show="!isImageLoaded" class="image__container__skeleton"/>
   </div>
 </template>
 

@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import {reactive, ref} from 'vue';
-import type {Rule} from 'ant-design-vue/es/form';
 import type {FormInstance} from 'ant-design-vue';
-import {UploadFileStatus} from "ant-design-vue/es/upload/interface";
 import {UserVehicle} from "~/types/userVehicle";
 import TheImageUpload from "~/components/common/TheImageUpload.vue";
-import {ImageUploadStatus} from "~/types/vendors/antd/ImageUploadStatus";
+import {useAddVehicleValidation} from "~/composables/useAddVehicleModal/useCases/useAddVehicleValidation";
 
 const formRef = ref<FormInstance>();
 const userVehicleData = reactive<UserVehicle>({
@@ -15,81 +13,16 @@ const userVehicleData = reactive<UserVehicle>({
   image: '',
 })
 
-const imageUploadStatus = ref<ImageUploadStatus>({
-  fileUploadStatus: null,
-  isImage: null
-})
+const {imageUploadStatus, rules} = useAddVehicleValidation()
 
-const regexLetters = /^[A-Za-z]/;
-
-
-const checkImage = async () => {
-  if (imageUploadStatus.value.fileUploadStatus === "uploading") return Promise.resolve();
-  if (imageUploadStatus.value.fileUploadStatus === "done" && imageUploadStatus.value.isImage) {
-    return Promise.resolve();
-  } else {
-    return Promise.reject('Please upload JPG or PNG image');
-  }
-}
-
-const checkRent = async (_rule: Rule, value: number) => {
-  if (!value) {
-    return Promise.reject('Please input the price');
-  }
-  if (isNaN(Number(value))) {
-    return Promise.reject('Please input digits');
-  }
-  if (!Number.isInteger(Number(value))) {
-    return Promise.reject('Please input integer number');
-  }
-  if (!(Number(value) < 10000)) {
-    return Promise.reject('Price must be less than 10000$');
-  } else {
-    return Promise.resolve();
-  }
-};
-const validateName = async (_rule: Rule, value: string) => {
-  if (value === '') {
-    return Promise.reject('Please input the name');
-  }
-  if (!regexLetters.test(value)) {
-    return Promise.reject('Name must start with latin letter');
-  }
-  if (value.length < 4) {
-    return Promise.reject('Name must contain at least 4 characters');
-  } else {
-    return Promise.resolve();
-  }
-};
-const validateDescription = async (_rule: Rule, value: string) => {
-  if (value === '') {
-    return Promise.reject('Please input the description');
-  }
-  if (value.length < 10) {
-    return Promise.reject('Description must contain at least 10 characters');
-  } else {
-    return Promise.resolve();
-  }
-};
-
-const rules: Record<string, Rule[]> = {
-  name: [{validator: validateName, trigger: 'change'}],
-  description: [{ validator: validateDescription, trigger: 'change'}],
-  rent: [{ validator: checkRent, trigger: 'change'}],
-  isImage: [{ validator: checkImage, trigger: 'change'}],
-};
-
-const handleImageStatus = (status: UploadFileStatus) => {
-  imageUploadStatus.value.fileUploadStatus = status
-}
-
-const imageDeleted = () => {
-  userVehicleData.image = ''
-  imageUploadStatus.value.isImage = null;
-}
 
 const handleImageData = (base64: string) => {
   userVehicleData.image = base64
+}
+
+const onImgRemoved = () => {
+  imageUploadStatus.value.isImage = null;
+  imageUploadStatus.value.isSize = null;
 }
 
 const onFinish = () => {
@@ -110,11 +43,10 @@ const onFinish = () => {
     >
       <TheImageUpload
           v-model:value="userVehicleData.image"
+          :upload-status="imageUploadStatus"
           class="modal__drop-container"
-          @image-deleted="imageDeleted"
-          @image-status="handleImageStatus"
-          @image-added="imageUploadStatus.isImage = true"
           @emit-base64="handleImageData"
+          @img-removed="onImgRemoved"
       />
     </a-form-item>
     <a-form-item
@@ -124,7 +56,7 @@ const onFinish = () => {
       <a-input
           v-model:value="userVehicleData.name"
           autocomplete="off"
-          :placeholder="$t('imageUpload.inputPlaceholder.name')"
+          :placeholder="$t('addVehicleModal.form.inputPlaceholder.name')"
           class="form__input "
           v-maska data-maska="@@@@@@@@@@"
       />
@@ -136,7 +68,7 @@ const onFinish = () => {
       <a-textarea
           v-model:value="userVehicleData.description"
           autocomplete="off"
-          :placeholder="$t('imageUpload.inputPlaceholder.description')"
+          :placeholder="$t('addVehicleModal.form.inputPlaceholder.description')"
           class="form__input "
       />
     </a-form-item>
@@ -147,7 +79,7 @@ const onFinish = () => {
       <a-input
           v-model:value="userVehicleData.rent"
           autocomplete="off"
-          :placeholder="$t('imageUpload.inputPlaceholder.rent')"
+          :placeholder="$t('addVehicleModal.form.inputPlaceholder.rent')"
           v-maska data-maska="####"
           class="form__input"
       >

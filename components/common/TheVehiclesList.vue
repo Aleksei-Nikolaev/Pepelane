@@ -73,6 +73,9 @@ onMounted(() => {
   display: flex;
   overflow: hidden;
   position: relative;
+  min-height: calc(
+      3 * var(--margin_card_horizontal) + 2 * var(--padding_list) + 3 * 164px
+  );
 
   &__blur-bottom,
   &__blur-top {

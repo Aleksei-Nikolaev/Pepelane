@@ -17,7 +17,7 @@
       "specialists": "Qualified specialists",
       "conditions": "Additional conditions"
     },
-    "specification" : {
+    "specification": {
       "customerSlogan": "A challenge for a true champion",
       "pilotSlogan": "Pilot's sweaty hands"
     }
@@ -33,14 +33,35 @@
     "buttonMessage": "Reload main page"
   },
   "addVehicleModal": {
-    "heading":"Add new vehicle"
-  },
-  "imageUpload": {
-    "errorMessage": "Please, upload JPG or PNG image file",
-    "inputPlaceholder":{
-      "name": "Name",
-      "description": "Description",
-      "rent": "Rent price"
+    "heading": "Add new vehicle",
+    "form": {
+      "inputPlaceholder": {
+        "name": "Name",
+        "description": "Description",
+        "rent": "Rent price"
+      },
+      "rejectMessage": {
+        "rent": {
+          "default": "Please input the price",
+          "digits": "Please input digits",
+          "integer": "Please input integer number",
+          "hugeNumber": "Price must be less than ${maxRentValue}"
+        },
+        "name": {
+          "default": "Please input the name",
+          "firstIsLetter": "Name must start with latin letter",
+          "smallLength": "Name must contain at least {minNameLength} characters"
+        },
+        "description":{
+          "default": "Please input the description",
+          "smallLength": "Description must contain at least {minDescriptionLength} characters"
+        },
+        "image": {
+          "default": "Please upload PNG or JPG image. Max size {imgMaxSize}Mb.",
+          "isNotImage": "The file is not a PNG or JPG image",
+          "hugeFileSize": "Your image exceeds {imgMaxSize}Mb"
+        }
+      }
     }
   }
 }

@@ -1,24 +1,32 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { UploadProps, UploadChangeParam } from 'ant-design-vue';
-import {UploadFileStatus} from "ant-design-vue/es/upload/interface";
+import {checkFileSize} from "~/utils/checkFileSize";
+import {ImageUploadState} from "~/types/vendors/antd/ImageUploadStatus";
+import {initStateFactory} from "~/factories/initStateFactory";
+import {useAddVehicleValidation} from "~/composables/useAddVehicleModal/useCases/useAddVehicleValidation";
 
+const props = defineProps<{
+  uploadStatus: ImageUploadState;
+}>();
+
+const model = useModel(props, "uploadStatus");
 
 const emits = defineEmits<{
-  (eventName: "imageStatus", imageStatus: UploadFileStatus | undefined): void;
-  (eventName: "imageDeleted"): void;
-  (eventName: "imageAdded"): void;
   (eventName: "emitBase64", base64: string): void
+  (eventName: "imgRemoved"): void
 }>()
 
 const fileList = ref([]);
-const isFile = ref<boolean | null>(null)
-const isImage = ref<boolean | null>(null)
+const loading = ref<boolean>(false);
 const imageUrl = ref<string>("")
-
-
+const {imgMaxSize} = useAddVehicleValidation()
 const handleChange = async (info: UploadChangeParam) => {
-  if (isImage.value) emits("imageStatus", info.file.status)
+  if (info.file.status) props.uploadStatus.fileUploadStatus =  info.file.status
+  if (info.file.status === 'uploading') {
+    loading.value = true;
+    return;
+  }
   if (info.file.status === "done") {
     imageUrl.value = await getBase64(info.file.originFileObj) as string
     emits("emitBase64", imageUrl.value)
@@ -27,6 +35,7 @@ const handleChange = async (info: UploadChangeParam) => {
 
 function getBase64(file: File | undefined) {
   if (!file) return
+
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -35,16 +44,24 @@ function getBase64(file: File | undefined) {
   });
 }
 
-const handleRemove = () => {
-  isImage.value = null;
-  emits("imageDeleted")
+const rejectLoading = () => {
+  loading.value = false
+
+  return loading.value
 }
 
 const beforeUpload = (file: UploadProps['fileList'][number]) => {
-  handleRemove()
+  const {fileUploadStatus, isImage, isSize} = toRefs(props.uploadStatus)
+
+  fileUploadStatus.value = null
   isImage.value = file.type === 'image/jpeg' || file.type === 'image/png';
-  if (isImage.value) emits("imageAdded")
+  isSize.value = checkFileSize(file, imgMaxSize)
+
+  if (!props.uploadStatus.isImage || !props.uploadStatus.isSize) return rejectLoading()
 };
+
+
+
 
 </script>
 
@@ -52,6 +69,7 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
   <div class="drop-zone">
     <a-upload
         v-model:file-list="fileList"
+        v-show="props.uploadStatus.fileUploadStatus !== 'uploading'"
         list-type="picture-card"
         :max-count="1"
         :show-upload-list="{showPreviewIcon: false, showRemoveIcon: true}"
@@ -59,7 +77,7 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
         accept="image/*"
         class="drop-zone__upload"
         @change="handleChange"
-        @remove="handleRemove"
+        @remove="emits('imgRemoved')"
     >
         <nuxt-icon v-if="fileList.length < 1" name="image_upload" class="drop-zone__icon" filled/>
     </a-upload>
@@ -127,6 +145,11 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
 :deep(.ant-upload-list-item) {
   padding: 0 0;
 }
+
+:deep(.anticon-delete) {
+  transform:  scale(1.4);
+}
+
 
 
 </style>

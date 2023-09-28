@@ -2,7 +2,10 @@ import { defineStore } from "pinia";
 import { $api } from "~/plugins/api";
 import { vehicleStoreState } from "~/types/store/vehicleStoreState";
 import { getVehiclesRequestParams } from "~/services/types/vehicles";
-import {initFiltersParams} from "~/constants/initFilterParams";
+import {filterFactory} from "~/factories/filterFactory";
+
+const {createFilter} = filterFactory()
+const initFiltersParams = createFilter()
 
 
 export const useVehicleStore = defineStore("VehicleStore", {

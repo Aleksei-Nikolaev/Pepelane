@@ -59,7 +59,6 @@ const { defaultRoute } = useDetailedPageRoutes()
     width: 88px;
     height: 88px;
     border-radius: var(--border_radius_small);
-    //pointer-events: none;
   }
 
   &__info {
@@ -81,7 +80,6 @@ const { defaultRoute } = useDetailedPageRoutes()
       color: var(--base_300);
       font-size: var(--font_size_smallest);
       font-weight: var(--font_weight_medium);
-      //height:2.4em;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;

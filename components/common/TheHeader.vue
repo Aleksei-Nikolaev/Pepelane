@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import TheColorModeSwitcher from "~/components/common/header/TheColorModeSwitcher.vue";
 import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
-import {initFiltersParams} from "~/constants/initFilterParams";
-import {useVehicleStore} from "~/stores/VehicleStore";
+import {filterFactory} from "~/factories/filterFactory";
+import {useVehicleStore} from "~/stores/VehicleStore"
 
 const {resetFilters} = useVehicleStore()
+const {createFilter} = filterFactory()
 
 </script>
 
@@ -12,7 +13,7 @@ const {resetFilters} = useVehicleStore()
   <header class="header">
     <div class="header__left-part">
       <NuxtLink
-          :to="{ path: '/', query: initFiltersParams }"
+          :to="{ path: '/', query: createFilter() }"
           @click="resetFilters"
       >
         <div class="header__logo-container">

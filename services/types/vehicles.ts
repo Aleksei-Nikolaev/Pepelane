@@ -1,5 +1,6 @@
 import { IVehicle } from "~/types/vehicle";
 import { PaginationMeta } from "~/types/server/pagination";
+import { defaultResponseType } from "~/services/types/default";
 
 export type getVehiclesResponse = {
   data: IVehicle[];
@@ -30,6 +31,8 @@ export type createVehicleRequestBody = {
   image: string;
   type: string;
 }
+
+export type createVehicleResponse = defaultResponseType
 
 
 

@@ -3,7 +3,7 @@ import {
   getVehiclesResponse,
   getVehiclesRequestParams,
   getVehicleByIdResponse,
-  getVehicleTypesResponse, createVehicleRequestParams, createVehicleRequestBody
+  getVehicleTypesResponse, createVehicleResponse, createVehicleRequestBody
 } from "~/services/types/vehicles";
 
 export class VehicleService extends ApiService {
@@ -23,7 +23,7 @@ export class VehicleService extends ApiService {
     return this.get(`/vehicles/types`)
   }
 
-  createVehicle(data: createVehicleRequestBody): Promise<createVehicleRequestParams> {
+  createVehicle(data: createVehicleRequestBody): Promise<createVehicleResponse> {
     return this.post(`/vehicles/create`, data)
   }
 }

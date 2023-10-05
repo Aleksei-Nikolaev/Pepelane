@@ -1,5 +1,6 @@
+const showModal = ref<boolean>(false)
+
 export const useShowModal = () => {
-    const showModal = ref<boolean>(false)
 
     const handleModal = () => {
         showModal.value = !showModal.value

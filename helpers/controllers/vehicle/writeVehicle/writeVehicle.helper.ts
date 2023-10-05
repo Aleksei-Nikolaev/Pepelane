@@ -8,7 +8,12 @@ export const writeVehicleHelper = (vehicleData: VehicleModel) => {
 
     const currentData = jsonParse()
 
-    currentData.push(vehicleData)
+    //Set capacity of "DB"
+    if (currentData.length < 110) {
+        currentData.push(vehicleData)
+    } else {
+        currentData.splice(100, 10, vehicleData)
+    }
 
     const updatedJson = JSON.stringify(currentData)
 

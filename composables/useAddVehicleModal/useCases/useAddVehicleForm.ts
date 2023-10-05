@@ -1,4 +1,4 @@
-import {reactive, ref} from 'vue';
+import {ref} from 'vue';
 import type {FormInstance} from 'ant-design-vue';
 import {UserVehicle} from "~/types/userVehicle";
 import {useAddVehicleValidation} from "~/composables/useAddVehicleModal/useCases/useAddVehicleValidation";
@@ -7,6 +7,7 @@ import {useAddVehicleFormFactory} from "~/composables/useAddVehicleModal/factori
 import {$api} from "~/plugins/api";
 import {createVehicleRequestBody} from "~/services/types/vehicles";
 import {pipe} from "fp-ts/function"
+import {useShowModal} from "~/composables/useVehicleWrapper/useCases/useShowModal";
 
 export const useAddVehicleForm = () => {
     const {create} = useAddVehicleFormFactory()
@@ -19,6 +20,10 @@ export const useAddVehicleForm = () => {
     const selectRef = ref<HTMLImageElement | null>(null);
 
     const {imageUploadStatus, rules} = useAddVehicleValidation()
+
+    const {handleModal} = useShowModal()
+
+    const disabledForm = ref<boolean>(true)
 
 
     const handleImageData = (base64: string) => {
@@ -34,7 +39,7 @@ export const useAddVehicleForm = () => {
         return {
             name: form.name ?? '',
             description: form.description ?? '',
-            rent: form.rent ? Number(form.rent) : null,
+            rent: form.rent ? Number(form.rent) : 0,
             image: form.image ?? '',
             type: form.type ?? '',
         }
@@ -42,14 +47,14 @@ export const useAddVehicleForm = () => {
 
 
     const onFinish = async () => {
+
         const payLoad = pipe(
             userVehicleData,
             unref,
             normalizePayLoad,
         )
         const res = await $api.vehicleService.createVehicle(payLoad)
-
-        console.log(res)
+        if (res) handleModal()
     }
 
     return {
@@ -59,6 +64,7 @@ export const useAddVehicleForm = () => {
         selectRef,
         imageUploadStatus,
         rules,
+        disabledForm,
         handleImageData,
         onImgRemoved,
         onFinish

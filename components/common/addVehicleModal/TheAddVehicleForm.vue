@@ -2,6 +2,7 @@
 import TheImageUpload from "~/components/common/TheImageUpload.vue";
 import {useAddVehicleForm} from "~/composables/useAddVehicleModal/useCases/useAddVehicleForm";
 
+
 const {
   formRef,
   userVehicleData,
@@ -9,10 +10,13 @@ const {
   selectRef,
   imageUploadStatus,
   rules,
+  disabledForm,
   handleImageData,
   onImgRemoved,
   onFinish
 } = useAddVehicleForm()
+
+
 
 </script>
 
@@ -128,6 +132,9 @@ const {
   align-items: center;
 }
 
+:deep(.ant-form-item-control-input-content) {
+  display: flex;
+}
 
 
 .drop-menu__dropdown-container {

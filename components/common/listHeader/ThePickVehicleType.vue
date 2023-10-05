@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { vehicleTypes } from "~/constants/vehicleTypes";
+// import { vehicleTypes } from "~/constants/vehicleTypes";
 import { FilterParams } from "~/types/FilterParams";
 import { eventNames } from "~/constants/events";
+import {useHandleVehiclesTypes} from "~/composables/useHandleVehiclesApi/useHandleVehiclesTypes";
 
 defineProps<{
   value: FilterParams["type"] | null;
@@ -11,6 +12,8 @@ const emits = defineEmits<{
   (eventName: eventNames.UPDATE_VALUE, value: string | null): void;
 }>();
 
+const {vehicleFilterTypes} = useHandleVehiclesTypes()
+
 
 </script>
 
@@ -19,7 +22,7 @@ const emits = defineEmits<{
     <client-only>
       <a-radio-group
         :value="value"
-        :options="vehicleTypes"
+        :options="vehicleFilterTypes"
         option-type="button"
         button-style="solid"
         class="radio-group"

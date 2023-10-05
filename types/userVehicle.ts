@@ -3,4 +3,5 @@ export interface UserVehicle {
     description: string;
     rent: number | null;
     image: string;
+    type: string | null;
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TheImage from "~/components/common/TheImage.vue";
-const image = "/face.jpg";
+const image = "/assets/images/face.jpg";
 </script>
 
 <template>

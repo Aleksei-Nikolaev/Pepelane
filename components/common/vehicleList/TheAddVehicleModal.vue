@@ -6,6 +6,8 @@ const emits = defineEmits<{
   (eventName: "closeModal"): void;
 }>()
 
+
+
 </script>
 
 <template>
@@ -23,9 +25,10 @@ const emits = defineEmits<{
           <nuxt-icon class="modal__close-button-icon" name="close_cross" filled/>
         </a-button>
       </div>
-      <TheAddVehicleForm />
+      <TheAddVehicleForm
+          ref="ignoreElRef"
+      />
     </OnClickOutside>
-
   </div>
 </template>
 

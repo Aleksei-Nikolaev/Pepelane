@@ -23,6 +23,7 @@ const imageUrl = ref<string>("")
 const {imgMaxSize} = useAddVehicleValidation()
 const handleChange = async (info: UploadChangeParam) => {
   if (info.file.status) props.uploadStatus.fileUploadStatus =  info.file.status
+
   if (info.file.status === 'uploading') {
     loading.value = true;
     return;

@@ -31,6 +31,7 @@ export const useAddVehicleValidation = () => {
         name: "addVehicleModal.form.rejectMessage.name",
         description: "addVehicleModal.form.rejectMessage.description",
         image: "addVehicleModal.form.rejectMessage.image",
+        type: "addVehicleModal.form.rejectMessage.type",
     }
     const checkRent = async (_rule: Rule, value: number) => {
         if (isNotEmpty(value)) return handleFormReject(t(`${localesPath.rent}.default`))
@@ -83,11 +84,19 @@ export const useAddVehicleValidation = () => {
         return Promise.resolve();
     }
 
+    const checkType = async (_rule: Rule, value: string) => {
+        if (isNotEmpty(value)) return handleFormReject(t(`${localesPath.type}`))
+
+        return Promise.resolve();
+    };
+
+
     const rules: Record<string, Rule[]> = {
         name: [{ validator: checkName, trigger: 'change'}],
         description: [{ validator: checkDescription, trigger: 'change'}],
         rent: [{ validator: checkRent, trigger: 'change'}],
         isImage: [{ validator: checkImage, trigger: 'change'}],
+        type: [{ validator: checkType, trigger: 'change'}]
     };
 
 

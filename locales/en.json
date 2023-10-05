@@ -38,7 +38,8 @@
       "inputPlaceholder": {
         "name": "Name",
         "description": "Description",
-        "rent": "Rent price"
+        "rent": "Rent price",
+        "type": "Vehicle type"
       },
       "rejectMessage": {
         "rent": {
@@ -60,7 +61,8 @@
           "default": "Please upload PNG or JPG image. Max size {imgMaxSize}Mb.",
           "isNotImage": "The file is not a PNG or JPG image",
           "hugeFileSize": "Your image exceeds {imgMaxSize}Mb"
-        }
+        },
+        "type": "Please pick a vehicle type"
       }
     }
   }

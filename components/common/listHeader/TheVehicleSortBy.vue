@@ -36,4 +36,5 @@ const options: SelectProps["options"] = [
 .filter-container__sort-by {
   min-width: 100px;
 }
+
 </style>

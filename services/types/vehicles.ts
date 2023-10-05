@@ -19,5 +19,18 @@ export type getVehicleByIdResponse = {
   data: IVehicle;
 }
 
+export type getVehicleTypesResponse = {
+  data: string[];
+}
+
+export type createVehicleRequestBody = {
+  name: string;
+  description: string;
+  rent: number;
+  image: string;
+  type: string;
+}
+
+
 
 

@@ -1,37 +1,42 @@
 <script setup lang="ts">
 import { Skeletor } from "vue-skeletor";
 import "vue-skeletor/dist/vue-skeletor.css";
-
-defineProps<{
+type TheImageProps = {
   url: string;
-}>();
+}
 
-const img = ref();
+const props = defineProps<TheImageProps>()
+
+const img = ref<HTMLImageElement | null>(null);
 
 const isImageLoaded = ref(false);
-onMounted(() => {
-  const element = img.value.$el as HTMLImageElement;
 
-  nextTick(() => {
-    if (!element || !element.complete) return;
-    isImageLoaded.value = true;
-  })
+onMounted(() => {
+  isImageLoaded.value = false
+  const element = img.value as HTMLImageElement
+  if (element.complete) isImageLoaded.value = true
 })
 
-const onImageLoad = () => {
-  isImageLoaded.value = true;
-};
+onUnmounted(() => {
+  isImageLoaded.value = false
+})
+const imageLoaded = () => {
+  isImageLoaded.value = true
+}
+
 </script>
 
 <template>
   <div class="image__container">
-    <NuxtImg
+    <img
         ref="img"
         :src="url"
+        @load="imageLoaded"
         class="image__container__image"
-        @load="onImageLoad"
+        v-show="isImageLoaded"
     />
-    <Skeletor v-show="!isImageLoaded" class="image__container__skeleton"/>
+
+      <Skeletor v-show="!isImageLoaded" class="image__container__skeleton"/>
   </div>
 </template>
 

@@ -17,14 +17,13 @@ const { data: vehicleData } = useAsyncData("vehicle",
     },
 )
 
-
 const { sections } = useDetailedPageRoutes()
 
 </script>
 
 <template>
   <div class="vehicle-page__container" v-if="vehicleData">
-    <TheImage :url="vehicleData.image" class="vehicle-page__image"/>
+      <TheImage :url="vehicleData.image" class="vehicle-page__image" />
     <div class="vehicle-page__info">
       <h1 class="vehicle-page__info-name">{{ vehicleData.name }}</h1>
       <div class="vehicle-page__navigation">

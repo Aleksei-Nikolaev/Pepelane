@@ -1,33 +1,18 @@
 <script setup lang="ts">
-import {reactive, ref} from 'vue';
-import type {FormInstance} from 'ant-design-vue';
-import {UserVehicle} from "~/types/userVehicle";
 import TheImageUpload from "~/components/common/TheImageUpload.vue";
-import {useAddVehicleValidation} from "~/composables/useAddVehicleModal/useCases/useAddVehicleValidation";
+import {useAddVehicleForm} from "~/composables/useAddVehicleModal/useCases/useAddVehicleForm";
 
-const formRef = ref<FormInstance>();
-const userVehicleData = reactive<UserVehicle>({
-  name: '',
-  description: '',
-  rent: null,
-  image: '',
-})
-
-const {imageUploadStatus, rules} = useAddVehicleValidation()
-
-
-const handleImageData = (base64: string) => {
-  userVehicleData.image = base64
-}
-
-const onImgRemoved = () => {
-  imageUploadStatus.value.isImage = null;
-  imageUploadStatus.value.isSize = null;
-}
-
-const onFinish = () => {
-  alert("Схавало")
-}
+const {
+  formRef,
+  userVehicleData,
+  vehicleTypes,
+  selectRef,
+  imageUploadStatus,
+  rules,
+  handleImageData,
+  onImgRemoved,
+  onFinish
+} = useAddVehicleForm()
 
 </script>
 
@@ -44,10 +29,25 @@ const onFinish = () => {
       <TheImageUpload
           v-model:value="userVehicleData.image"
           :upload-status="imageUploadStatus"
-          class="modal__drop-container"
           @emit-base64="handleImageData"
           @img-removed="onImgRemoved"
       />
+    </a-form-item>
+    <a-form-item
+        has-feedback
+        name="type"
+    >
+      <div
+          ref="selectRef"
+          class="drop-menu__dropdown-container"
+      />
+      <a-select
+          v-model:value="userVehicleData.type"
+          :placeholder="$t('addVehicleModal.form.inputPlaceholder.type')"
+          :options="vehicleTypes"
+          :getPopupContainer="() => selectRef"
+      >
+      </a-select>
     </a-form-item>
     <a-form-item
         has-feedback
@@ -57,7 +57,7 @@ const onFinish = () => {
           v-model:value="userVehicleData.name"
           autocomplete="off"
           :placeholder="$t('addVehicleModal.form.inputPlaceholder.name')"
-          class="form__input "
+          class="form__input"
           v-maska data-maska="@@@@@@@@@@"
       />
     </a-form-item>
@@ -69,7 +69,7 @@ const onFinish = () => {
           v-model:value="userVehicleData.description"
           autocomplete="off"
           :placeholder="$t('addVehicleModal.form.inputPlaceholder.description')"
-          class="form__input "
+          class="form__input text-area"
       />
     </a-form-item>
     <a-form-item
@@ -83,8 +83,8 @@ const onFinish = () => {
           v-maska data-maska="####"
           class="form__input"
       >
-        <template #suffix class="form__input ">
-          <a-tooltip class="form__input ">
+        <template #suffix class="form__input">
+          <a-tooltip class="form__input">
             $/h
           </a-tooltip>
         </template>
@@ -97,26 +97,46 @@ const onFinish = () => {
 </template>
 
 <style scoped lang="scss">
-.form__input {
-  height: 56px;
+
+
+.form__input,
+:deep(.ant-select .ant-select-selector) {
+  height: 46px;
 }
 
 .form__input,
-:deep(.ant-input) {
+:deep(.ant-input),
+:deep(.ant-select .ant-select-selector) {
   background-color: var(--base_50);
   font-size: var(--font_size_default);
   font-weight: var(--font_weight_medium);
   color: var(--base_300);
-  font-family: "Codec Pro", sans-serif;
 }
 
 :deep(.form_button) {
   width: 100%;
   height: 56px;
+  margin-top: 20px;
 }
 
 :deep(.ant-form-item-control-input-content) {
   padding: 0 0;
 }
+
+:deep(.ant-select-selector) {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.drop-menu__dropdown-container {
+  margin-top: 20px;
+}
+
+.text-area {
+  padding-top: 10px;
+}
+
 
 </style>

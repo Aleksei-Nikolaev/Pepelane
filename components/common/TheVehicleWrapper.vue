@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
 import TheListFilter from "~/components/common/TheListFilter.vue";
-import TheAddVehicleModal from "~/components/common/vehicleList/TheAddVehicleModal.vue";
-import { useHandleListAppearance } from "~/composables/useVehicleWrapper/useCases/useHandleAnimation";
+import {useHandleListAppearance} from "~/composables/useVehicleWrapper/useCases/useHandleAnimation";
 import {filterFactory} from "~/factories/filterFactory";
-import {useVehicleWrapperFilter} from "~/composables/useVehicleWrapper/useCases/useVehicleWrapperFilter/useCases/useVehicleWrapperFilter";
+import {
+  useVehicleWrapperFilter
+} from "~/composables/useVehicleWrapper/useCases/useVehicleWrapperFilter/useCases/useVehicleWrapperFilter";
 import {useVehicleStore} from "~/stores/VehicleStore";
 import {storeToRefs} from "pinia";
 import TheNoDataPage from "~/components/common/TheNoDataPage.vue";
 import {useShowModal} from "~/composables/useVehicleWrapper/useCases/useShowModal";
+import {Modals} from "~/types/Modals";
 
 const { data, meta, filterParams, isEmptyList } = storeToRefs(useVehicleStore())
 const { getVehicles, resetFilters, updateFilterParams } = useVehicleStore()
-const { showModal, handleModal} = useShowModal()
+const { openModal } = useShowModal()
 const { createFilter } = filterFactory()
 
 const initFiltersParams = createFilter()
@@ -46,6 +48,7 @@ useAsyncData(
   },
 );
 
+
 </script>
 
 <template>
@@ -55,7 +58,7 @@ useAsyncData(
         type="primary"
         size="large"
         class="control-panel__add-button"
-        @click="handleModal"
+        @click="openModal(Modals.ADD_VEHICLE)"
     >Add new
     </a-button>
   </div>
@@ -69,10 +72,6 @@ useAsyncData(
       @element-removed="elementIsRemoved"
   />
   <TheNoDataPage v-else/>
-  <TheAddVehicleModal
-      v-if="showModal"
-      @close-modal="handleModal"
-  />
 </template>
 
 <style scoped lang="scss">

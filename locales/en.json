@@ -65,5 +65,9 @@
         "type": "Please pick a vehicle type"
       }
     }
+  },
+  "notificationMessage": {
+    "vehicleAdded": "The vehicle was successfully added",
+    "vehicleAddedError": "Server error: Vehicle wasn't added"
   }
 }

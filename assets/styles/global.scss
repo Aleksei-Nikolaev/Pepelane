@@ -60,3 +60,7 @@ body {
   filter: blur(1rem);
 }
 
+.Toastify__toast-container > .notification {
+  border-radius: var(--border_radius_micro);
+  font-weight: var(--font_weight_bold);
+}

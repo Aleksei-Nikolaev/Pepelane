@@ -25,10 +25,7 @@ const {createFilter} = filterFactory()
     </div>
     <div class="header__right-part">
       <TheUserInfo />
-      <div class="header__icon-container">
-        <nuxt-icon class="header__icon-bell" name="Bell" filled />
-      </div>
-      <TheColorModeSwitcher />
+      <TheColorModeSwitcher class="header__color-mode" />
     </div>
   </header>
 </template>
@@ -76,21 +73,16 @@ const {createFilter} = filterFactory()
     margin-bottom: 0;
   }
 
-  &__icon {
-    &-container {
-      height: 21.5px;
-      margin-left: 100px;
-    }
+  &__color-mode {
+    margin-right: 160px;
+  }
 
+  &__icon {
     &-logo {
       cursor: pointer;
       width: 48px;
       height: 48px;
       margin-right: 18px;
-    }
-
-    &-bell {
-      cursor: pointer;
     }
   }
 }

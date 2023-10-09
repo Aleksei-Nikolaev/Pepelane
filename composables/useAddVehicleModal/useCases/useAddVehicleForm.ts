@@ -8,6 +8,9 @@ import {$api} from "~/plugins/api";
 import {createVehicleRequestBody} from "~/services/types/vehicles";
 import {pipe} from "fp-ts/function"
 import {useShowModal} from "~/composables/useVehicleWrapper/useCases/useShowModal";
+import {useVehicleStore} from "~/stores/VehicleStore";
+import {filterFactory} from "~/factories/filterFactory";
+import {CreateStatusCode} from "~/types/createStatusCode";
 
 export const useAddVehicleForm = () => {
     const {create} = useAddVehicleFormFactory()
@@ -21,10 +24,17 @@ export const useAddVehicleForm = () => {
 
     const {imageUploadStatus, rules} = useAddVehicleValidation()
 
-    const {handleModal} = useShowModal()
+    const {closeModal} = useShowModal()
 
-    const disabledForm = ref<boolean>(true)
+    const disabledButton = ref<boolean>(false)
 
+    const {updateFilterParams} = useVehicleStore()
+
+    const {createFilter} = filterFactory()
+
+    const {$toast: notify} = useNuxtApp()
+
+    const {t} = useI18n()
 
     const handleImageData = (base64: string) => {
         userVehicleData.value.image = base64
@@ -47,14 +57,39 @@ export const useAddVehicleForm = () => {
 
 
     const onFinish = async () => {
-
+        disabledButton.value = true
         const payLoad = pipe(
             userVehicleData,
             unref,
             normalizePayLoad,
         )
+
         const res = await $api.vehicleService.createVehicle(payLoad)
-        if (res) handleModal()
+
+        if (res.statusCode === CreateStatusCode.SUCCESS) {
+            const message = t(`notificationMessage.vehicleAdded`)
+            const newFilter = {
+                type: payLoad.type
+            }
+
+            pipe(
+                newFilter,
+                createFilter,
+                updateFilterParams
+            )
+
+            notify.success(message);
+        }
+        if (res.statusCode === CreateStatusCode.ERROR) {
+            const message = t(`notificationMessage.vehicleAddedError`)
+            notify.error(message);
+        }
+
+
+        if (res.statusCode) {
+
+            closeModal()
+        }
     }
 
     return {
@@ -64,7 +99,7 @@ export const useAddVehicleForm = () => {
         selectRef,
         imageUploadStatus,
         rules,
-        disabledForm,
+        disabledButton,
         handleImageData,
         onImgRemoved,
         onFinish

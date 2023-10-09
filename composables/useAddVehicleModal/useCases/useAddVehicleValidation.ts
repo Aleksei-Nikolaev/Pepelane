@@ -65,6 +65,8 @@ export const useAddVehicleValidation = () => {
     const checkImage = async () => {
         const {isImage, isSize, fileUploadStatus} = imageUploadStatus.value
 
+        if (fileUploadStatus === "uploading") return
+
         if (fileUploadStatus === "removed") {
             return handleFormReject(t(`${localesPath.image}.default`, {imgMaxSize}))
         }
@@ -80,6 +82,8 @@ export const useAddVehicleValidation = () => {
         if (fileUploadStatus !== "done") {
             return handleFormReject(t(`${localesPath.image}.default`, {imgMaxSize}))
         }
+
+
 
         return Promise.resolve();
     }

@@ -10,7 +10,7 @@ const {
   selectRef,
   imageUploadStatus,
   rules,
-  disabledForm,
+  disabledButton,
   handleImageData,
   onImgRemoved,
   onFinish
@@ -95,7 +95,12 @@ const {
       </a-input>
     </a-form-item>
     <a-form-item>
-      <a-button class="form_button" type="primary" html-type="submit">Submit</a-button>
+      <a-button
+          class="form_button"
+          type="primary"
+          html-type="submit"
+          :disabled="disabledButton"
+      >Submit</a-button>
     </a-form-item>
   </a-form>
 </template>

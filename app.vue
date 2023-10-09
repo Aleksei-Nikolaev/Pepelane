@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import TheHeader from "~/components/common/TheHeader.vue";
+import TheModal from "~/components/common/TheModal.vue";
+import {useShowModal} from "~/composables/useVehicleWrapper/useCases/useShowModal";
+import { toast } from 'vue3-toastify';
+
+const {showModal} = useShowModal()
+
+
 
 </script>
 
@@ -15,6 +22,13 @@ import TheHeader from "~/components/common/TheHeader.vue";
               mode: 'out-in'
             }"
           />
+          <Transition name="modal-overlay">
+          <TheModal
+              :showModal="showModal"
+              v-if="showModal"
+              @close-modal-window="showModal = false"
+          />
+          </Transition>
         </NuxtLayout>
       </div>
     </div>
@@ -30,4 +44,15 @@ import TheHeader from "~/components/common/TheHeader.vue";
 .page {
   padding-top: 40px;
 }
+
+.modal-overlay-enter-active,
+.modal-overlay-leave-active {
+  transition: all 0.2s ease-out;
+}
+
+.modal-overlay-leave-to,
+.modal-overlay-enter-from {
+  opacity: 0.5;
+}
+
 </style>

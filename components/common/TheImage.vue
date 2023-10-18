@@ -11,15 +11,12 @@ const img = ref<HTMLImageElement | null>(null);
 
 const isImageLoaded = ref(false);
 
+//
 onMounted(() => {
-  isImageLoaded.value = false
-  const element = img.value as HTMLImageElement
-  if (element.complete) isImageLoaded.value = true
+  const { complete } = img.value as HTMLImageElement
+  if (complete) isImageLoaded.value = true
 })
 
-onUnmounted(() => {
-  isImageLoaded.value = false
-})
 const imageLoaded = () => {
   isImageLoaded.value = true
 }
@@ -35,7 +32,6 @@ const imageLoaded = () => {
         class="image__container__image"
         v-show="isImageLoaded"
     />
-
       <Skeletor v-show="!isImageLoaded" class="image__container__skeleton"/>
   </div>
 </template>

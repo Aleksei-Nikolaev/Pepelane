@@ -23,7 +23,7 @@ defineProps<{
     >
       <TheImage
           class="team__member-photo"
-          :url="`/assets/images/${member.id}.png`"
+          :url="`/img/${member.id}.png`"
       />
       <p class="section__text-bold">{{ member.name }}</p>
       <p class="section__text">{{ member.title }}</p>

@@ -15,6 +15,7 @@ const {createFilter} = filterFactory()
       <NuxtLink
           :to="{ path: '/', query: createFilter() }"
           @click="resetFilters"
+          class="header__logo-container"
       >
         <div class="header__logo-container">
           <nuxt-icon class="header__icon-logo" name="Logo" filled />
@@ -38,12 +39,20 @@ const {createFilter} = filterFactory()
   text-wrap: nowrap;
   width: 100%;
 
+
+  @include sm {
+    padding: 12px var(--padding-mobile-content);
+  }
+
+
   &__left-part,
   &__right-part {
     display: flex;
     align-items: center;
     height: 100%;
   }
+
+
 
   &__right-part {
     margin-left: auto;
@@ -53,16 +62,19 @@ const {createFilter} = filterFactory()
   &__logo-container {
     height: 100%;
     align-items: center;
-    width: auto;
     display: flex;
   }
 
   &__name {
     color: var(--base_500);
-    font-size: 20px;
+    font-size: var(--font_size_medium_increase);
     font-weight: var(--font_weight_bold);
     margin-right: 64px;
     margin-bottom: 0;
+    @include sm {
+      margin-right: 0;
+      font-size: var(--font_size_default);
+    }
   }
 
   &__slogan {
@@ -71,10 +83,20 @@ const {createFilter} = filterFactory()
     font-weight: var(--font_weight_medium);
     margin-left: 64px;
     margin-bottom: 0;
+
+    @include xl {
+      margin-left: 0;
+    }
+    @include md {
+      display: none;
+    }
   }
 
   &__color-mode {
-    margin-right: 160px;
+    margin-right: 40px;
+    @include sm {
+      margin-right: 0;
+    }
   }
 
   &__icon {
@@ -83,7 +105,13 @@ const {createFilter} = filterFactory()
       width: 48px;
       height: 48px;
       margin-right: 18px;
+      @include sm {
+        margin-right: 10px;
+        width: 32px;
+        height: 32px;
+      }
     }
   }
 }
+
 </style>

@@ -30,10 +30,15 @@ p,h1,h2 {
 
 html {
   padding-left: calc(100vw - 100%);
+  background: var(--base_0);
 }
 
 body {
   width: 100vw;
+}
+
+html > body {
+  background: var(--base_0);
 }
 
 .no-scroll {
@@ -64,3 +69,4 @@ body {
   border-radius: var(--border_radius_micro);
   font-weight: var(--font_weight_bold);
 }
+

@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import appConfig from "./core/config";
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
@@ -11,6 +12,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@vueuse/nuxt",
   ],
+
 
   css: ["normalize.css/normalize.css", "~/assets/styles/global.scss"],
 
@@ -30,7 +32,7 @@ export default defineNuxtConfig({
   },
 
   image: {
-    dir: "assets/images",
+    dir: "~assets/images",
   },
 
   runtimeConfig: {
@@ -49,7 +51,11 @@ export default defineNuxtConfig({
         less: {
           javascriptEnabled: true,
         },
+        scss: {
+          additionalData: '@import "assets/styles/shared/_mixins";'
+        }
       },
     },
+
   },
 });

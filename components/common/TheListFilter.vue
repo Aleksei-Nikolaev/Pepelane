@@ -25,14 +25,16 @@ const model = useModel(props, "filter");
       <TheVehicleSortBy v-model:value="model.sortBy" />
       <TheSortType v-model:value="model.sortType" />
     </div>
-    <ThePickVehicleType
-      v-model:value="model.type"
-      class="filter-container__radio-group"
-    />
-    <CloseCircleOutlined
-      class="filter-container__reset-button"
-      @click="emits('clearClicked')"
-    />
+    <div class="filter-container__button-container">
+      <ThePickVehicleType
+          v-model:value="model.type"
+          class="filter-container__radio-group"
+      />
+      <CloseCircleOutlined
+          class="filter-container__reset-button"
+          @click="emits('clearClicked')"
+      />
+    </div>
   </div>
 </template>
 
@@ -40,22 +42,38 @@ const model = useModel(props, "filter");
 .filter-container {
   display: flex;
   align-items: center;
-  padding: 10px 0px;
+  @include md {
+    flex-direction: column;
+  }
+
 
   &__sort {
     display: flex;
     align-items: center;
     color: var(--base_500);
+    margin-right: 30px;
+    @include md {
+      margin-right: auto;
+      margin-bottom: 6px;
+    }
   }
 
-  &__radio-group {
-    margin-left: 30px;
-  }
+
 
   &__reset-button {
     margin-left: 20px;
     color: var(--main_400);
     font-size: 1.6em;
   }
+
+
+
+
+  &__button-container {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+  }
+
 }
 </style>

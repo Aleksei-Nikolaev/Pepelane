@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import TheImage from "~/components/common/TheImage.vue";
-const image = "/assets/images/face.jpg";
+const image = "/img/face.jpg";
 </script>
 
 <template>
-  <client-only>
     <div class="user-info__container">
       <span class="user-info__name">Alexey Nikolaev</span>
-      <TheImage class="user-info__image" :url=image />
+      <TheImage class="user-info__image" :url="image" />
     </div>
-  </client-only>
 </template>
 
 <style scoped lang="scss">
@@ -19,14 +17,30 @@ const image = "/assets/images/face.jpg";
     display: flex;
     align-items: center;
     margin-left: 20px;
+    @include sm {
+      margin-left: 0;
+    }
+  }
+
+  &__name {
+    color: var(--base_500);
+    font-size: var(--font_size_default);
+    font-weight: var(--font_weight_bold);
+    @include sm {
+      display: none;
+    }
   }
 
   &__image {
-    max-width: 56px;
-    width: 100vh;
-    height: 100%;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     margin-left: 16px;
+    @include sm {
+      width: 32px;
+      height: 32px;
+    }
+
   }
 }
 </style>

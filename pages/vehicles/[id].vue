@@ -7,15 +7,19 @@ import TheRentForm from "~/components/common/TheRentForm.vue";
 const route = useRoute()
 const router = useRouter()
 
-
 const { id } = route.params
 
-const { data: vehicleData } = useAsyncData("vehicle",
+
+
+const { data: vehicleData } = useAsyncData(`vehicle-${id}`,
     async () => {
       const {data} = await $api.vehicleService.getVehicleById(id as string)
+      // dataUpdated.value = true
       return data
     },
 )
+
+
 
 const { sections } = useDetailedPageRoutes()
 

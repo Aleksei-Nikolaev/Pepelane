@@ -79,6 +79,10 @@ useAsyncData(
 .control-panel {
   display: flex;
   flex-direction: row;
+  padding: 10px 0px;
+  @include sm {
+    padding: 10px var(--padding-mobile-content);
+  }
 
   &__add-button {
     margin-left: auto;

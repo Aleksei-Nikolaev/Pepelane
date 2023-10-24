@@ -37,7 +37,6 @@ const collapseHandle = () => {
 
 .text {
   &-container {
-    margin-top: var(--margin_specification_medium);
     display: flex;
     position: relative;
     transition: max-height 0.2s ease-in-out;
@@ -49,7 +48,7 @@ const collapseHandle = () => {
 .collapsed {
   max-height: 4.8em;
   overflow: hidden;
-  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+  background-image: linear-gradient(rgba(255, 255, 255, 0), var(--base_0));
 
   &__icon {
     &-container {
@@ -75,7 +74,7 @@ const collapseHandle = () => {
   position: absolute;
   left: 0px;
   bottom: 0px;
-  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+  background-image: linear-gradient(rgba(255, 255, 255, 0), var(--base_0));
 }
 
 

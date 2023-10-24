@@ -59,5 +59,8 @@ const modalComponent = computed(() => {
 .modal-window-leave-to,
 .modal-window-enter-from {
   transform: translateX(700px);
+  @include sm {
+    transform: translateY(700px);
+  }
 }
 </style>

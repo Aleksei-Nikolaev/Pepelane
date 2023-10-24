@@ -2,19 +2,7 @@
 
 
 const colorMode = useColorMode();
-//
 
-//
-// const antdColorState = {
-//   primaryColor: "#4959ff"
-// }
-//
-// const antdDarkColorState = {
-//
-// }
-//
-//
-//
 // const switchColor = () => {
 //   if (colorMode.preference === "dark") {
 //     colorMode.preference = "light"

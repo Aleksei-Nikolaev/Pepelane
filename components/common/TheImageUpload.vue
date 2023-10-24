@@ -99,6 +99,10 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
   align-items: center;
   position: relative;
 
+  @include sm {
+    height: 260px;
+  }
+
 
   &__icon {
     color: var(--main_400);

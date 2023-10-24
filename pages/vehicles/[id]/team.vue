@@ -25,8 +25,11 @@ defineProps<{
           class="team__member-photo"
           :url="`/img/${member.id}.png`"
       />
-      <p class="section__text-bold">{{ member.name }}</p>
-      <p class="section__text">{{ member.title }}</p>
+      <div class="team__member-info">
+        <p class="section__text-bold team__member-info-name">{{ member.name }}</p>
+        <p class="section__text team__member-description">{{ member.title }}</p>
+      </div>
+
     </div>
 
   </div>
@@ -41,6 +44,16 @@ defineProps<{
     &-bold {
       margin-bottom: 8px;
       font-size: var(--font_size_default);
+
+      @include lg {
+        white-space: pre-wrap;
+        display: inline;
+        width: 10%;
+      }
+
+      @include sm {
+        width: 100%;
+      }
     }
   }
 }
@@ -49,17 +62,43 @@ defineProps<{
   &-grid {
     display: flex;
     gap: 24px;
+
+    @include sm {
+      flex-direction: column;
+    }
   }
 
   &-box {
     display: flex;
     flex: 1;
     flex-direction: column;
+
+    @include sm {
+      flex-direction: row;
+    }
   }
 
   &-photo {
-    height: 96px;
+    aspect-ratio: 16 / 9;
     border-radius: var(--border_radius_tiny);
+
+    @include sm {
+      height: 80px;
+      margin-right: 16px;
+    }
+  }
+
+  &-info {
+    @include sm {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &-name,
+      &-description {
+        margin: 0;
+      }
+    }
   }
 }
 

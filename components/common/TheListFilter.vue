@@ -3,7 +3,7 @@ import { FilterParams } from "~/types/FilterParams";
 import TheVehicleSortBy from "~/components/common/listHeader/TheVehicleSortBy.vue";
 import TheSortType from "~/components/common/listHeader/TheSortType.vue";
 import ThePickVehicleType from "~/components/common/listHeader/ThePickVehicleType.vue";
-import {CloseCircleOutlined} from "@ant-design/icons-vue";
+import { CloseCircleOutlined } from "@ant-design/icons-vue";
 
 const props = defineProps<{
   filter: FilterParams;
@@ -14,66 +14,62 @@ const emits = defineEmits<{
 }>();
 
 const model = useModel(props, "filter");
-
-
-
 </script>
 
 <template>
-  <div class="filter-container">
-    <div class="filter-container__sort">
-      <TheVehicleSortBy v-model:value="model.sortBy" />
-      <TheSortType v-model:value="model.sortType" />
-    </div>
-    <div class="filter-container__button-container">
-      <ThePickVehicleType
-          v-model:value="model.type"
-          class="filter-container__radio-group"
-      />
-      <CloseCircleOutlined
-          class="filter-container__reset-button"
-          @click="emits('clearClicked')"
-      />
-    </div>
+  <div class="filter-container__sort">
+    <TheVehicleSortBy v-model:value="model.sortBy" />
+    <TheSortType v-model:value="model.sortType" />
+  </div>
+  <div class="filter-container__button-container">
+    <ThePickVehicleType
+      v-model:value="model.type"
+      class="filter-container__radio-group"
+    />
+    <CloseCircleOutlined
+      class="filter-container__reset-button"
+      @click="emits('clearClicked')"
+    />
   </div>
 </template>
 
 <style scoped lang="scss">
 .filter-container {
-  display: flex;
-  align-items: center;
-  @include md {
-    flex-direction: column;
-  }
-
-
   &__sort {
     display: flex;
     align-items: center;
     color: var(--base_500);
     margin-right: 30px;
     @include md {
-      margin-right: auto;
-      margin-bottom: 6px;
+      margin-bottom: 16px;
     }
   }
-
-
 
   &__reset-button {
     margin-left: 20px;
     color: var(--main_400);
     font-size: 1.6em;
+    @include sm {
+      margin-left: auto;
+      font-size: 1.8em;
+    }
   }
-
-
-
 
   &__button-container {
     display: flex;
     align-items: center;
     margin-right: auto;
+    @include md {
+      order: 2;
+      flex-basis: 100%;
+    }
   }
+}
 
+:deep(.filter-container__radio-group) {
+  @include sm {
+    width: 100%;
+    margin-right: 10px
+  }
 }
 </style>

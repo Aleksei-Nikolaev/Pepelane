@@ -1,21 +1,20 @@
 <script setup lang="ts">
 import TheColorModeSwitcher from "~/components/common/header/TheColorModeSwitcher.vue";
 import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
-import {filterFactory} from "~/factories/filterFactory";
-import {useVehicleStore} from "~/stores/VehicleStore"
+import { filterFactory } from "~/factories/filterFactory";
+import { useVehicleStore } from "~/stores/VehicleStore";
 
-const {resetFilters} = useVehicleStore()
-const {createFilter} = filterFactory()
-
+const { resetFilters } = useVehicleStore();
+const { createFilter } = filterFactory();
 </script>
 
 <template>
   <header class="header">
     <div class="header__left-part">
       <NuxtLink
-          :to="{ path: '/', query: createFilter() }"
-          @click="resetFilters"
-          class="header__logo-container"
+        :to="{ path: '/', query: createFilter() }"
+        @click="resetFilters"
+        class="header__logo-container"
       >
         <div class="header__logo-container">
           <nuxt-icon class="header__icon-logo" name="Logo" filled />
@@ -39,11 +38,11 @@ const {createFilter} = filterFactory()
   text-wrap: nowrap;
   width: 100%;
 
-
   @include sm {
     padding: 12px var(--padding-mobile-content);
+    border-bottom: 1px solid var(--base_200);
+    box-shadow: 0 1px var(--base_50);
   }
-
 
   &__left-part,
   &__right-part {
@@ -51,8 +50,6 @@ const {createFilter} = filterFactory()
     align-items: center;
     height: 100%;
   }
-
-
 
   &__right-part {
     margin-left: auto;
@@ -105,6 +102,7 @@ const {createFilter} = filterFactory()
       width: 48px;
       height: 48px;
       margin-right: 18px;
+
       @include sm {
         margin-right: 10px;
         width: 32px;
@@ -112,6 +110,11 @@ const {createFilter} = filterFactory()
       }
     }
   }
+
+}
+
+:deep(.header__icon-logo > svg > circle:first-child) {
+  fill: var(--base_500);
 }
 
 </style>

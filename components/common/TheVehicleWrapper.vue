@@ -1,37 +1,40 @@
 <script setup lang="ts">
 import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
 import TheListFilter from "~/components/common/TheListFilter.vue";
-import {useHandleListAppearance} from "~/composables/useVehicleWrapper/useCases/useHandleAnimation";
-import {filterFactory} from "~/factories/filterFactory";
-import {
-  useVehicleWrapperFilter
-} from "~/composables/useVehicleWrapper/useCases/useVehicleWrapperFilter/useCases/useVehicleWrapperFilter";
-import {useVehicleStore} from "~/stores/VehicleStore";
-import {storeToRefs} from "pinia";
+import { useHandleListAppearance } from "~/composables/useVehicleWrapper/useCases/useHandleAnimation";
+import { filterFactory } from "~/factories/filterFactory";
+import { useVehicleWrapperFilter } from "~/composables/useVehicleWrapper/useCases/useVehicleWrapperFilter/useCases/useVehicleWrapperFilter";
+import { useVehicleStore } from "~/stores/VehicleStore";
+import { storeToRefs } from "pinia";
 import TheNoDataPage from "~/components/common/TheNoDataPage.vue";
-import {useShowModal} from "~/composables/useVehicleWrapper/useCases/useShowModal";
-import {Modals} from "~/types/Modals";
+import { useShowModal } from "~/composables/useVehicleWrapper/useCases/useShowModal";
+import { Modals } from "~/types/Modals";
 
-const { data, meta, filterParams, isEmptyList } = storeToRefs(useVehicleStore())
-const { getVehicles, resetFilters, updateFilterParams } = useVehicleStore()
-const { openModal } = useShowModal()
-const { createFilter } = filterFactory()
 
-const initFiltersParams = createFilter()
+const { data, meta, filterParams, isEmptyList } = storeToRefs(
+  useVehicleStore()
+);
+const { getVehicles, resetFilters, updateFilterParams } = useVehicleStore();
+const { openModal } = useShowModal();
+const { createFilter } = filterFactory();
 
-const router = useRouter()
-const route = useRoute()
+const initFiltersParams = createFilter();
 
-updateFilterParams(route.query)
+const router = useRouter();
+const route = useRoute();
 
-const {  handlePageChange } = useVehicleWrapperFilter(filterParams)
-const { resetStatus, elementIsRemoved, loadingStatus, renderItems} = useHandleListAppearance()
+updateFilterParams(route.query);
+
+const { handlePageChange } = useVehicleWrapperFilter(filterParams);
+const { resetStatus, elementIsRemoved, loadingStatus, renderItems } =
+  useHandleListAppearance();
 
 watch(
   () => filterParams.value.type,
-  () => updateFilterParams({
-    page: initFiltersParams.page
-  })
+  () =>
+    updateFilterParams({
+      page: initFiltersParams.page,
+    })
 );
 
 useAsyncData(
@@ -41,47 +44,51 @@ useAsyncData(
     router.push({ query: filterParams.value });
     await getVehicles(filterParams.value);
     loadingStatus.value.dataIsLoaded = true;
-    return filterParams.value
+    return filterParams.value;
   },
   {
-    watch:  [filterParams.value],
-  },
+    watch: [filterParams.value],
+  }
 );
+
 
 
 </script>
 
 <template>
   <div class="control-panel">
-    <TheListFilter :filter="filterParams" @clear-clicked="resetFilters"/>
+    <TheListFilter :filter="filterParams" @clear-clicked="resetFilters" />
     <a-button
-        type="primary"
-        size="large"
-        class="control-panel__add-button"
-        @click="openModal(Modals.ADD_VEHICLE)"
-    >Add new
+      type="primary"
+      size="large"
+      class="control-panel__add-button"
+      @click="openModal(Modals.ADD_VEHICLE)"
+      >Add new
     </a-button>
   </div>
   <TheVehiclesList
-      v-if="!isEmptyList"
-      :vehicles="data"
-      :meta="meta"
-      :filter="filterParams"
-      :render-items="renderItems"
-      @update-filter="handlePageChange"
-      @element-removed="elementIsRemoved"
+    v-if="!isEmptyList"
+    :vehicles="data"
+    :meta="meta"
+    :filter="filterParams"
+    :render-items="renderItems"
+    @update-filter="handlePageChange"
+    @element-removed="elementIsRemoved"
   />
-  <TheNoDataPage v-else/>
+  <TheNoDataPage v-else />
 </template>
 
 <style scoped lang="scss">
-
 .control-panel {
   display: flex;
   flex-direction: row;
   padding: 10px 0px;
   @include sm {
     padding: 10px var(--padding-mobile-content);
+  }
+  @include md {
+    display: flex;
+    flex-wrap: wrap;
   }
 
   &__add-button {
@@ -90,9 +97,13 @@ useAsyncData(
     font-weight: var(--font_weight_bold);
     border-radius: var(--border_radius_mini);
     height: 100%;
+
+    @include sm {
+      height: 32px;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+    }
   }
 }
-
-
 </style>
-

@@ -9,6 +9,7 @@ defineProps<{
 </script>
 
 <template>
+  <div class="rent__container-blur"></div>
   <div class="rent__container">
     <h2 class="rent__text">Rent for <span class="rent__price">{{ price }}$</span></h2>
     <a-button
@@ -31,13 +32,35 @@ defineProps<{
     display: flex;
     align-items: center;
     padding: 0 32px;
+    margin-top: 40px;
+
+    @include md {
+      padding: 0 16px;
+    }
+
+    @include sm {
+      height: 68px;
+      z-index: 2;
+      position: fixed;
+      bottom: 32px;
+      left: 16px;
+      right: 16px;
+      width: calc(100% - 32px);
+      box-shadow: 0 50px var(--base_0), 0 -10px 15px var(--base_0);
+    }
   }
+
+
 
   &__text {
     font-size: var(--font_size_medium_increase);
     font-weight: var(--font_weight_bold);
     color: var(--base_500);
     margin: 0;
+
+    @include sm {
+     font-size: var(--font_size_default);
+    }
   }
 
   &__price {
@@ -52,6 +75,13 @@ defineProps<{
   border-radius: var(--border_radius_mini);
   width: 136px;
   height: 48px;
+
+  @include sm {
+    font-size: var(--font_size_tiny);
+    width: 110px;
+    height: 44px;
+  }
+
 }
 
 

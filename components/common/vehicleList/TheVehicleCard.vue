@@ -1,25 +1,22 @@
 <script setup lang="ts">
 import type { IVehicle } from "~/types/vehicle";
 import TheImage from "~/components/common/TheImage.vue";
-import {useDetailedPageRoutes} from "~/composables/useDetailedPage/useCases/useDetailedPageRoutes.";
+import { useDetailedPageRoutes } from "~/composables/useDetailedPage/useCases/useDetailedPageRoutes.";
 
 defineProps<{
   vehicle: IVehicle;
 }>();
 
-const { defaultRoute } = useDetailedPageRoutes()
-
+const { defaultRoute } = useDetailedPageRoutes();
 </script>
 
 <template>
   <NuxtLink
-      :to="`vehicles/${vehicle.id}/${defaultRoute}`"
-      :rel="vehicle.id"
-      class="link-wrapper"
+    :to="`vehicles/${vehicle.id}/${defaultRoute}`"
+    :rel="vehicle.id"
+    class="link-wrapper"
   >
-    <div
-        class="card-container"
-    >
+    <div class="card-container">
       <TheImage :url="vehicle.preview" class="card-container__image" />
       <div class="card-container__info">
         <p class="card-container__info__name">{{ vehicle.name }}</p>
@@ -33,19 +30,18 @@ const { defaultRoute } = useDetailedPageRoutes()
 </template>
 
 <style scoped lang="scss">
-
 .link-wrapper {
-  width: calc((100% - 2 * var(--margin_card_horizontal)) / 3);
+  width: calc((100% - 2 * var(--gap)) / 3);
   height: 164px;
   background: var(--base_0);
   border-radius: var(--border_radius_medium);
-
-  &:not(:nth-child(3n)) {
-    margin-right: var(--margin_card_horizontal);
+  @include lg {
+    width: calc((100% - var(--gap)) / 2);
   }
 
-  &:not(:nth-last-child(-n + 3)) {
-    margin-bottom: var(--margin_card_horizontal);
+  @include sm {
+    width: 100%;
+    min-width: 200px;
   }
 }
 
@@ -59,6 +55,7 @@ const { defaultRoute } = useDetailedPageRoutes()
     width: 88px;
     height: 88px;
     border-radius: var(--border_radius_small);
+    overflow: hidden;
   }
 
   &__info {
@@ -68,12 +65,16 @@ const { defaultRoute } = useDetailedPageRoutes()
     display: flex;
     flex-direction: column;
     pointer-events: none;
+    overflow: hidden;
 
     &__name {
       color: var(--base_500);
       font-size: var(--font_size_default);
       font-weight: var(--font_weight_bold);
       margin-bottom: 12px;
+      overflow: hidden;
+      display: -webkit-box;
+      scroll: none;
     }
 
     &__description {

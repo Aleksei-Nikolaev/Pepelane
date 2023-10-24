@@ -2,6 +2,7 @@
   // colors
   --base_0: #fcfcfc;
   --base_50: #f3f4f6;
+  --base_100: #C6CED6;
   --base_200: #99a7b5;
   --base_300: #677b8f;
   --base_500: #012345;
@@ -34,26 +35,40 @@
   --border_radius_medium: 32px;
   --border_radius_big: 48px;
 
-  // margin
-  --margin_card_horizontal: 32px;
-  --margin_card_vertical: 32px;
-  --margin_specification_medium: 32px;
+  // margins and gaps
+  --gap: 32px;
+  @include lg {
+    --gap: 20px;
+  }
+  @include sm {
+    --gap: 16px;
+  }
+
+  --margin_detailed_sections_vertical: 32px;
+  --margin_form_elements: 24px;
+
+  @include md {
+    --margin_detailed_sections_vertical: 16px;
+  }
+
+  @include sm {
+    --margin_form_elements: 16px;
+  }
 
 
   // padding
   --padding_list: 64px;
   --padding-mobile-content: 16px;
 
-
-
+  @include sm {
+    --padding_list: 32px;
+  }
 }
-
-
-
 
 .dark-mode {
   --base_0: #012345;
   --base_50: #011c37;
+  --base_100: #01203E;
   --base_300: #99a7b5;
   --base_500: #fcfcfc;
   --base_600: #011c37;

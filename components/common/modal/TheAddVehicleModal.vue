@@ -42,19 +42,36 @@ const emits = defineEmits<{
   border-radius: var(--border_radius_big) 0 0 var(--border_radius_big);
   justify-content: flex-start;
   padding: 64px 72px;
+  overflow: auto;
+
+  @include sm {
+    height: 84%;
+    width: 100%;
+    border-radius: var(--border_radius_small) var(--border_radius_small) 0 0;
+    margin-top: auto;
+    padding: 28px 14px;
+  }
 
   &__header {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 48px;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
+
+    @include sm {
+      margin-bottom: 10px;
+    }
   }
 
   &__heading {
     color: var(--base_500);
     font-size: var(--font_size_largest);
     font-weight: var(--font_weight_bold);
+
+    @include sm {
+      font-size: var(--font_size_big);
+    }
   }
 
   &__close-button {
@@ -64,6 +81,13 @@ const emits = defineEmits<{
     padding: 10px 10px;
     border-radius: var(--border_radius_tiny);
     background-color: var(--base_50);
+
+    @include sm {
+      height: 32px;
+      width: 32px;
+      border-radius: var(--border_radius_micro);
+      padding: 4px 4px;
+    }
 
 
     &-icon {
@@ -91,6 +115,11 @@ const emits = defineEmits<{
   }
 }
 
+.modal::-webkit-scrollbar-track {
+  @include sm {
+    margin-top: 18px;
+  }
+}
 
 
 

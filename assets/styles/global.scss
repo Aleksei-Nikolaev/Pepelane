@@ -10,6 +10,7 @@ p,h1,h2 {
   margin: 0;
 }
 
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -44,6 +45,7 @@ html > body {
 .no-scroll {
   overflow: hidden;
 }
+
 
 .page-enter-active,
 .page-leave-active {

@@ -15,8 +15,11 @@
     font-weight: var(--font_weight_bold);
     font-size: var(--font_size_big);
     color: var(--base_500);
-    margin-top: var(--margin_specification_medium);
-    margin-bottom: var(--margin_specification_medium);
+    margin: var(--margin_detailed_sections_vertical) 0;
+
+    @include sm {
+      font-size: var(--font_size_medium_increase);
+    }
   }
 
   &__element {
@@ -38,6 +41,10 @@
   &__box {
     display: flex;
     gap: 24px;
+
+    @include sm {
+      gap: 16px;
+    }
   }
 }
 
@@ -49,6 +56,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 24px;
+
+
+    @include sm {
+      min-width: 64px;
+      height: 80px;
+    }
   }
 }

@@ -126,6 +126,11 @@ const {
   width: 100%;
   height: 56px;
   margin-top: 20px;
+
+  @include sm {
+    height: 48px;
+    margin-top: 14px;
+  }
 }
 
 :deep(.ant-form-item-control-input-content) {

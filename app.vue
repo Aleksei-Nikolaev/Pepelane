@@ -47,6 +47,9 @@ const {showModal} = useShowModal()
 }
 .page {
   padding-top: 40px;
+  @include sm {
+    padding: 16px 0;
+  }
 }
 
 .modal-overlay-enter-active,

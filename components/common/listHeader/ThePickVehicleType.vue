@@ -15,11 +15,13 @@ const emits = defineEmits<{
 const {vehicleFilterTypes} = useHandleVehiclesTypes()
 
 
+
+
+
 </script>
 
 <template>
   <div>
-    <client-only>
       <a-radio-group
         :value="value"
         :options="vehicleFilterTypes"
@@ -28,8 +30,26 @@ const {vehicleFilterTypes} = useHandleVehiclesTypes()
         class="radio-group"
         @change="emits(eventNames.UPDATE_VALUE, $event.target?.value)"
       />
-    </client-only>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+:deep(.ant-radio-group) {
+  @include sm {
+    width: 100%;
+    display: flex;
+  }
+}
+
+:deep(.ant-radio-button-wrapper) {
+  @include sm {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 0 4px;
+  }
+}
+
+
+
+</style>

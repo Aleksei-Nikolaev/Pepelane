@@ -7,5 +7,4 @@ export type VehiclesListProps = {
     filter: FilterParams;
     meta: PaginationMeta;
     renderItems: boolean;
-
 }

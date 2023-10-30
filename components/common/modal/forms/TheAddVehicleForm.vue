@@ -88,7 +88,7 @@ const {
           class="form__input"
       >
         <template #suffix class="form__input">
-          <a-tooltip class="form__input">
+          <a-tooltip>
             $/h
           </a-tooltip>
         </template>
@@ -106,6 +106,7 @@ const {
 </template>
 
 <style scoped lang="scss">
+@import "assets/styles/vendors/antd/antd-theme";
 
 
 .form__input,
@@ -113,9 +114,10 @@ const {
   height: 46px;
 }
 
-.form__input,
-:deep(.ant-input),
-:deep(.ant-select .ant-select-selector) {
+
+
+
+.form__input {
   background-color: var(--base_50);
   font-size: var(--font_size_default);
   font-weight: var(--font_weight_medium);
@@ -145,6 +147,7 @@ const {
 :deep(.ant-form-item-control-input-content) {
   display: flex;
 }
+
 
 
 .drop-menu__dropdown-container {

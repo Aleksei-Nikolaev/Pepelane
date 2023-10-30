@@ -6,24 +6,43 @@ defineProps<{
   price: IVehicle["rent"]
 }>()
 
+const {t} = useI18n()
+const {$toast: notify} = useNuxtApp()
+
+const onOrder = () => {
+  const message = t(`notificationMessage.vehicleOrdered`)
+  notify.success(message);
+}
+
 </script>
 
 <template>
-  <div class="rent__container-blur"></div>
-  <div class="rent__container">
-    <h2 class="rent__text">Rent for <span class="rent__price">{{ price }}$</span></h2>
-    <a-button
-        type="primary"
-        size="large"
-        class="rent__button"
-    >Rent now
-    </a-button>
+  <div class="rent__wrapper">
+    <div class="rent__container">
+      <h2 class="rent__text">Rent for <span class="rent__price">{{ price }}$</span></h2>
+      <a-button
+          type="primary"
+          size="large"
+          class="rent__button"
+          @click="onOrder"
+      >Rent now
+      </a-button>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 
 .rent {
+  &__wrapper {
+    @include sm {
+      z-index: 2;
+      position: sticky;
+      height: 120px;
+      bottom: 0;
+      background: linear-gradient(to bottom, transparent 1%, var(--base_0) 10%);
+    }
+  }
   &__container {
     border-radius: var(--border_radius_tiny);
     background: var(--base_50);
@@ -40,13 +59,10 @@ defineProps<{
 
     @include sm {
       height: 68px;
-      z-index: 2;
-      position: fixed;
-      bottom: 32px;
-      left: 16px;
+
       right: 16px;
-      width: calc(100% - 32px);
-      box-shadow: 0 50px var(--base_0), 0 -10px 15px var(--base_0);
+      width: 100%;
+      box-shadow:   0 -10px 15px var(--base_0);
     }
   }
 

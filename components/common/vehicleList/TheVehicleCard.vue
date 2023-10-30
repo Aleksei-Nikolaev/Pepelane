@@ -35,8 +35,10 @@ const { defaultRoute } = useDetailedPageRoutes();
   height: 164px;
   background: var(--base_0);
   border-radius: var(--border_radius_medium);
+
   @include lg {
     width: calc((100% - var(--gap)) / 2);
+    border-radius: var(--border_radius_small);
   }
 
   @include sm {

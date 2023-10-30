@@ -2,17 +2,18 @@ import { defineStore } from "pinia";
 import { $api } from "~/plugins/api";
 import { vehicleStoreState } from "~/types/store/vehicleStoreState";
 import { getVehiclesRequestParams } from "~/services/types/vehicles";
-import {filterFactory} from "~/factories/filterFactory";
+import {useDevicePageSize} from "~/composables/useDevicePageSize/useDevicePageSize";
+import {normalizeQueryFilter} from "~/utils/normalizeQueryFilter";
 
-const {createFilter} = filterFactory()
-const initFiltersParams = createFilter()
+
+
 
 
 export const useVehicleStore = defineStore("VehicleStore", {
   state: (): vehicleStoreState => ({
     data: [],
     meta: null,
-    filterParams: {...initFiltersParams},
+    filterParams: {...useDevicePageSize()},
   }),
 
   getters: {
@@ -27,10 +28,11 @@ export const useVehicleStore = defineStore("VehicleStore", {
     },
 
     resetFilters() {
-      this.filterParams = Object.assign(this.filterParams, initFiltersParams)
+      this.filterParams = Object.assign(this.filterParams, useDevicePageSize())
     },
 
     updateFilterParams(filter: vehicleStoreState["filterParams"]) {
+      normalizeQueryFilter(filter)
       this.filterParams = Object.assign(this.filterParams, filter)
     }
   }

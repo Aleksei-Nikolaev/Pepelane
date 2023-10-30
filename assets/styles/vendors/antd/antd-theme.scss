@@ -1,0 +1,53 @@
+:deep(.ant-input),
+:deep(.ant-select .ant-select-selector),
+:deep(.ant-radio-button-wrapper) {
+  background-color: var(--base_50);
+  font-size: var(--font_size_default);
+  font-weight: var(--font_weight_medium);
+  color: var(--base_300);
+  border: 1px solid var(--base_100);
+}
+
+:deep(.ant-input:hover),
+:deep(.ant-input:focus) {
+  border: 1px solid var(--switched_main_400);
+}
+
+
+:deep(.ant-input-affix-wrapper .ant-input:hover),
+:deep(.ant-input-affix-wrapper .ant-input:focus) {
+  border: none;
+}
+
+:deep(.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):focus-within) {
+  box-shadow: 0 0 0 1px var(--base_50);
+}
+
+:deep(.ant-select-arrow) {
+  color: var(--base_300);
+}
+
+:deep(.ant-radio-button-wrapper::before) {
+  display: none;
+}
+
+:deep(.ant-input-affix-wrapper) {
+  border: 1px solid var(--base_100);
+}
+
+:deep(.ant-upload-select-picture-card) {
+  border: 1px dashed var(--base_100);
+}
+
+:deep(.ant-upload-select-picture-card:hover),
+:deep(.ant-upload-select-picture-card:focus) {
+  border: 1px dashed var(--switched_main_400);
+}
+
+:deep(.ant-radio-button-wrapper:focus-within) {
+  box-shadow: none;
+}
+
+//:deep(.ant-radio-group:focus-within) {
+//  box-shadow: none;
+//}

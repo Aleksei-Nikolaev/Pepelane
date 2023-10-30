@@ -11,8 +11,8 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@pinia/nuxt",
     "@vueuse/nuxt",
+    '@nuxtjs/device',
   ],
-
 
   css: ["normalize.css/normalize.css", "~/assets/styles/global.scss"],
 
@@ -52,10 +52,9 @@ export default defineNuxtConfig({
           javascriptEnabled: true,
         },
         scss: {
-          additionalData: '@import "assets/styles/shared/_mixins";'
-        }
+          additionalData: '@import "assets/styles/shared/_mixins";',
+        },
       },
     },
-
   },
 });

@@ -8,7 +8,9 @@
   --base_500: #012345;
   --base_600: #011c37;
 
+  --switched_main_400: #4959ff;
   --main_400: #4959ff;
+
 
   --secondary_400: #f84ab3;
   --secondary_500: #f61d9f;
@@ -61,15 +63,16 @@
   --padding-mobile-content: 16px;
 
   @include sm {
-    --padding_list: 32px;
+    --padding_list: 40px;
   }
 }
 
 .dark-mode {
   --base_0: #012345;
   --base_50: #011c37;
-  --base_100: #01203E;
+  --base_100: #4959ff;
   --base_300: #99a7b5;
   --base_500: #fcfcfc;
   --base_600: #011c37;
+  --switched_main_400: #7383ff;
 }

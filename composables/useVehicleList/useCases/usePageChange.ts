@@ -39,11 +39,11 @@ export const usePageChange = (props: VehiclesListProps, emits: vehiclesListEmits
     };
 
     const handleSwipe = (event: swipeDirection) => {
-        if (event === swipeDirection.TOP) {
+        if (event === swipeDirection.LEFT) {
             pageInc(props.filter.page)
             return
         }
-        if (event === swipeDirection.BOTTOM) {
+        if (event === swipeDirection.RIGHT) {
             pageDec(props.filter.page)
             return
         }

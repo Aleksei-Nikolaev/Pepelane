@@ -1,25 +1,7 @@
 <script setup lang="ts">
 
-
 const colorMode = useColorMode();
 
-// const switchColor = () => {
-//   if (colorMode.preference === "dark") {
-//     colorMode.preference = "light"
-//     ConfigProvider.config({
-//       theme: {
-//         primaryColor: "#4959ff",
-//       },
-//     });
-//   } else {
-//     colorMode.preference = "dark"
-//     ConfigProvider.config({
-//       theme: {
-//         primaryColor: "#f61d9f",
-//       },
-//   })
-// }
-// }
 
 const switchColor = () => {
   colorMode.preference === "dark"
@@ -61,6 +43,7 @@ const switchColor = () => {
     color: var(--base_200);
     font-size: var(--font_size_default);
     font-weight: var(--font_weight_medium);
+    user-select: none;
     @include sm {
       display: none;
     }

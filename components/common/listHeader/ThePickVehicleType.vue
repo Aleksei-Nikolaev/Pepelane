@@ -34,7 +34,9 @@ const {vehicleFilterTypes} = useHandleVehiclesTypes()
 </template>
 
 <style scoped lang="scss">
+
 :deep(.ant-radio-group) {
+  user-select: none;
   @include sm {
     width: 100%;
     display: flex;

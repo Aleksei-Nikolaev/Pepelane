@@ -34,6 +34,8 @@ const model = useModel(props, "filter");
 </template>
 
 <style scoped lang="scss">
+@import "assets/styles/vendors/antd/antd-theme";
+
 .filter-container {
   &__sort {
     display: flex;

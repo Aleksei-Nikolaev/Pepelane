@@ -75,7 +75,7 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
         :max-count="1"
         :show-upload-list="{showPreviewIcon: false, showRemoveIcon: true}"
         :before-upload="beforeUpload"
-        accept="image/*"
+        accept=".jpg, .png"
         class="drop-zone__upload"
         @change="handleChange"
         @remove="emits('imgRemoved')"
@@ -100,7 +100,7 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
   position: relative;
 
   @include sm {
-    height: 260px;
+    height: 200px;
   }
 
 

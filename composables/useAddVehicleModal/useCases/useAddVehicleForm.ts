@@ -9,7 +9,6 @@ import {createVehicleRequestBody} from "~/services/types/vehicles";
 import {pipe} from "fp-ts/function"
 import {useShowModal} from "~/composables/useVehicleWrapper/useCases/useShowModal";
 import {useVehicleStore} from "~/stores/VehicleStore";
-import {filterFactory} from "~/factories/filterFactory";
 import {CreateStatusCode} from "~/types/createStatusCode";
 
 export const useAddVehicleForm = () => {
@@ -29,8 +28,6 @@ export const useAddVehicleForm = () => {
     const disabledButton = ref<boolean>(false)
 
     const {updateFilterParams} = useVehicleStore()
-
-    const {createFilter} = filterFactory()
 
     const {$toast: notify} = useNuxtApp()
 
@@ -74,7 +71,6 @@ export const useAddVehicleForm = () => {
 
             pipe(
                 newFilter,
-                createFilter,
                 updateFilterParams
             )
 

@@ -32,6 +32,7 @@ p,h1,h2 {
 html {
   padding-left: calc(100vw - 100%);
   background: var(--base_0);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -70,5 +71,14 @@ html > body {
 .Toastify__toast-container > .notification {
   border-radius: var(--border_radius_micro);
   font-weight: var(--font_weight_bold);
+}
+
+
+:deep(.ant-input),
+:deep(.ant-select .ant-select-selector) {
+  background-color: var(--base_50);
+  font-size: var(--font_size_default);
+  font-weight: var(--font_weight_medium);
+  color: var(--base_300) ;
 }
 

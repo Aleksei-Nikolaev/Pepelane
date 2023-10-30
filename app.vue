@@ -3,13 +3,15 @@ import TheHeader from "~/components/common/TheHeader.vue";
 import TheModal from "~/components/common/TheModal.vue";
 import {useShowModal} from "~/composables/useVehicleWrapper/useCases/useShowModal";
 
+
 const {showModal} = useShowModal()
+
 
 </script>
 
 <template>
     <NuxtLayout>
-      <div class="content">
+      <div class="content" >
         <TheHeader/>
         <div class="page">
           <NuxtLayout>
@@ -61,5 +63,6 @@ const {showModal} = useShowModal()
 .modal-overlay-enter-from {
   opacity: 0.5;
 }
+
 
 </style>

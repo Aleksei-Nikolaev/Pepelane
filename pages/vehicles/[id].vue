@@ -1,42 +1,37 @@
 <script setup lang="ts">
-import {$api} from "~/plugins/api";
+import { $api } from "~/plugins/api";
 import TheImage from "~/components/common/TheImage.vue";
 import { useDetailedPageRoutes } from "~/composables/useDetailedPage/useCases/useDetailedPageRoutes.";
 import TheRentForm from "~/components/common/TheRentForm.vue";
 
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
-const { id } = route.params
+const { id } = route.params;
 
-
-
-const { data: vehicleData } = useAsyncData(`vehicle-${id}`,
-    async () => {
-      const {data} = await $api.vehicleService.getVehicleById(id as string)
-      // dataUpdated.value = true
-      return data
-    },
-)
+const { data: vehicleData } = useAsyncData(`vehicle-${id}`, async () => {
+  const { data } = await $api.vehicleService.getVehicleById(id as string);
+  return data;
+});
 
 
+const { sections } = useDetailedPageRoutes();
 
-const { sections } = useDetailedPageRoutes()
 
 </script>
 
 <template>
-  <div class="vehicle-page__container" v-if="vehicleData">
-      <TheImage :url="vehicleData.image" class="vehicle-page__image" />
+  <div v-if="vehicleData" class="vehicle-page__container">
+    <TheImage :url="vehicleData.image" class="vehicle-page__image" />
     <div class="vehicle-page__info">
-      <h1 class="vehicle-page__info-name">{{ vehicleData.name }}</h1>
+      <h1 id="name" class="vehicle-page__info-name">{{ vehicleData.name }}</h1>
       <div class="vehicle-page__navigation">
         <NuxtLink
-            v-for="(section) in sections"
-            :to="{ path: `/vehicles/${id}/${section.value}`}"
-            :rel="section.value"
-            active-class="router-link-active"
-            class="vehicle-page__navigation-link"
+          v-for="section in sections"
+          :to="{ path: `/vehicles/${id}/${section.value}`}"
+          :rel="section.value"
+          active-class="router-link-active"
+          class="vehicle-page__navigation-link"
         >
           {{ section.label }}
         </NuxtLink>
@@ -46,23 +41,15 @@ const { sections } = useDetailedPageRoutes()
             class="vehicle-page__info-box"
             :key="route.fullPath"
         >
-          <NuxtPage
-              :vehicle-data="vehicleData"
-          />
-          <TheRentForm
-              :price="vehicleData.rent"
-              class="rent-form"
-          />
+          <NuxtPage :vehicle-data="vehicleData" />
+          <TheRentForm :price="vehicleData.rent" />
         </div>
       </Transition>
     </div>
   </div>
-
-
 </template>
 
 <style scoped lang="scss">
-
 .vehicle-page {
   &__container {
     display: flex;
@@ -115,11 +102,6 @@ const { sections } = useDetailedPageRoutes()
   }
 
   &__info {
-    &-box {
-      @include sm {
-        margin-bottom: 132px;
-      }
-    }
 
     &-name {
       color: var(--base_500);
@@ -148,6 +130,4 @@ const { sections } = useDetailedPageRoutes()
 .router-link-active {
   color: var(--main_400);
 }
-
 </style>
-

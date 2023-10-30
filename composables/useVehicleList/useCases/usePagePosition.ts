@@ -3,15 +3,20 @@ import {VehiclesListProps} from "~/composables/useVehicleList/types/vehiclesList
 export const usePagePosition = (props: VehiclesListProps) => {
     const isLastPage = computed(() => {
 
-        return (Number(props.filter.page) === props.meta?.totalPages)
+        return (props.filter.page === props.meta?.totalPages)
     })
     const isFirstPage = computed(() => {
-        return (Number(props.filter.page) === 1)
+        return (props.filter.page === 1)
+    })
+
+    const isPreLastPage = computed(() => {
+        return ((props.meta.page - props.meta.totalPages) === 1)
     })
 
 
     return {
         isLastPage,
-        isFirstPage
+        isFirstPage,
+        isPreLastPage
     }
 }

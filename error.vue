@@ -28,9 +28,19 @@ import TheHeader from "~/components/common/TheHeader.vue";
   width: 1440px;
   margin: 0 auto;
   padding: 48px 64px;
+
+  @include xl {
+    width: 100%;
+  }
+  @include sm {
+    padding: 0 0;
+  }
 }
 .page {
   padding-top: 40px;
+  @include sm {
+    padding: 16px 0;
+  }
 }
 
 .error__container {

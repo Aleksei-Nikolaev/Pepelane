@@ -2,7 +2,7 @@
 import {IVehicle} from "~/types/vehicle";
 import TheCollapsedText from "~/components/common/TheCollapsedText.vue";
 import TheImage from "~/components/common/TheImage.vue";
-import {staffMembers} from "~/constants/staffMembers";
+import {staffMembers} from "~/constants";
 
 defineProps<{
   vehicleData: IVehicle

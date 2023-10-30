@@ -68,6 +68,7 @@
   },
   "notificationMessage": {
     "vehicleAdded": "The vehicle was successfully added",
-    "vehicleAddedError": "Server error: Vehicle wasn't added"
+    "vehicleAddedError": "Server error: Vehicle wasn't added",
+    "vehicleOrdered": "Thank you! We'll call you back \uD83D\uDE0E"
   }
 }

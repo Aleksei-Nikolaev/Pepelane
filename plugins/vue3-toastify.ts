@@ -7,6 +7,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         position: toast.POSITION.TOP_RIGHT,
         hideProgressBar: true,
         clearOnUrlChange: false,
+        multiple: false,
         transition: toast.TRANSITIONS.SLIDE,
         toastClassName: "notification",
     });

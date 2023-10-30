@@ -33,6 +33,7 @@ const options: SelectProps["options"] = [
 </template>
 
 <style scoped lang="scss">
+
 .filter-container__sort-by {
   min-width: 100px;
 }

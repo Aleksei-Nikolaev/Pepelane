@@ -21,7 +21,7 @@ const emits = defineEmits<{
                 class="modal__close-button"
                 @click="emits('closeModal')"
             >
-              <nuxt-icon class="modal__close-button-icon" name="close_cross" filled/>
+              <nuxt-icon class="modal__close-button-icon" name="close_cross" />
             </a-button>
           </div>
           <TheAddVehicleForm
@@ -45,7 +45,7 @@ const emits = defineEmits<{
   overflow: auto;
 
   @include sm {
-    height: 84%;
+    height: 98%;
     width: 100%;
     border-radius: var(--border_radius_small) var(--border_radius_small) 0 0;
     margin-top: auto;
@@ -81,6 +81,12 @@ const emits = defineEmits<{
     padding: 10px 10px;
     border-radius: var(--border_radius_tiny);
     background-color: var(--base_50);
+    border: 1px solid var(--base_100);
+
+    &:hover {
+      border: 1px solid var(--switched_main_400);
+    }
+
 
     @include sm {
       height: 32px;

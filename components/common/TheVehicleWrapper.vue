@@ -9,16 +9,17 @@ import { storeToRefs } from "pinia";
 import TheNoDataPage from "~/components/common/TheNoDataPage.vue";
 import { useShowModal } from "~/composables/useVehicleWrapper/useCases/useShowModal";
 import { Modals } from "~/types/Modals";
+import {useDevicePageSize} from "~/composables/useDevicePageSize/useDevicePageSize";
+
 
 
 const { data, meta, filterParams, isEmptyList } = storeToRefs(
   useVehicleStore()
 );
-const { getVehicles, resetFilters, updateFilterParams } = useVehicleStore();
-const { openModal } = useShowModal();
 const { createFilter } = filterFactory();
 
-const initFiltersParams = createFilter();
+const { getVehicles, resetFilters, updateFilterParams } = useVehicleStore();
+const { openModal } = useShowModal();
 
 const router = useRouter();
 const route = useRoute();
@@ -33,9 +34,10 @@ watch(
   () => filterParams.value.type,
   () =>
     updateFilterParams({
-      page: initFiltersParams.page,
+      page: createFilter().page,
     })
 );
+
 
 useAsyncData(
   "vehicles",
@@ -51,8 +53,7 @@ useAsyncData(
   }
 );
 
-
-
+useDevicePageSize()
 </script>
 
 <template>
@@ -106,4 +107,6 @@ useAsyncData(
     }
   }
 }
+
+
 </style>

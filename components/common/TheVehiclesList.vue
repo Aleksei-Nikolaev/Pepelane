@@ -8,6 +8,8 @@ import { usePageChange } from "~/composables/useVehicleList/useCases/usePageChan
 import { scrollDirection } from "~/constants/scrollDirection";
 import { usePagePosition } from "~/composables/useVehicleList/useCases/usePagePosition";
 import { onMounted } from "vue";
+import {useEmptyCards} from "~/composables/useVehicleList/useCases/useEmptyCards";
+import {useScreenSize} from "~/composables/useDevicePageSize/useScreenSize";
 
 const props = defineProps<VehiclesListProps>();
 const emits = defineEmits<vehiclesListEmits>();
@@ -22,6 +24,19 @@ const { debouncedHandleScroll, debouncedHandleSwipe } = usePageChange(
 );
 const { isLastPage, isFirstPage } = usePagePosition(props);
 
+const {emptyCardsBottom, emptyCardsTop, setEmptyCards} = useEmptyCards()
+const {sm, lg} = useScreenSize()
+
+setEmptyCards(props)
+
+
+
+watch(
+    () => [sm.value, lg.value, props.meta],
+    () => setEmptyCards(props),
+    {deep: true}
+)
+
 
 onMounted(() => {
   emits(eventNames.ELEMENT_REMOVED);
@@ -32,6 +47,8 @@ onMounted(() => {
   <div
     ref="container"
     class="list-container"
+    v-touch:swipe.left="debouncedHandleSwipe"
+    v-touch:swipe.right="debouncedHandleSwipe"
     @wheel="debouncedHandleScroll"
   >
     <Transition name="empty-top">
@@ -39,9 +56,7 @@ onMounted(() => {
         v-if="!isFirstPage && renderItems"
         class="list-container__empty-card-wrapper-top"
       >
-        <div class="list-container__empty-card-top"></div>
-        <div class="list-container__empty-card-top empty-card-second"></div>
-        <div class="list-container__empty-card-top empty-card-third"></div>
+        <div v-for="card in emptyCardsTop" class="list-container__empty-card-top"></div>
       </div>
     </Transition>
     <Transition
@@ -52,8 +67,6 @@ onMounted(() => {
       <div
           v-if="renderItems"
           class="list-container__wrapper"
-          v-touch:swipe.top="debouncedHandleSwipe"
-          v-touch:swipe.bottom="debouncedHandleSwipe"
       >
         <TheVehicleCard
           v-for="vehicle in vehicles"
@@ -68,12 +81,10 @@ onMounted(() => {
           v-if="!isLastPage && renderItems"
           class="list-container__empty-card-wrapper-bottom"
       >
-        <div class="list-container__empty-card-bottom"></div>
-        <div class="list-container__empty-card-bottom empty-card-second"></div>
-        <div class="list-container__empty-card-bottom empty-card-third"></div>
+        <div v-for="card in emptyCardsBottom" class="list-container__empty-card-bottom"></div>
+
       </div>
     </Transition>
-
   </div>
 </template>
 
@@ -88,15 +99,8 @@ onMounted(() => {
   position: relative;
   border: 1px solid var(--base_100);
 
-  min-height: calc(2 * var(--padding_list) + 2 * var(--gap) + 3 * 164px);
+  //min-height: calc(2 * var(--padding_list) + 2 * var(--gap) + 3 * 164px);
 
-  @include lg {
-    min-height: calc(2 * var(--padding_list) + 2 * var(--gap) + 3 * 164px);
-  }
-
-  @include sm {
-    min-height: calc(2 * var(--padding_list) + 2 * var(--gap) + 3 * 164px);
-  }
 
   &__wrapper {
     display: flex;
@@ -104,14 +108,6 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     gap: var(--gap);
-
-    @include lg {
-      gap: var(--gap);
-    }
-
-    @include sm {
-      gap: var(--gap);
-    }
   }
 
   &__empty {
@@ -123,22 +119,24 @@ onMounted(() => {
         background: var(--base_0);
 
         @include lg {
-          width: calc((100% - var(--gap)) / 2);
-        }
-
-        @include sm {
           width: 100%;
-          min-width: 200px;
+          height: 164px;
         }
       }
 
       &-top {
-        border-radius: 0 0 var(--border_radius_medium)
-          var(--border_radius_medium);
+        border-radius: 0 0 var(--border_radius_small) var(--border_radius_small);
+
+        @include lg {
+          border-radius: 0 var(--border_radius_small) var(--border_radius_small) 0;
+        }
       }
       &-bottom {
-        border-radius: var(--border_radius_medium)
-        var(--border_radius_medium) 0 0;
+        border-radius: var(--border_radius_small) var(--border_radius_small) 0 0;
+
+        @include lg {
+          border-radius: var(--border_radius_small) 0 0 var(--border_radius_small);
+        }
       }
 
       &-wrapper {
@@ -149,12 +147,26 @@ onMounted(() => {
           width: calc(100% - 2 * var(--padding_list));
           display: flex;
           gap: var(--gap);
+
+          @include lg {
+            height: calc(100% - 2 * var(--padding_list));
+            width: calc(var(--padding_list) - var(--gap));
+            flex-direction: column;
+          }
         }
         &-top {
           top: 1px;
+          @include lg {
+            left: 1px;
+            margin-top: var(--padding_list);
+          }
         }
         &-bottom {
           bottom: 1px;
+          @include lg {
+            right: 1px;
+            margin-bottom: var(--padding_list);
+          }
         }
       }
     }
@@ -185,6 +197,10 @@ onMounted(() => {
 .scroll-down-leave-to,
 .scroll-up-enter-from {
   transform: translateY(-700px);
+
+  @include lg {
+    transform: translateX(-700px);
+  }
 }
 
 .empty-bottom-leave-to,
@@ -192,19 +208,12 @@ onMounted(() => {
 .scroll-down-enter-from,
 .scroll-up-leave-to {
   transform: translateY(700px);
-}
 
-.empty-card-third {
   @include lg {
-    display: none;
+    transform: translateX(700px);
   }
 }
 
-.empty-card-second {
-  @include sm {
-    display: none;
-  }
-}
 
 
 

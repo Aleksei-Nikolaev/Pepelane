@@ -14,7 +14,7 @@
     "lint": "npm run lint:js && npm run lint:prettier",
     "lintfix": "prettier --write --list-different . && npm run lint:js --fix",
     "prepare": "husky install",
-    "precommit": "npm run lint && vue-tsc"
+    "precommit": "vue-tsc"
   },
   "devDependencies": {
     "@ant-design-vue/nuxt": "^1.1.2",

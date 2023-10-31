@@ -5,10 +5,6 @@ import { getVehiclesRequestParams } from "~/services/types/vehicles";
 import {useDevicePageSize} from "~/composables/useDevicePageSize/useDevicePageSize";
 import {normalizeQueryFilter} from "~/utils/normalizeQueryFilter";
 
-
-
-
-
 export const useVehicleStore = defineStore("VehicleStore", {
   state: (): vehicleStoreState => ({
     data: [],
@@ -31,7 +27,7 @@ export const useVehicleStore = defineStore("VehicleStore", {
       this.filterParams = Object.assign(this.filterParams, useDevicePageSize())
     },
 
-    updateFilterParams(filter: vehicleStoreState["filterParams"]) {
+    updateFilterParams(filter: Partial<vehicleStoreState["filterParams"]>) {
       normalizeQueryFilter(filter)
       this.filterParams = Object.assign(this.filterParams, filter)
     }

@@ -5,6 +5,6 @@ import {PaginationMeta} from "~/types/server/pagination";
 export type VehiclesListProps = {
     vehicles: IVehicle[];
     filter: FilterParams;
-    meta: PaginationMeta;
+    meta: PaginationMeta | null;
     renderItems: boolean;
 }

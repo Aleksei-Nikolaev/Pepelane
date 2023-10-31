@@ -39,9 +39,10 @@ const { resetFilters, filterParams } = useVehicleStore();
   width: 100%;
 
   @include sm {
-    padding: 12px var(--padding-mobile-content);
+    padding: 6px var(--padding-mobile-content);
     border-bottom: 1px solid var(--base_100);
     box-shadow: 0 1px var(--base_50);
+
   }
 
   &__left-part,

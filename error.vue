@@ -61,6 +61,10 @@ import TheHeader from "~/components/common/TheHeader.vue";
       font-weight: var(--font_weight_bold);
       height: 48px;
       margin-bottom: 0;
+
+      @include sm {
+        font-size: var(--font_size_big);
+      }
     }
     &-minor {
       color: var(--base_300);

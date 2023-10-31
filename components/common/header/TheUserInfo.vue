@@ -37,8 +37,8 @@ const image = "/img/face.jpg";
     border-radius: 50%;
     margin-left: 16px;
     @include sm {
-      width: 32px;
-      height: 32px;
+      width: 42px;
+      height: 42px;
     }
 
   }

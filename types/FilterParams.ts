@@ -9,4 +9,11 @@ export enum sortType {
   DESCENDING = "descending",
 }
 
-export type FilterParams = getVehiclesRequestParams;
+
+export type FilterParams = getVehiclesRequestParams & {
+  page: number;
+  pageSize: number;
+  sortBy: sortName;
+  sortType: sortType;
+  type: string | null;
+};

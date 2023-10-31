@@ -5,6 +5,7 @@ import {checkFileSize} from "~/utils/checkFileSize";
 import {ImageUploadState} from "~/types/vendors/antd/ImageUploadStatus";
 import {initStateFactory} from "~/factories/initStateFactory";
 import {useAddVehicleValidation} from "~/composables/useAddVehicleModal/useCases/useAddVehicleValidation";
+import {UploadFile} from "ant-design-vue/lib/upload/interface";
 
 const props = defineProps<{
   uploadStatus: ImageUploadState;
@@ -51,7 +52,7 @@ const rejectLoading = () => {
   return loading.value
 }
 
-const beforeUpload = (file: UploadProps['fileList'][number]) => {
+const beforeUpload = (file: UploadFile) => {
   const {fileUploadStatus, isImage, isSize} = toRefs(props.uploadStatus)
 
   fileUploadStatus.value = null

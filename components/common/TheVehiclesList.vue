@@ -99,8 +99,6 @@ onMounted(() => {
   position: relative;
   border: 1px solid var(--base_100);
 
-  //min-height: calc(2 * var(--padding_list) + 2 * var(--gap) + 3 * 164px);
-
 
   &__wrapper {
     display: flex;

@@ -56,8 +56,8 @@ const switchColor = () => {
     display: flex;
     align-items: center;
     @include sm {
-      width: 16px;
-      height: 16px;
+      width: 22px;
+      height: 22px;
       margin-right: 0px;
     }
   }

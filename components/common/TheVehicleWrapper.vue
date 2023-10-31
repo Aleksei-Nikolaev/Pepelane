@@ -99,6 +99,8 @@ useDevicePageSize()
     border-radius: var(--border_radius_mini);
     height: 100%;
 
+
+
     @include sm {
       height: 32px;
       display: flex;
@@ -108,5 +110,11 @@ useDevicePageSize()
   }
 }
 
+
+:deep(.control-panel__add-button span) {
+  @include sm {
+    padding-top: 0.15em;
+  }
+}
 
 </style>

@@ -6,39 +6,55 @@ export const useEmptyCards = () => {
 
     const emptyCardsTop = ref<number>(0)
     const emptyCardsBottom = ref<number>(0)
-    const isPreLastPage = ref<boolean>(false)
-
-
 
     const setEmptyCards = (props: VehiclesListProps) => {
+        if (!props.meta) return
+
         const {sm, lg} = useScreenSize()
         const {isLastPage, isPreLastPage} = usePagePosition(props)
-        const {page, pageSize, totalPages, totalItems} = props.meta
 
+
+        const { pageSize, totalPages, totalItems} = props.meta
 
         if (isLastPage.value) {
             emptyCardsBottom.value  = 0
+            const emptyCardPortion = totalItems - ((totalPages - 1) * pageSize)
             if (sm.value) {
-                emptyCardsTop.value = totalItems - ((totalPages - 1) * pageSize)
+                emptyCardsTop.value = emptyCardPortion
                 return;
             }
             if (lg.value) {
-                emptyCardsTop.value = Math.ceil((totalItems - ((totalPages - 1) * pageSize))  / 2)
+                emptyCardsTop.value = Math.ceil(emptyCardPortion  / 2)
                 return
             }
-            return;
+            emptyCardsTop.value = 3
+            return
         }
 
         if (isPreLastPage.value) {
-            emptyCardsBottom.value  = Math.ceil((totalItems - ((totalPages - 1) * pageSize))  / 2)
+            const leftCards = totalItems - ((totalPages - 1) * pageSize)
+
             if (sm.value) {
                 emptyCardsTop.value = pageSize
+                emptyCardsBottom.value  = leftCards
                 return;
             }
+
             if (lg.value) {
                 emptyCardsTop.value = Math.ceil(pageSize  / 2)
+                emptyCardsBottom.value  = Math.ceil(leftCards  / 2)
                 return
             }
+
+            emptyCardsTop.value = 3
+
+            if (leftCards <= 3) {
+                emptyCardsBottom.value = leftCards
+                return;
+            }
+
+            emptyCardsBottom.value = 3
+
             return;
         }
 
@@ -60,7 +76,6 @@ export const useEmptyCards = () => {
         emptyCardsBottom,
         emptyCardsTop,
         setEmptyCards,
-        isPreLastPage
     }
 
 }

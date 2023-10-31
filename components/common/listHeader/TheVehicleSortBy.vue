@@ -8,7 +8,7 @@ defineProps<{
 }>();
 
 const emits = defineEmits<{
-  (eventName: eventNames.UPDATE_VALUE, value: string): void;
+  (eventName: eventNames.UPDATE_VALUE, value: sortName): void;
 }>();
 
 const options: SelectProps["options"] = [

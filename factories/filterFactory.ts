@@ -1,7 +1,7 @@
 import {FilterParams, sortName, sortType} from "~/types/FilterParams";
 
 export const filterFactory = () => {
-    const createFilter = (params?: FilterParams) :FilterParams => {
+    const createFilter = (params?: Partial<FilterParams>) :FilterParams => {
 
         return {
             page: 1,

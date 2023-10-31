@@ -10,7 +10,8 @@ export const usePagePosition = (props: VehiclesListProps) => {
     })
 
     const isPreLastPage = computed(() => {
-        return ((props.meta.page - props.meta.totalPages) === 1)
+        if (!props.meta) return false
+        return ((props.meta.totalPages - props.meta.page) === 1)
     })
 
 

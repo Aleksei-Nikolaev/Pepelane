@@ -1,16 +1,17 @@
 import {filterFactory} from "~/factories/filterFactory";
-export const useDevicePageSize = () => {
-    const {$device} = useNuxtApp();
-    const {createFilter} = filterFactory()
 
+export const useDevicePageSize = () => {
+    const { $device } = useNuxtApp();
+    const {createFilter} = filterFactory()
+    let pageSize = 9
 
     if ($device.isMobile) {
-        return createFilter({pageSize: 4})
+        pageSize = 4
     }
 
     if ($device.isTablet) {
-        return createFilter({pageSize: 8})
+       pageSize = 8
     }
 
-    return createFilter({pageSize: 9})
+    return createFilter({ pageSize })
 }

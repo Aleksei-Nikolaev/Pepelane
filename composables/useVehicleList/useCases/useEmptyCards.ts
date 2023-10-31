@@ -3,73 +3,44 @@ import {usePagePosition} from "~/composables/useVehicleList/useCases/usePagePosi
 import {VehiclesListProps} from "~/composables/useVehicleList/types/vehiclesListProps";
 
 export const useEmptyCards = () => {
-
-    const emptyCardsTop = ref<number>(0)
-    const emptyCardsBottom = ref<number>(0)
+    const emptyCardsTop = ref(3)
+    const emptyCardsBottom = ref(3)
 
     const setEmptyCards = (props: VehiclesListProps) => {
+        const {sm, lg} = useScreenSize()
+        const {isLastPage, isPreLastPage, isFirstPage} = usePagePosition(props)
+
         if (!props.meta) return
 
-        const {sm, lg} = useScreenSize()
-        const {isLastPage, isPreLastPage} = usePagePosition(props)
+        const { pageSize, totalPages, totalItems, page} = props.meta
 
+        const leftCards = totalItems - (pageSize * page)
 
-        const { pageSize, totalPages, totalItems} = props.meta
+        const renderCards = (isLastPage.value) ? (totalItems - (pageSize * (page - 1))) : pageSize
 
-        if (isLastPage.value) {
-            emptyCardsBottom.value  = 0
-            const emptyCardPortion = totalItems - ((totalPages - 1) * pageSize)
-            if (sm.value) {
-                emptyCardsTop.value = emptyCardPortion
-                return;
-            }
-            if (lg.value) {
-                emptyCardsTop.value = Math.ceil(emptyCardPortion  / 2)
-                return
-            }
-            emptyCardsTop.value = 3
-            return
+        const checkFirstLast = () => {
+            if (isLastPage.value) emptyCardsBottom.value = 0
+            if (isFirstPage.value) emptyCardsTop.value = 0
         }
 
-        if (isPreLastPage.value) {
-            const leftCards = totalItems - ((totalPages - 1) * pageSize)
-
-            if (sm.value) {
-                emptyCardsTop.value = pageSize
-                emptyCardsBottom.value  = leftCards
-                return;
-            }
-
-            if (lg.value) {
-                emptyCardsTop.value = Math.ceil(pageSize  / 2)
-                emptyCardsBottom.value  = Math.ceil(leftCards  / 2)
-                return
-            }
-
-            emptyCardsTop.value = 3
-
-            if (leftCards <= 3) {
-                emptyCardsBottom.value = leftCards
-                return;
-            }
-
-            emptyCardsBottom.value = 3
-
-            return;
-        }
 
         if (sm.value) {
-            emptyCardsBottom.value = emptyCardsTop.value = pageSize
+            emptyCardsTop.value = renderCards
+            emptyCardsBottom.value = (pageSize < leftCards) ? renderCards : leftCards
+            checkFirstLast()
             return;
         }
+
         if (lg.value) {
-            emptyCardsBottom.value = emptyCardsTop.value = Math.ceil(pageSize / 2)
-            return
+            const ceiledRenderCards = Math.ceil(renderCards / 2)
+            const ceiledLeftCards = Math.ceil(leftCards / 2)
+
+            emptyCardsTop.value = ceiledRenderCards
+            emptyCardsBottom.value = (pageSize < (leftCards * 2)) ? ceiledRenderCards : ceiledLeftCards
+            checkFirstLast()
+            return;
         }
-
-        emptyCardsBottom.value = emptyCardsTop.value = 3
-
-
+        checkFirstLast()
     }
 
     return {

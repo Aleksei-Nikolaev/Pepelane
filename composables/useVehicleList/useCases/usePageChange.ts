@@ -18,13 +18,13 @@ export const usePageChange = (props: VehiclesListProps, emits: vehiclesListEmits
             page,
         });
     };
-     const pageInc = (currentPage?: number) => {
-        if (!currentPage || currentPage >= props.meta.totalPages) return;
+     const pageInc = (currentPage: number) => {
+        if (currentPage >= props.meta.totalPages ) return;
         currentPage++;
         pageEmit(currentPage);
     };
-    const pageDec = (currentPage?: number) => {
-        if (!currentPage || currentPage <= 1) return;
+    const pageDec = (currentPage: number) => {
+        if (currentPage <= 1) return;
         changeScrollDirection();
         currentPage--;
         pageEmit(currentPage);

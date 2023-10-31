@@ -24,7 +24,7 @@ const { debouncedHandleScroll, debouncedHandleSwipe } = usePageChange(
 );
 const { isLastPage, isFirstPage } = usePagePosition(props);
 
-const {emptyCardsBottom, emptyCardsTop, setEmptyCards} = useEmptyCards()
+const { emptyCardsBottom, emptyCardsTop, setEmptyCards } = useEmptyCards()
 const {sm, lg} = useScreenSize()
 
 setEmptyCards(props)
@@ -169,7 +169,6 @@ onMounted(() => {
       }
     }
   }
-
 }
 
 .empty-top-enter-active,
@@ -187,7 +186,7 @@ onMounted(() => {
 .scroll-down-enter-from,
 .scroll-up-leave-to,
 .scroll-down-enter-from {
-  opacity: 0.5;
+  opacity: 0.1;
 }
 
 .empty-top-leave-to,
@@ -197,7 +196,7 @@ onMounted(() => {
   transform: translateY(-700px);
 
   @include lg {
-    transform: translateX(-700px);
+    transform: translateX(-1200px);
   }
 }
 
@@ -208,12 +207,7 @@ onMounted(() => {
   transform: translateY(700px);
 
   @include lg {
-    transform: translateX(700px);
+    transform: translateX(1200px);
   }
 }
-
-
-
-
-
 </style>

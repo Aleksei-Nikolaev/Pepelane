@@ -11,8 +11,6 @@ import { useShowModal } from "~/composables/useVehicleWrapper/useCases/useShowMo
 import { Modals } from "~/types/Modals";
 import {useDevicePageSize} from "~/composables/useDevicePageSize/useDevicePageSize";
 
-
-
 const { data, meta, filterParams, isEmptyList } = storeToRefs(
   useVehicleStore()
 );
@@ -30,14 +28,15 @@ const { handlePageChange } = useVehicleWrapperFilter(filterParams);
 const { resetStatus, elementIsRemoved, loadingStatus, renderItems } =
   useHandleListAppearance();
 
+const {page} = createFilter()
+
 watch(
   () => filterParams.value.type,
   () =>
     updateFilterParams({
-      page: createFilter().page,
+      page
     })
 );
-
 
 useAsyncData(
   "vehicles",

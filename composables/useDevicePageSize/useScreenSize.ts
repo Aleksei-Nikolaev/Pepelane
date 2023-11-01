@@ -1,13 +1,12 @@
 import { useMediaQuery } from '@vueuse/core'
 
-
-//need to split
+// need to split
 export const useScreenSize = () => {
-    const sm = useMediaQuery('(max-width: 768px)')
-    const lg = useMediaQuery('(max-width: 1200px)')
+  const sm = useMediaQuery('(max-width: 768px)')
+  const lg = useMediaQuery('(max-width: 1200px)')
 
-    return {
-        sm,
-        lg
-    }
+  return {
+    sm,
+    lg
+  }
 }

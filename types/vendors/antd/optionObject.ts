@@ -1,4 +1,4 @@
 export interface optionObject {
-    value: string | number | null,
-    label: string
+  value: string | number | null;
+  label: string;
 }

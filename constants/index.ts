@@ -1,1 +1,1 @@
-export * from "./staffMembers"
+export * from './staffMembers'

@@ -1,19 +1,15 @@
-import {FilterParams} from "~/types/FilterParams";
-import {useVehicleStore} from "~/stores/VehicleStore";
+import { FilterParams } from '~/types/FilterParams'
+import { useVehicleStore } from '~/stores/VehicleStore'
 
+export const useVehicleWrapperFilter = () => {
+  const { updateFilterParams } = useVehicleStore()
+  const handlePageChange = (changedFilterParams: FilterParams) => {
+    updateFilterParams({
+      page: changedFilterParams.page
+    })
+  }
 
-export const useVehicleWrapperFilter = (filterParams: Ref<FilterParams>) => {
-    const { updateFilterParams } = useVehicleStore()
-    const handlePageChange = (changedFilterParams: FilterParams) => {
-        updateFilterParams({
-            page: changedFilterParams.page,
-        })
-    };
-
-    return {
-        handlePageChange
-    }
+  return {
+    handlePageChange
+  }
 }
-
-
-

@@ -1,23 +1,24 @@
 <script setup lang="ts">
-import TheHeader from "~/components/common/TheHeader.vue";
-
+import TheHeader from '~/components/common/TheHeader.vue'
 </script>
 
 <template>
   <div class="content">
-    <TheHeader/>
-    <div
-        class="error__container"
-    >
-      <h1 class="error__container-message-main">{{ $t("errorPage.errorMessage") }}</h1>
-      <h2 class="error__container-message-minor">{{ $t("errorPage.reloadMessage") }}</h2>
+    <TheHeader />
+    <div class="error__container">
+      <h1 class="error__container-message-main">
+        {{ $t("errorPage.errorMessage") }}
+      </h1>
+      <h2 class="error__container-message-minor">
+        {{ $t("errorPage.reloadMessage") }}
+      </h2>
       <a-button
-          href="/"
-          class="error__container-button"
-          type="primary"
-          size="large"
+        href="/"
+        class="error__container-button"
+        type="primary"
+        size="large"
       >
-          {{ $t("errorPage.buttonMessage") }}
+        {{ $t("errorPage.buttonMessage") }}
       </a-button>
     </div>
   </div>

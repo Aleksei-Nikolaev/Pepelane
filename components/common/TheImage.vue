@@ -1,38 +1,37 @@
 <script setup lang="ts">
-import { Skeletor } from "vue-skeletor";
-import "vue-skeletor/dist/vue-skeletor.css";
+import { Skeletor } from 'vue-skeletor'
+import 'vue-skeletor/dist/vue-skeletor.css'
+
 type TheImageProps = {
   url: string;
-}
+};
 
-const props = defineProps<TheImageProps>()
+defineProps<TheImageProps>()
 
-const img = ref<HTMLImageElement | null>(null);
+const img = ref<HTMLImageElement | null>(null)
 
-const isImageLoaded = ref(false);
+const isImageLoaded = ref(false)
 
-//
 onMounted(() => {
   const { complete } = img.value as HTMLImageElement
-  if (complete) isImageLoaded.value = true
+  if (complete) { isImageLoaded.value = true }
 })
 
 const imageLoaded = () => {
   isImageLoaded.value = true
 }
-
 </script>
 
 <template>
   <div class="image__container">
     <img
-        ref="img"
-        :src="url"
-        @load="imageLoaded"
-        class="image__container__image"
-        v-show="isImageLoaded"
-    />
-      <Skeletor v-show="!isImageLoaded" class="image__container__skeleton"/>
+      v-show="isImageLoaded"
+      ref="img"
+      :src="url"
+      class="image__container__image"
+      @load="imageLoaded"
+    >
+    <Skeletor v-show="!isImageLoaded" class="image__container__skeleton" />
   </div>
 </template>
 

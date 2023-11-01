@@ -1,40 +1,32 @@
 <script setup lang="ts">
-import {defineAsyncComponent} from 'vue'
-import {useShowModal} from "~/composables/useVehicleWrapper/useCases/useShowModal";
-import {Modals} from "~/types/Modals";
-
+import { defineAsyncComponent } from 'vue'
+import { useShowModal } from '~/composables/useVehicleWrapper/useCases/useShowModal'
+import { Modals } from '~/types/Modals'
 
 const { closeModal, modal } = useShowModal()
 
 const modals = {
-  [Modals.ADD_VEHICLE]: defineAsyncComponent(() =>
-      import('/components/common/modal/TheAddVehicleModal.vue')
+  [Modals.ADD_VEHICLE]: defineAsyncComponent(
+    () => import('~/components/common/modal/TheAddVehicleModal.vue')
   )
 }
 
 const modalComponent = computed(() => {
-  if (!modal.value) return
+  if (!modal.value) { return }
 
   return modals[modal.value]
 })
-
 </script>
 
 <template>
-    <div  class="modal-overlay">
-      <Transition name="modal-window">
-        <Component
-            :is="modalComponent"
-            @close-modal="closeModal"
-        />
-      </Transition>
-    </div>
-
-
+  <div class="modal-overlay">
+    <Transition name="modal-window">
+      <Component :is="modalComponent" @close-modal="closeModal" />
+    </Transition>
+  </div>
 </template>
 
 <style scoped lang="scss">
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -47,14 +39,10 @@ const modalComponent = computed(() => {
   z-index: 1;
 }
 
-
-
 .modal-window-enter-active,
 .modal-window-leave-active {
   transition: all 0.2s linear;
 }
-
-
 
 .modal-window-leave-to,
 .modal-window-enter-from {

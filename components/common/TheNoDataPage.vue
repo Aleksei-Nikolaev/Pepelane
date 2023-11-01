@@ -1,20 +1,21 @@
 <script setup lang="ts">
-import {useVehicleStore} from "~/stores/VehicleStore";
+import { useVehicleStore } from '~/stores/VehicleStore'
 
-const {resetFilters} = useVehicleStore()
-
+const { resetFilters } = useVehicleStore()
 </script>
 <template>
-  <div
-      class="no-data__container"
-  >
-    <h1 class="no-data__container-message-main">{{ $t("noDataPage.noDataMessage") }}</h1>
-    <h2 class="no-data__container-message-minor">{{ $t("noDataPage.resetMessage") }}</h2>
+  <div class="no-data__container">
+    <h1 class="no-data__container-message-main">
+      {{ $t("noDataPage.noDataMessage") }}
+    </h1>
+    <h2 class="no-data__container-message-minor">
+      {{ $t("noDataPage.resetMessage") }}
+    </h2>
     <a-button
-        type="primary"
-        size="large"
-        class="no-data__container-button"
-        @click="resetFilters"
+      type="primary"
+      size="large"
+      class="no-data__container-button"
+      @click="resetFilters"
     >
       {{ $t("noDataPage.buttonMessage") }}
     </a-button>

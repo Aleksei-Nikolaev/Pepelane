@@ -1,14 +1,14 @@
-import {ImageUploadState} from "~/types/vendors/antd/ImageUploadStatus";
+import { ImageUploadState } from '~/types/vendors/antd/ImageUploadStatus'
 
 export const initStateFactory = () => {
-    const createImgUploadState = () :ImageUploadState => {
-        return {
-            fileUploadStatus: null,
-            isImage: null,
-            isSize: null,
-        }
-    }
+  const createImgUploadState = (): ImageUploadState => {
     return {
-        createImgUploadState
+      fileUploadStatus: null,
+      isImage: null,
+      isSize: null
     }
+  }
+  return {
+    createImgUploadState
+  }
 }

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { IVehicle } from "~/types/vehicle";
-import TheCollapsedText from "~/components/common/TheCollapsedText.vue";
-import { textPlaceHolders } from "~/constants/textPlaceHolders";
+import { IVehicle } from '~/types/vehicle'
+import TheCollapsedText from '~/components/common/TheCollapsedText.vue'
+import { textPlaceHolders } from '~/constants/textPlaceHolders'
 
 defineProps<{
   vehicleData: IVehicle;
-}>();
+}>()
 </script>
 
 <template>
@@ -24,7 +24,9 @@ defineProps<{
         <h2 class="section__subHeading">
           {{ $t("detailedPage.specification.customerSlogan") }}
         </h2>
-        <p class="section__text">{{ textPlaceHolders.medium }}</p>
+        <p class="section__text">
+          {{ textPlaceHolders.medium }}
+        </p>
       </div>
     </div>
     <div class="section__box">
@@ -37,7 +39,9 @@ defineProps<{
         <h2 class="section__subHeading">
           {{ $t("detailedPage.specification.pilotSlogan") }}
         </h2>
-        <p class="section__text">{{ textPlaceHolders.medium }}</p>
+        <p class="section__text">
+          {{ textPlaceHolders.medium }}
+        </p>
       </div>
     </div>
   </div>

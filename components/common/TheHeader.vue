@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import TheColorModeSwitcher from "~/components/common/header/TheColorModeSwitcher.vue";
-import TheUserInfo from "~/components/common/header/TheUserInfo.vue";
-import { useVehicleStore } from "~/stores/VehicleStore";
+import TheColorModeSwitcher from '~/components/common/header/TheColorModeSwitcher.vue'
+import TheUserInfo from '~/components/common/header/TheUserInfo.vue'
+import { useVehicleStore } from '~/stores/VehicleStore'
 
-
-const { resetFilters, filterParams } = useVehicleStore();
-
+const { resetFilters, filterParams } = useVehicleStore()
 </script>
 
 <template>
@@ -13,15 +11,19 @@ const { resetFilters, filterParams } = useVehicleStore();
     <div class="header__left-part">
       <NuxtLink
         :to="{ path: '/', query: filterParams }"
-        @click="resetFilters"
         class="header__logo-container"
+        @click="resetFilters"
       >
         <div class="header__logo-container">
           <nuxt-icon class="header__icon-logo" name="Logo" filled />
-          <h1 class="header__name">Pepelane</h1>
+          <h1 class="header__name">
+            Pepelane
+          </h1>
         </div>
       </NuxtLink>
-      <h2 class="header__slogan">{{ $t("header.slogan") }}</h2>
+      <h2 class="header__slogan">
+        {{ $t("header.slogan") }}
+      </h2>
     </div>
     <div class="header__right-part">
       <TheUserInfo />
@@ -35,14 +37,13 @@ const { resetFilters, filterParams } = useVehicleStore();
   display: flex;
   height: 56px;
   align-items: center;
-  text-wrap: nowrap;
+  text-wrap: avoid;
   width: 100%;
 
   @include sm {
     padding: 6px var(--padding-mobile-content);
     border-bottom: 1px solid var(--base_100);
     box-shadow: 0 1px var(--base_50);
-
   }
 
   &__left-part,
@@ -111,11 +112,9 @@ const { resetFilters, filterParams } = useVehicleStore();
       }
     }
   }
-
 }
 
 :deep(.header__icon-logo > svg > circle:first-child) {
   fill: var(--base_500);
 }
-
 </style>

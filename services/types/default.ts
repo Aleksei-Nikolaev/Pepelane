@@ -1,4 +1,4 @@
 export type defaultResponseType = {
-    statusCode: number;
-    message: string
-}
+  statusCode: number;
+  message: string;
+};

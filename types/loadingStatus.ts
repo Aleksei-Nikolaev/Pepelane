@@ -1,4 +1,4 @@
 export interface LoadingStatus {
-    dataIsLoaded: boolean,
-    elementIsRemoved: boolean,
+  dataIsLoaded: boolean;
+  elementIsRemoved: boolean;
 }

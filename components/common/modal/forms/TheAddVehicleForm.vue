@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import TheImageUpload from "~/components/common/TheImageUpload.vue";
-import {useAddVehicleForm} from "~/composables/useAddVehicleModal/useCases/useAddVehicleForm";
-
+import TheImageUpload from '~/components/common/TheImageUpload.vue'
+import { useAddVehicleForm } from '~/composables/useAddVehicleModal/useCases/useAddVehicleForm'
 
 const {
   formRef,
@@ -15,92 +14,73 @@ const {
   onImgRemoved,
   onFinish
 } = useAddVehicleForm()
-
-
-
 </script>
 
 <template>
   <a-form
-      ref="formRef"
-      :model="userVehicleData"
-      :rules="rules"
-      @finish="onFinish"
+    ref="formRef"
+    :model="userVehicleData"
+    :rules="rules"
+    @finish="onFinish"
   >
-    <a-form-item
-        name="isImage"
-    >
+    <a-form-item name="isImage">
       <TheImageUpload
-          v-model:value="userVehicleData.image"
-          :upload-status="imageUploadStatus"
-          @emit-base64="handleImageData"
-          @img-removed="onImgRemoved"
+        v-model:value="userVehicleData.image"
+        :upload-status="imageUploadStatus"
+        @emit-base64="handleImageData"
+        @img-removed="onImgRemoved"
       />
     </a-form-item>
-    <a-form-item
-        has-feedback
-        name="type"
-    >
-      <div
-          ref="selectRef"
-          class="drop-menu__dropdown-container"
-      />
+    <a-form-item has-feedback name="type">
+      <div ref="selectRef" class="drop-menu__dropdown-container" />
       <a-select
-          v-model:value="userVehicleData.type"
-          :placeholder="$t('addVehicleModal.form.inputPlaceholder.type')"
-          :options="vehicleTypes"
-          :getPopupContainer="() => selectRef"
-      >
-      </a-select>
-    </a-form-item>
-    <a-form-item
-        has-feedback
-        name="name"
-    >
-      <a-input
-          v-model:value="userVehicleData.name"
-          autocomplete="off"
-          :placeholder="$t('addVehicleModal.form.inputPlaceholder.name')"
-          class="form__input"
-          v-maska data-maska="@@@@@@@@@@"
+        v-model:value="userVehicleData.type"
+        :placeholder="$t('addVehicleModal.form.inputPlaceholder.type')"
+        :options="vehicleTypes"
+        :get-popup-container="() => selectRef"
       />
     </a-form-item>
-    <a-form-item
-        has-feedback
-        name="description"
-    >
+    <a-form-item has-feedback name="name">
+      <a-input
+        v-model:value="userVehicleData.name"
+        v-maska
+        autocomplete="off"
+        :placeholder="$t('addVehicleModal.form.inputPlaceholder.name')"
+        class="form__input"
+        data-maska="@@@@@@@@@@"
+      />
+    </a-form-item>
+    <a-form-item has-feedback name="description">
       <a-textarea
-          v-model:value="userVehicleData.description"
-          autocomplete="off"
-          :placeholder="$t('addVehicleModal.form.inputPlaceholder.description')"
-          class="form__input text-area"
+        v-model:value="userVehicleData.description"
+        autocomplete="off"
+        :placeholder="$t('addVehicleModal.form.inputPlaceholder.description')"
+        class="form__input text-area"
       />
     </a-form-item>
-    <a-form-item
-        has-feedback
-        name="rent"
-    >
+    <a-form-item has-feedback name="rent">
       <a-input
-          v-model:value="userVehicleData.rent"
-          autocomplete="off"
-          :placeholder="$t('addVehicleModal.form.inputPlaceholder.rent')"
-          v-maska data-maska="####"
-          class="form__input"
+        v-model:value="userVehicleData.rent"
+        v-maska
+        autocomplete="off"
+        :placeholder="$t('addVehicleModal.form.inputPlaceholder.rent')"
+        data-maska="####"
+        class="form__input"
       >
-        <template #suffix class="form__input">
-          <a-tooltip>
-            $/h
-          </a-tooltip>
+        <template #suffix>
+          <a-tooltip>$/h</a-tooltip>
         </template>
       </a-input>
     </a-form-item>
     <a-form-item>
       <a-button
-          class="form_button"
-          type="primary"
-          html-type="submit"
-          :disabled="disabledButton"
-      >Submit</a-button>
+        class="form_button"
+        type="primary"
+        html-type="submit"
+        :disabled="disabledButton"
+      >
+        Submit
+      </a-button>
     </a-form-item>
   </a-form>
 </template>
@@ -108,14 +88,10 @@ const {
 <style scoped lang="scss">
 @import "assets/styles/vendors/antd/antd-theme";
 
-
 .form__input,
 :deep(.ant-select .ant-select-selector) {
   height: 46px;
 }
-
-
-
 
 .form__input {
   background-color: var(--base_50);
@@ -148,8 +124,6 @@ const {
   display: flex;
 }
 
-
-
 .drop-menu__dropdown-container {
   margin-top: 20px;
 }
@@ -157,6 +131,4 @@ const {
 .text-area {
   padding-top: 10px;
 }
-
-
 </style>

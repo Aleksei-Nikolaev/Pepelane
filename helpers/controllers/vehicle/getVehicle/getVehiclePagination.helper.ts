@@ -1,6 +1,6 @@
-import { QueryValue } from "ufo";
-import { VehicleModel } from "~/models/vehicle.model";
-import { PaginationMeta } from "~/types/server/pagination";
+import { QueryValue } from 'ufo'
+import { VehicleModel } from '~/models/vehicle.model'
+import { PaginationMeta } from '~/types/server/pagination'
 export const getVehiclePaginationHelper = (
   page: QueryValue,
   pageSize: QueryValue,
@@ -9,16 +9,16 @@ export const getVehiclePaginationHelper = (
   vehicles: VehicleModel[];
   meta: PaginationMeta;
 } => {
-  const currentPage = parseInt(String(page)) || 1;
-  const currentPageSize = parseInt(String(pageSize)) || 10;
+  const currentPage = parseInt(String(page)) || 1
+  const currentPageSize = parseInt(String(pageSize)) || 10
 
-  const startIndex = (currentPage - 1) * currentPageSize;
-  const endIndex = startIndex + currentPageSize;
+  const startIndex = (currentPage - 1) * currentPageSize
+  const endIndex = startIndex + currentPageSize
 
-  const vehiclesPortion = vehicles.slice(startIndex, endIndex);
+  const vehiclesPortion = vehicles.slice(startIndex, endIndex)
 
-  const totalVehicles = vehicles.length;
-  const totalPages = Math.ceil(totalVehicles / currentPageSize);
+  const totalVehicles = vehicles.length
+  const totalPages = Math.ceil(totalVehicles / currentPageSize)
 
   return {
     vehicles: vehiclesPortion,
@@ -26,7 +26,7 @@ export const getVehiclePaginationHelper = (
       page: currentPage,
       pageSize: currentPageSize,
       totalItems: totalVehicles,
-      totalPages,
-    },
-  };
-};
+      totalPages
+    }
+  }
+}

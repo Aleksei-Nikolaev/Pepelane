@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import {IVehicle} from "~/types/vehicle";
-import TheCollapsedText from "~/components/common/TheCollapsedText.vue";
-import TheImage from "~/components/common/TheImage.vue";
-import {staffMembers} from "~/constants";
+import { IVehicle } from '~/types/vehicle'
+import TheCollapsedText from '~/components/common/TheCollapsedText.vue'
+import TheImage from '~/components/common/TheImage.vue'
+import { staffMembers } from '~/constants'
 
 defineProps<{
-  vehicleData: IVehicle
-}>();
-
+  vehicleData: IVehicle;
+}>()
 </script>
 
 <template>
@@ -17,21 +16,20 @@ defineProps<{
   </h2>
   <div class="team__member-grid">
     <div
-        v-for="member in staffMembers"
-        :key="member.id"
-        class="team__member-box"
+      v-for="member in staffMembers"
+      :key="member.id"
+      class="team__member-box"
     >
-      <TheImage
-          class="team__member-photo"
-          :url="`/img/${member.id}.png`"
-      />
+      <TheImage class="team__member-photo" :url="`/img/${member.id}.png`" />
       <div class="team__member-info">
-        <p class="section__text-bold team__member-info-name">{{ member.name }}</p>
-        <p class="section__text team__member-description">{{ member.title }}</p>
+        <p class="section__text-bold team__member-info-name">
+          {{ member.name }}
+        </p>
+        <p class="section__text team__member-description">
+          {{ member.title }}
+        </p>
       </div>
-
     </div>
-
   </div>
 </template>
 
@@ -101,6 +99,4 @@ defineProps<{
     }
   }
 }
-
-
 </style>

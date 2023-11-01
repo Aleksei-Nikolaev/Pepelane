@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import TheImage from "~/components/common/TheImage.vue";
-const image = "/img/face.jpg";
+import TheImage from '~/components/common/TheImage.vue'
+const image = '/img/face.jpg'
 </script>
 
 <template>
-    <div class="user-info__container">
-      <span class="user-info__name">Alexey Nikolaev</span>
-      <TheImage class="user-info__image" :url="image" />
-    </div>
+  <div class="user-info__container">
+    <span class="user-info__name">Alexey Nikolaev</span>
+    <TheImage class="user-info__image" :url="image" />
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -40,7 +40,6 @@ const image = "/img/face.jpg";
       width: 42px;
       height: 42px;
     }
-
   }
 }
 </style>

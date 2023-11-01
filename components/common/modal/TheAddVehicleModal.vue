@@ -1,34 +1,24 @@
 <script setup lang="ts">
 import { OnClickOutside } from '@vueuse/components'
-import TheAddVehicleForm from "~/components/common/modal/forms/TheAddVehicleForm.vue";
+import TheAddVehicleForm from '~/components/common/modal/forms/TheAddVehicleForm.vue'
 
 const emits = defineEmits<{
-  (eventName: "closeModal"): void;
+  (eventName: 'closeModal'): void;
 }>()
-
-
-
 </script>
 
 <template>
-    <OnClickOutside
-        class="modal"
-        @trigger="emits('closeModal')"
-    >
-          <div class="modal__header">
-            <h1 class="modal__heading">{{ $t("addVehicleModal.heading") }}</h1>
-            <a-button
-                class="modal__close-button"
-                @click="emits('closeModal')"
-            >
-              <nuxt-icon class="modal__close-button-icon" name="close_cross" />
-            </a-button>
-          </div>
-          <TheAddVehicleForm
-              ref="ignoreElRef"
-          />
-    </OnClickOutside>
-
+  <OnClickOutside class="modal" @trigger="emits('closeModal')">
+    <div class="modal__header">
+      <h1 class="modal__heading">
+        {{ $t("addVehicleModal.heading") }}
+      </h1>
+      <a-button class="modal__close-button" @click="emits('closeModal')">
+        <nuxt-icon class="modal__close-button-icon" name="close_cross" />
+      </a-button>
+    </div>
+    <TheAddVehicleForm ref="ignoreElRef" />
+  </OnClickOutside>
 </template>
 
 <style scoped lang="scss">
@@ -87,7 +77,6 @@ const emits = defineEmits<{
       border: 1px solid var(--switched_main_400);
     }
 
-
     @include sm {
       height: 32px;
       width: 32px;
@@ -95,14 +84,12 @@ const emits = defineEmits<{
       padding: 4px 4px;
     }
 
-
     &-icon {
       height: 100%;
       width: 100%;
       color: var(--base_500);
     }
   }
-
 
   &-overlay {
     position: fixed;
@@ -126,7 +113,4 @@ const emits = defineEmits<{
     margin-top: 18px;
   }
 }
-
-
-
 </style>

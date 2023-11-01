@@ -1,4 +1,4 @@
 export enum vehiclesSortOptions {
-  name = "name",
-  rent = "rent",
+  name = 'name',
+  rent = 'rent',
 }

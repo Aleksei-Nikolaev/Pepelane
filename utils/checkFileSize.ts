@@ -1,7 +1,7 @@
-import {UploadFile} from "ant-design-vue/lib/upload/interface";
+import { UploadFile } from 'ant-design-vue/lib/upload/interface'
 
 export const checkFileSize = (file: UploadFile, sizeLimit: number) => {
-    if (!file.size) return false
+  if (!file.size) { return false }
 
-    return file.size / 1024 / 1024 < sizeLimit
+  return file.size / 1024 / 1024 < sizeLimit
 }

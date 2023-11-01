@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { FilterParams } from "~/types/FilterParams";
-import TheVehicleSortBy from "~/components/common/listHeader/TheVehicleSortBy.vue";
-import TheSortType from "~/components/common/listHeader/TheSortType.vue";
-import ThePickVehicleType from "~/components/common/listHeader/ThePickVehicleType.vue";
-import { CloseCircleOutlined } from "@ant-design/icons-vue";
+import { CloseCircleOutlined } from '@ant-design/icons-vue'
+import { FilterParams } from '~/types/FilterParams'
+import TheVehicleSortBy from '~/components/common/listHeader/TheVehicleSortBy.vue'
+import TheSortType from '~/components/common/listHeader/TheSortType.vue'
+import ThePickVehicleType from '~/components/common/listHeader/ThePickVehicleType.vue'
 
 const props = defineProps<{
   filter: FilterParams;
-}>();
+}>()
 
 const emits = defineEmits<{
-  (eventName: "clearClicked"): void;
-}>();
+  (eventName: 'clearClicked'): void;
+}>()
 
-const model = useModel(props, "filter");
+const model = useModel(props, 'filter')
 </script>
 
 <template>
@@ -71,7 +71,7 @@ const model = useModel(props, "filter");
 :deep(.filter-container__radio-group) {
   @include sm {
     width: 100%;
-    margin-right: 10px
+    margin-right: 10px;
   }
 }
 </style>

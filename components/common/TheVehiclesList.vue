@@ -1,54 +1,51 @@
 <script setup lang="ts">
-import TheVehicleCard from "~/components/common/vehicleList/TheVehicleCard.vue";
-import { eventNames } from "~/constants/events";
-import { VehiclesListProps } from "~/composables/useVehicleList/types/vehiclesListProps";
-import { useScrollDirection } from "~/composables/useVehicleList/useCases/useScrollDirection";
-import { vehiclesListEmits } from "~/composables/useVehicleList/types/vehiclesListEmits";
-import { usePageChange } from "~/composables/useVehicleList/useCases/usePageChange";
-import { scrollDirection } from "~/constants/scrollDirection";
-import { usePagePosition } from "~/composables/useVehicleList/useCases/usePagePosition";
-import { onMounted } from "vue";
-import {useEmptyCards} from "~/composables/useVehicleList/useCases/useEmptyCards";
-import {useScreenSize} from "~/composables/useDevicePageSize/useScreenSize";
+import { onMounted } from 'vue'
+import TheVehicleCard from '~/components/common/vehicleList/TheVehicleCard.vue'
+import { eventNames } from '~/constants/events'
+import { VehiclesListProps } from '~/composables/useVehicleList/types/vehiclesListProps'
+import { useScrollDirection } from '~/composables/useVehicleList/useCases/useScrollDirection'
+import { vehiclesListEmits } from '~/composables/useVehicleList/types/vehiclesListEmits'
+import { usePageChange } from '~/composables/useVehicleList/useCases/usePageChange'
+import { scrollDirection } from '~/constants/scrollDirection'
+import { usePagePosition } from '~/composables/useVehicleList/useCases/usePagePosition'
+import { useEmptyCards } from '~/composables/useVehicleList/useCases/useEmptyCards'
+import { useScreenSize } from '~/composables/useDevicePageSize/useScreenSize'
 
-const props = defineProps<VehiclesListProps>();
-const emits = defineEmits<vehiclesListEmits>();
+const props = defineProps<VehiclesListProps>()
+const emits = defineEmits<vehiclesListEmits>()
 
-const scrollDirectionClass = ref(scrollDirection.DOWN);
+const scrollDirectionClass = ref(scrollDirection.DOWN)
 
-const { defaultDirection } = useScrollDirection(scrollDirectionClass);
+const { defaultDirection } = useScrollDirection(scrollDirectionClass)
 const { debouncedHandleScroll, debouncedHandleSwipe } = usePageChange(
   props,
   emits,
   scrollDirectionClass
-);
-const { isLastPage, isFirstPage } = usePagePosition(props);
+)
+const { isLastPage, isFirstPage } = usePagePosition(props)
 
 const { emptyCardsBottom, emptyCardsTop, setEmptyCards } = useEmptyCards()
-const {sm, lg} = useScreenSize()
+const { sm, lg } = useScreenSize()
 
 setEmptyCards(props)
 
-
-
 watch(
-    () => [sm.value, lg.value, props.meta],
-    () => setEmptyCards(props),
-    {deep: true}
+  () => [sm.value, lg.value, props.meta],
+  () => setEmptyCards(props),
+  { deep: true }
 )
 
-
 onMounted(() => {
-  emits(eventNames.ELEMENT_REMOVED);
-});
+  emits(eventNames.ELEMENT_REMOVED)
+})
 </script>
 
 <template>
   <div
     ref="container"
-    class="list-container"
     v-touch:swipe.left="debouncedHandleSwipe"
     v-touch:swipe.right="debouncedHandleSwipe"
+    class="list-container"
     @wheel="debouncedHandleScroll"
   >
     <Transition name="empty-top">
@@ -56,7 +53,11 @@ onMounted(() => {
         v-if="!isFirstPage && renderItems"
         class="list-container__empty-card-wrapper-top"
       >
-        <div v-for="card in emptyCardsTop" class="list-container__empty-card-top"></div>
+        <div
+          v-for="index in emptyCardsTop"
+          :key="index"
+          class="list-container__empty-card-top"
+        />
       </div>
     </Transition>
     <Transition
@@ -64,10 +65,7 @@ onMounted(() => {
       @after-leave="emits(eventNames.ELEMENT_REMOVED)"
       @after-enter="defaultDirection"
     >
-      <div
-          v-if="renderItems"
-          class="list-container__wrapper"
-      >
+      <div v-if="renderItems" class="list-container__wrapper">
         <TheVehicleCard
           v-for="vehicle in vehicles"
           :key="vehicle.id"
@@ -78,11 +76,14 @@ onMounted(() => {
     </Transition>
     <Transition name="empty-bottom">
       <div
-          v-if="!isLastPage && renderItems"
-          class="list-container__empty-card-wrapper-bottom"
+        v-if="!isLastPage && renderItems"
+        class="list-container__empty-card-wrapper-bottom"
       >
-        <div v-for="card in emptyCardsBottom" class="list-container__empty-card-bottom"></div>
-
+        <div
+          v-for="index in emptyCardsBottom"
+          :key="index"
+          class="list-container__empty-card-bottom"
+        />
       </div>
     </Transition>
   </div>
@@ -98,7 +99,6 @@ onMounted(() => {
   overflow: hidden;
   position: relative;
   border: 1px solid var(--base_100);
-
 
   &__wrapper {
     display: flex;
@@ -126,14 +126,16 @@ onMounted(() => {
         border-radius: 0 0 var(--border_radius_small) var(--border_radius_small);
 
         @include lg {
-          border-radius: 0 var(--border_radius_small) var(--border_radius_small) 0;
+          border-radius: 0 var(--border_radius_small) var(--border_radius_small)
+            0;
         }
       }
       &-bottom {
         border-radius: var(--border_radius_small) var(--border_radius_small) 0 0;
 
         @include lg {
-          border-radius: var(--border_radius_small) 0 0 var(--border_radius_small);
+          border-radius: var(--border_radius_small) 0 0
+            var(--border_radius_small);
         }
       }
 

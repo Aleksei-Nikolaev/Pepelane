@@ -1,95 +1,77 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { UploadProps, UploadChangeParam } from 'ant-design-vue';
-import {checkFileSize} from "~/utils/checkFileSize";
-import {ImageUploadState} from "~/types/vendors/antd/ImageUploadStatus";
-import {initStateFactory} from "~/factories/initStateFactory";
-import {useAddVehicleValidation} from "~/composables/useAddVehicleModal/useCases/useAddVehicleValidation";
-import {UploadFile} from "ant-design-vue/lib/upload/interface";
+import { ref } from 'vue'
+import type { UploadChangeParam } from 'ant-design-vue'
+import { UploadFile } from 'ant-design-vue/lib/upload/interface'
+import { checkFileSize } from '~/utils/checkFileSize'
+import { ImageUploadState } from '~/types/vendors/antd/ImageUploadStatus'
+import { useAddVehicleValidation } from '~/composables/useAddVehicleModal/useCases/useAddVehicleValidation'
+import { useImageUpload } from '~/composables/useImageUpload/useImageUpload'
 
 const props = defineProps<{
   uploadStatus: ImageUploadState;
-}>();
-
-const model = useModel(props, "uploadStatus");
-
-const emits = defineEmits<{
-  (eventName: "emitBase64", base64: string): void
-  (eventName: "imgRemoved"): void
 }>()
 
-const fileList = ref([]);
-const loading = ref<boolean>(false);
-const imageUrl = ref<string>("")
-const {imgMaxSize} = useAddVehicleValidation()
+const model = useModel(props, 'uploadStatus')
+
+const emits = defineEmits<{
+  (eventName: 'emitBase64', base64: string): void;
+  (eventName: 'imgRemoved'): void;
+}>()
+
+const fileList = ref([])
+const imageUrl = ref<string>('')
+const { imgMaxSize } = useAddVehicleValidation()
+
+const { getBase64, loading, rejectLoading } = useImageUpload()
 const handleChange = async (info: UploadChangeParam) => {
-  if (info.file.status) props.uploadStatus.fileUploadStatus =  info.file.status
+  if (info.file.status) { model.value.fileUploadStatus = info.file.status }
 
   if (info.file.status === 'uploading') {
-    loading.value = true;
-    return;
+    loading.value = true
+    return
   }
-  if (info.file.status === "done") {
-    imageUrl.value = await getBase64(info.file.originFileObj) as string
-    emits("emitBase64", imageUrl.value)
+  if (info.file.status === 'done') {
+    imageUrl.value = (await getBase64(info.file.originFileObj)) as string
+    emits('emitBase64', imageUrl.value)
   }
-}
-
-function getBase64(file: File | undefined) {
-  if (!file) return
-
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
-}
-
-const rejectLoading = () => {
-  loading.value = false
-
-  return loading.value
 }
 
 const beforeUpload = (file: UploadFile) => {
-  const {fileUploadStatus, isImage, isSize} = toRefs(props.uploadStatus)
+  const { fileUploadStatus, isImage, isSize } = toRefs(props.uploadStatus)
 
   fileUploadStatus.value = null
-  isImage.value = file.type === 'image/jpeg' || file.type === 'image/png';
+  isImage.value = file.type === 'image/jpeg' || file.type === 'image/png'
   isSize.value = checkFileSize(file, imgMaxSize)
 
-  if (!props.uploadStatus.isImage || !props.uploadStatus.isSize) return rejectLoading()
-};
-
-
-
-
+  if (!props.uploadStatus.isImage || !props.uploadStatus.isSize) { return rejectLoading() }
+}
 </script>
 
 <template>
   <div class="drop-zone">
     <a-upload
-        v-model:file-list="fileList"
-        v-show="props.uploadStatus.fileUploadStatus !== 'uploading'"
-        list-type="picture-card"
-        :max-count="1"
-        :show-upload-list="{showPreviewIcon: false, showRemoveIcon: true}"
-        :before-upload="beforeUpload"
-        accept=".jpg, .png"
-        class="drop-zone__upload"
-        @change="handleChange"
-        @remove="emits('imgRemoved')"
+      v-show="props.uploadStatus.fileUploadStatus !== 'uploading'"
+      v-model:file-list="fileList"
+      list-type="picture-card"
+      :max-count="1"
+      :show-upload-list="{ showPreviewIcon: false, showRemoveIcon: true }"
+      :before-upload="beforeUpload"
+      accept=".jpg, .png"
+      class="drop-zone__upload"
+      @change="handleChange"
+      @remove="emits('imgRemoved')"
     >
-        <nuxt-icon v-if="fileList.length < 1" name="image_upload" class="drop-zone__icon" filled/>
+      <nuxt-icon
+        v-if="fileList.length < 1"
+        name="image_upload"
+        class="drop-zone__icon"
+        filled
+      />
     </a-upload>
   </div>
 </template>
 
 <style scoped lang="scss">
-
-
-
 .drop-zone {
   height: 350px;
   width: 100%;
@@ -103,7 +85,6 @@ const beforeUpload = (file: UploadFile) => {
   @include sm {
     height: 200px;
   }
-
 
   &__icon {
     color: var(--main_400);
@@ -147,15 +128,11 @@ const beforeUpload = (file: UploadFile) => {
   visibility: hidden;
 }
 
-
 :deep(.ant-upload-list-item) {
   padding: 0 0;
 }
 
 :deep(.anticon-delete) {
-  transform:  scale(1.4);
+  transform: scale(1.4);
 }
-
-
-
 </style>

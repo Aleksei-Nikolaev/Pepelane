@@ -1,35 +1,31 @@
 <script setup lang="ts">
-import {DownOutlined} from "@ant-design/icons-vue";
+import { DownOutlined } from '@ant-design/icons-vue'
 
 defineProps<{
-  detailedText: string
-}>();
+  detailedText: string;
+}>()
 
 const collapsed = ref(true)
 
 const collapseHandle = () => {
   collapsed.value = !collapsed.value
 }
-
 </script>
 
 <template>
-  <div
-      class="text-container"
-      :class="{ collapsed: collapsed }"
-  >
-    <p class="section__text">{{detailedText}}</p>
-    <div v-show="collapsed" class="blur"></div>
+  <div class="text-container" :class="{ collapsed: collapsed }">
+    <p class="section__text">
+      {{ detailedText }}
+    </p>
+    <div v-show="collapsed" class="blur" />
   </div>
   <div class="collapsed__icon-container">
     <DownOutlined
-        @click="collapseHandle"
-        class="collapsed__icon-arrow"
-        :class="{ rotated: !collapsed}"
+      class="collapsed__icon-arrow"
+      :class="{ rotated: !collapsed }"
+      @click="collapseHandle"
     />
   </div>
-
-
 </template>
 
 <style scoped lang="scss">
@@ -76,6 +72,4 @@ const collapseHandle = () => {
   bottom: 0px;
   background-image: linear-gradient(rgba(255, 255, 255, 0), var(--base_0));
 }
-
-
 </style>

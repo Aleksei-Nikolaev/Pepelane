@@ -1,54 +1,55 @@
-import { $Fetch, FetchOptions } from "ofetch";
+import { $Fetch, FetchOptions } from 'ofetch'
 
 export class ApiService {
-  constructor(private httpClient: $Fetch) {}
+  // eslint-disable-next-line no-useless-constructor
+  constructor (private httpClient: $Fetch) {}
 
-  get(path: string, params = {}, requestConfig = {}) {
+  get (path: string, params = {}, requestConfig = {}) {
     return this.request(path, {
-      method: "GET",
+      method: 'GET',
       params,
-      ...requestConfig,
-    });
+      ...requestConfig
+    })
   }
 
-  post(path: string, data = {}, requestConfig = {}) {
+  post (path: string, data = {}, requestConfig = {}) {
     return this.request(path, {
-      method: "POST",
+      method: 'POST',
       body: data,
-      ...requestConfig,
-    });
+      ...requestConfig
+    })
   }
 
-  put(path: string, data = {}, requestConfig = {}) {
+  put (path: string, data = {}, requestConfig = {}) {
     return this.request(path, {
-      method: "PUT",
+      method: 'PUT',
       body: data,
-      ...requestConfig,
-    });
+      ...requestConfig
+    })
   }
 
-  delete(path: string, params = {}, requestConfig = {}) {
+  delete (path: string, params = {}, requestConfig = {}) {
     return this.request(path, {
-      method: "DELETE",
+      method: 'DELETE',
       params,
-      ...requestConfig,
-    });
+      ...requestConfig
+    })
   }
 
-  patch(path: string, data = {}, requestConfig = {}) {
+  patch (path: string, data = {}, requestConfig = {}) {
     return this.request(path, {
-      method: "PATCH",
+      method: 'PATCH',
       body: data,
-      ...requestConfig,
-    });
+      ...requestConfig
+    })
   }
 
-  async request(url: string, options: FetchOptions) {
+  async request (url: string, options: FetchOptions) {
     const config = {
       ...options,
-      responseType: options.responseType || "json",
-    };
-    const response = await this.httpClient(url, config);
-    return response || {};
+      responseType: options.responseType || 'json'
+    }
+    const response = await this.httpClient(url, config)
+    return response || {}
   }
 }

@@ -1,14 +1,12 @@
-import { IVehicle } from "~/types/vehicle";
-import { PaginationMeta } from "~/types/server/pagination";
-import { defaultResponseType } from "~/services/types/default";
-import {sortName, sortType} from "~/types/FilterParams";
-
+import { IVehicle } from '~/types/vehicle'
+import { PaginationMeta } from '~/types/server/pagination'
+import { defaultResponseType } from '~/services/types/default'
+import { sortName, sortType } from '~/types/FilterParams'
 
 export type getVehiclesResponse = {
   data: IVehicle[];
   meta: PaginationMeta;
 };
-
 
 export type getVehiclesRequestParams = {
   page?: number;
@@ -20,11 +18,11 @@ export type getVehiclesRequestParams = {
 
 export type getVehicleByIdResponse = {
   data: IVehicle;
-}
+};
 
 export type getVehicleTypesResponse = {
   data: string[];
-}
+};
 
 export type createVehicleRequestBody = {
   name: string;
@@ -32,10 +30,6 @@ export type createVehicleRequestBody = {
   rent: number;
   image: string;
   type: string;
-}
+};
 
-export type createVehicleResponse = defaultResponseType
-
-
-
-
+export type createVehicleResponse = defaultResponseType;

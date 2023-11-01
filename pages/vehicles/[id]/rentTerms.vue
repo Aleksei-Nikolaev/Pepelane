@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import {IVehicle} from "~/types/vehicle";
-import TheCollapsedText from "~/components/common/TheCollapsedText.vue";
-import {textPlaceHolders} from "~/constants/textPlaceHolders";
+import { IVehicle } from '~/types/vehicle'
+import TheCollapsedText from '~/components/common/TheCollapsedText.vue'
+import { textPlaceHolders } from '~/constants/textPlaceHolders'
 
 defineProps<{
-  vehicleData: IVehicle
-}>();
-
+  vehicleData: IVehicle;
+}>()
 </script>
 
 <template>
@@ -15,8 +14,9 @@ defineProps<{
     {{ $t("detailedPage.subHeadings.conditions") }}:
   </h2>
   <li
-      v-for="text in textPlaceHolders"
-      class="section__text list_item"
+    v-for="text in textPlaceHolders"
+    :key="text"
+    class="section__text list_item"
   >
     {{ text }}
   </li>
@@ -30,8 +30,6 @@ defineProps<{
 }
 
 .list_item::marker {
-  color: var(--secondary_400)
+  color: var(--secondary_400);
 }
-
-
 </style>

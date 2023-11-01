@@ -1,3 +1,3 @@
 export enum Modals {
-    ADD_VEHICLE = "AddVehicleModal"
+  ADD_VEHICLE = 'AddVehicleModal',
 }

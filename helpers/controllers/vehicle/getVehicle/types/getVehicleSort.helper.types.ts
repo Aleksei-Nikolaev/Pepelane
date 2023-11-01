@@ -1,4 +1,4 @@
-import { QueryValue } from "ufo";
+import { QueryValue } from 'ufo'
 
 export type rawSortParams = {
   sortBy: QueryValue | QueryValue[];

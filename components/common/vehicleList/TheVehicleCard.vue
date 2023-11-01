@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { IVehicle } from "~/types/vehicle";
-import TheImage from "~/components/common/TheImage.vue";
-import { useDetailedPageRoutes } from "~/composables/useDetailedPage/useCases/useDetailedPageRoutes.";
+import type { IVehicle } from '~/types/vehicle'
+import TheImage from '~/components/common/TheImage.vue'
+import { useDetailedPageRoutes } from '~/composables/useDetailedPage/useCases/useDetailedPageRoutes.'
 
 defineProps<{
   vehicle: IVehicle;
-}>();
+}>()
 
-const { defaultRoute } = useDetailedPageRoutes();
+const { defaultRoute } = useDetailedPageRoutes()
 </script>
 
 <template>
@@ -19,11 +19,15 @@ const { defaultRoute } = useDetailedPageRoutes();
     <div class="card-container">
       <TheImage :url="vehicle.preview" class="card-container__image" />
       <div class="card-container__info">
-        <p class="card-container__info__name">{{ vehicle.name }}</p>
+        <p class="card-container__info__name">
+          {{ vehicle.name }}
+        </p>
         <p class="card-container__info__description">
           {{ capitalizeFirstLetter(vehicle.description) }}
         </p>
-        <p class="card-container__info__rent">{{ vehicle.rent + " $/h" }}</p>
+        <p class="card-container__info__rent">
+          {{ vehicle.rent + " $/h" }}
+        </p>
       </div>
     </div>
   </NuxtLink>

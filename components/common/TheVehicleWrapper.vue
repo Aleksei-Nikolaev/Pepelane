@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import TheVehiclesList from "~/components/common/TheVehiclesList.vue";
-import TheListFilter from "~/components/common/TheListFilter.vue";
-import { useHandleListAppearance } from "~/composables/useVehicleWrapper/useCases/useHandleAnimation";
-import { filterFactory } from "~/factories/filterFactory";
-import { useVehicleWrapperFilter } from "~/composables/useVehicleWrapper/useCases/useVehicleWrapperFilter/useCases/useVehicleWrapperFilter";
-import { useVehicleStore } from "~/stores/VehicleStore";
-import { storeToRefs } from "pinia";
-import TheNoDataPage from "~/components/common/TheNoDataPage.vue";
-import { useShowModal } from "~/composables/useVehicleWrapper/useCases/useShowModal";
-import { Modals } from "~/types/Modals";
-import {useDevicePageSize} from "~/composables/useDevicePageSize/useDevicePageSize";
+import { storeToRefs } from 'pinia'
+import TheVehiclesList from '~/components/common/TheVehiclesList.vue'
+import TheListFilter from '~/components/common/TheListFilter.vue'
+import { useHandleListAppearance } from '~/composables/useVehicleWrapper/useCases/useHandleAnimation'
+import { filterFactory } from '~/factories/filterFactory'
+import { useVehicleWrapperFilter } from '~/composables/useVehicleWrapper/useCases/useVehicleWrapperFilter/useCases/useVehicleWrapperFilter'
+import { useVehicleStore } from '~/stores/VehicleStore'
+import TheNoDataPage from '~/components/common/TheNoDataPage.vue'
+import { useShowModal } from '~/composables/useVehicleWrapper/useCases/useShowModal'
+import { Modals } from '~/types/Modals'
+import { useDevicePageSize } from '~/composables/useDevicePageSize/useDevicePageSize'
 
 const { data, meta, filterParams, isEmptyList } = storeToRefs(
   useVehicleStore()
-);
-const { createFilter } = filterFactory();
+)
+const { createFilter } = filterFactory()
 
-const { getVehicles, resetFilters, updateFilterParams } = useVehicleStore();
-const { openModal } = useShowModal();
+const { getVehicles, resetFilters, updateFilterParams } = useVehicleStore()
+const { openModal } = useShowModal()
 
-const router = useRouter();
-const route = useRoute();
+const router = useRouter()
+const route = useRoute()
 
-updateFilterParams(route.query);
+updateFilterParams(route.query)
 
-const { handlePageChange } = useVehicleWrapperFilter(filterParams);
+const { handlePageChange } = useVehicleWrapperFilter()
 const { resetStatus, elementIsRemoved, loadingStatus, renderItems } =
-  useHandleListAppearance();
+  useHandleListAppearance()
 
-const {page} = createFilter()
+const { page } = createFilter()
 
 watch(
   () => filterParams.value.type,
@@ -36,21 +36,21 @@ watch(
     updateFilterParams({
       page
     })
-);
+)
 
 useAsyncData(
-  "vehicles",
+  'vehicles',
   async () => {
-    resetStatus();
-    router.push({ query: filterParams.value });
-    await getVehicles(filterParams.value);
-    loadingStatus.value.dataIsLoaded = true;
-    return filterParams.value;
+    resetStatus()
+    router.push({ query: filterParams.value })
+    await getVehicles(filterParams.value)
+    loadingStatus.value.dataIsLoaded = true
+    return filterParams.value
   },
   {
-    watch: [filterParams.value],
+    watch: [filterParams.value]
   }
-);
+)
 
 useDevicePageSize()
 </script>
@@ -63,7 +63,8 @@ useDevicePageSize()
       size="large"
       class="control-panel__add-button"
       @click="openModal(Modals.ADD_VEHICLE)"
-      >Add new
+    >
+      Add new
     </a-button>
   </div>
   <TheVehiclesList
@@ -98,8 +99,6 @@ useDevicePageSize()
     border-radius: var(--border_radius_mini);
     height: 100%;
 
-
-
     @include sm {
       height: 32px;
       display: flex;
@@ -109,11 +108,9 @@ useDevicePageSize()
   }
 }
 
-
 :deep(.control-panel__add-button span) {
   @include sm {
     padding-top: 0.15em;
   }
 }
-
 </style>

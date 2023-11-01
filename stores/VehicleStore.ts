@@ -1,36 +1,35 @@
-import { defineStore } from "pinia";
-import { $api } from "~/plugins/api";
-import { vehicleStoreState } from "~/types/store/vehicleStoreState";
-import { getVehiclesRequestParams } from "~/services/types/vehicles";
-import {useDevicePageSize} from "~/composables/useDevicePageSize/useDevicePageSize";
-import {normalizeQueryFilter} from "~/utils/normalizeQueryFilter";
+import { defineStore } from 'pinia'
+import { $api } from '~/plugins/api'
+import { vehicleStoreState } from '~/types/store/vehicleStoreState'
+import { getVehiclesRequestParams } from '~/services/types/vehicles'
+import { useDevicePageSize } from '~/composables/useDevicePageSize/useDevicePageSize'
+import { normalizeQueryFilter } from '~/utils/normalizeQueryFilter'
 
-export const useVehicleStore = defineStore("VehicleStore", {
+export const useVehicleStore = defineStore('VehicleStore', {
   state: (): vehicleStoreState => ({
     data: [],
     meta: null,
-    filterParams: {...useDevicePageSize()},
+    filterParams: { ...useDevicePageSize() }
   }),
 
   getters: {
-   isEmptyList: (state) => !state.data.length
+    isEmptyList: state => !state.data.length
   },
 
   actions: {
-    async getVehicles(params: getVehiclesRequestParams) {
-      const {data, meta} = await $api.vehicleService.getVehicles(params);
-      this.data = data;
-      this.meta = meta;
+    async getVehicles (params: getVehiclesRequestParams) {
+      const { data, meta } = await $api.vehicleService.getVehicles(params)
+      this.data = data
+      this.meta = meta
     },
 
-    resetFilters() {
+    resetFilters () {
       this.filterParams = Object.assign(this.filterParams, useDevicePageSize())
     },
 
-    updateFilterParams(filter: Partial<vehicleStoreState["filterParams"]>) {
+    updateFilterParams (filter: Partial<vehicleStoreState['filterParams']>) {
       normalizeQueryFilter(filter)
       this.filterParams = Object.assign(this.filterParams, filter)
     }
   }
-});
-
+})

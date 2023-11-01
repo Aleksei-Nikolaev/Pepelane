@@ -1,38 +1,38 @@
 <script setup lang="ts">
-import {IVehicle} from "~/types/vehicle";
-
+import { IVehicle } from '~/types/vehicle'
 
 defineProps<{
-  price: IVehicle["rent"]
+  price: IVehicle['rent'];
 }>()
 
-const {t} = useI18n()
-const {$toast: notify} = useNuxtApp()
+const { t } = useI18n()
+const { $toast: notify } = useNuxtApp()
 
 const onOrder = () => {
-  const message = t(`notificationMessage.vehicleOrdered`)
-  notify.success(message);
+  const message = t('notificationMessage.vehicleOrdered')
+  notify.success(message)
 }
-
 </script>
 
 <template>
   <div class="rent__wrapper">
     <div class="rent__container">
-      <h2 class="rent__text">Rent for <span class="rent__price">{{ price }}$</span></h2>
+      <h2 class="rent__text">
+        Rent for <span class="rent__price">{{ price }}$</span>
+      </h2>
       <a-button
-          type="primary"
-          size="large"
-          class="rent__button"
-          @click="onOrder"
-      >Rent now
+        type="primary"
+        size="large"
+        class="rent__button"
+        @click="onOrder"
+      >
+        Rent now
       </a-button>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-
 .rent {
   &__wrapper {
     @include sm {
@@ -62,11 +62,9 @@ const onOrder = () => {
 
       right: 16px;
       width: 100%;
-      box-shadow:   0 -10px 15px var(--base_0);
+      box-shadow: 0 -10px 15px var(--base_0);
     }
   }
-
-
 
   &__text {
     font-size: var(--font_size_medium_increase);
@@ -75,7 +73,7 @@ const onOrder = () => {
     margin: 0;
 
     @include sm {
-     font-size: var(--font_size_default);
+      font-size: var(--font_size_default);
     }
   }
 
@@ -97,8 +95,5 @@ const onOrder = () => {
     width: 110px;
     height: 44px;
   }
-
 }
-
-
 </style>

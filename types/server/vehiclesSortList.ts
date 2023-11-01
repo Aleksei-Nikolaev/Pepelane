@@ -1,6 +1,6 @@
-import { vehiclesSortOptions } from "~/constants/sort";
+import { vehiclesSortOptions } from '~/constants/sort'
 
-type sortType = "ascending" | "descending";
+type sortType = 'ascending' | 'descending';
 type sortBy = vehiclesSortOptions;
 
 export interface vehiclesSortParams {

@@ -1,24 +1,26 @@
 <script setup lang="ts">
-import { sortType } from "~/types/FilterParams";
-import { eventNames } from "~/constants/events";
-import {SortAscendingOutlined} from "@ant-design/icons-vue";
-import {SortDescendingOutlined} from "@ant-design/icons-vue";
+import {
+  SortAscendingOutlined,
+  SortDescendingOutlined
+} from '@ant-design/icons-vue'
+import { sortType } from '~/types/FilterParams'
+import { eventNames } from '~/constants/events'
 
 const props = defineProps<{
   value: sortType;
-}>();
+}>()
 
 const emits = defineEmits<{
   (eventName: eventNames.UPDATE_VALUE, value: sortType): void;
-}>();
+}>()
 
 const handleClick = () => {
   const value =
     props.value === sortType.ASCENDING
       ? sortType.DESCENDING
-      : sortType.ASCENDING;
-  emits(eventNames.UPDATE_VALUE, value);
-};
+      : sortType.ASCENDING
+  emits(eventNames.UPDATE_VALUE, value)
+}
 </script>
 
 <template>

@@ -1,4 +1,4 @@
 export enum CreateStatusCode {
-    SUCCESS = 200,
-    ERROR = 500,
+  SUCCESS = 200,
+  ERROR = 500,
 }

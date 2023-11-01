@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import type { SelectProps } from "ant-design-vue";
-import { sortName } from "~/types/FilterParams";
-import { eventNames } from "~/constants/events";
+import type { SelectProps } from 'ant-design-vue'
+import { sortName } from '~/types/FilterParams'
+import { eventNames } from '~/constants/events'
 
 defineProps<{
   value: sortName;
-}>();
+}>()
 
 const emits = defineEmits<{
   (eventName: eventNames.UPDATE_VALUE, value: sortName): void;
-}>();
+}>()
 
-const options: SelectProps["options"] = [
+const options: SelectProps['options'] = [
   {
-    value: "rent",
-    label: "Rent",
+    value: 'rent',
+    label: 'Rent'
   },
   {
-    value: "name",
-    label: "Name",
-  },
-];
+    value: 'name',
+    label: 'Name'
+  }
+]
 </script>
 
 <template>
@@ -33,9 +33,7 @@ const options: SelectProps["options"] = [
 </template>
 
 <style scoped lang="scss">
-
 .filter-container__sort-by {
   min-width: 100px;
 }
-
 </style>

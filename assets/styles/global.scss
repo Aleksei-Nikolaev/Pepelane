@@ -29,6 +29,21 @@ p,h1,h2 {
   background: var(--base_300);
 }
 
+.dark-mode {
+  ::-webkit-scrollbar-thumb {
+    background: var(--main_400);
+    border-radius: var(--border_radius_micro);
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px var(--main_400);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--switched_main_400);
+  }
+}
+
 html {
   padding-left: calc(100vw - 100%);
   background: var(--base_0);

@@ -28,7 +28,7 @@ const switchColor = () => {
 .color-mode {
   &__container {
     height: 100%;
-    width: 130px;
+    width: 140px;
     display: flex;
     align-items: center;
     cursor: pointer;

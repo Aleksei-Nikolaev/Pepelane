@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TheImageUpload from '~/components/common/TheImageUpload.vue'
+import TheImageUpload from '~/components/common/TheImageUpload/TheImageUpload.vue'
 import { useAddVehicleForm } from '~/composables/useAddVehicleModal/useCases/useAddVehicleForm'
 
 const {
@@ -10,6 +10,7 @@ const {
   imageUploadStatus,
   rules,
   disabledButton,
+  imageUploadStatusUpdate,
   handleImageData,
   onImgRemoved,
   onFinish
@@ -25,10 +26,10 @@ const {
   >
     <a-form-item name="isImage">
       <TheImageUpload
-        v-model:value="userVehicleData.image"
         :upload-status="imageUploadStatus"
-        @emit-base64="handleImageData"
+        @pass-transformed-image="handleImageData"
         @img-removed="onImgRemoved"
+        @update:value="imageUploadStatusUpdate"
       />
     </a-form-item>
     <a-form-item has-feedback name="type">

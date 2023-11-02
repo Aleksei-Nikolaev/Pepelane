@@ -5,3 +5,11 @@ export const checkFileSize = (file: UploadFile, sizeLimit: number) => {
 
   return file.size / 1024 / 1024 < sizeLimit
 }
+
+export const checkImageType = (file: UploadFile) => {
+  if (!file.type) { return false }
+
+  const allowedTypes = ['image/jpeg', 'image/png']
+
+  return allowedTypes.includes(file.type)
+}

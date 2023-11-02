@@ -6,6 +6,7 @@
   font-weight: var(--font_weight_medium);
   color: var(--base_300);
   border: 1px solid var(--base_100);
+  transition: none;
 }
 
 :deep(.ant-input:hover),
@@ -47,7 +48,3 @@
 :deep(.ant-radio-button-wrapper:focus-within) {
   box-shadow: none;
 }
-
-//:deep(.ant-radio-group:focus-within) {
-//  box-shadow: none;
-//}

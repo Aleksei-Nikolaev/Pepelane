@@ -1,50 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { UploadChangeParam } from 'ant-design-vue'
-import { UploadFile } from 'ant-design-vue/lib/upload/interface'
-import { checkFileSize } from '~/utils/checkFileSize'
-import { ImageUploadState } from '~/types/vendors/antd/ImageUploadStatus'
-import { useAddVehicleValidation } from '~/composables/useAddVehicleModal/useCases/useAddVehicleValidation'
+import { ImageUploadEmits, ImageUploadProps } from './types'
 import { useImageUpload } from '~/composables/useImageUpload/useImageUpload'
 
-const props = defineProps<{
-  uploadStatus: ImageUploadState;
-}>()
+const props = defineProps<ImageUploadProps>()
 
-const model = useModel(props, 'uploadStatus')
+const emits = defineEmits<ImageUploadEmits>()
 
-const emits = defineEmits<{
-  (eventName: 'emitBase64', base64: string): void;
-  (eventName: 'imgRemoved'): void;
-}>()
+const { fileList, beforeUpload, handleChange } = useImageUpload(emits)
 
-const fileList = ref([])
-const imageUrl = ref<string>('')
-const { imgMaxSize } = useAddVehicleValidation()
-
-const { getBase64, loading, rejectLoading } = useImageUpload()
-const handleChange = async (info: UploadChangeParam) => {
-  if (info.file.status) { model.value.fileUploadStatus = info.file.status }
-
-  if (info.file.status === 'uploading') {
-    loading.value = true
-    return
-  }
-  if (info.file.status === 'done') {
-    imageUrl.value = (await getBase64(info.file.originFileObj)) as string
-    emits('emitBase64', imageUrl.value)
-  }
-}
-
-const beforeUpload = (file: UploadFile) => {
-  const { fileUploadStatus, isImage, isSize } = toRefs(props.uploadStatus)
-
-  fileUploadStatus.value = null
-  isImage.value = file.type === 'image/jpeg' || file.type === 'image/png'
-  isSize.value = checkFileSize(file, imgMaxSize)
-
-  if (!props.uploadStatus.isImage || !props.uploadStatus.isSize) { return rejectLoading() }
-}
 </script>
 
 <template>
@@ -62,7 +25,7 @@ const beforeUpload = (file: UploadFile) => {
       @remove="emits('imgRemoved')"
     >
       <nuxt-icon
-        v-if="fileList.length < 1"
+        v-if="fileList.length === 0"
         name="image_upload"
         class="drop-zone__icon"
         filled

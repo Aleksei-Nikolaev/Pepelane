@@ -1,5 +1,4 @@
 import { Rule } from 'ant-design-vue/es/form'
-import { ref } from 'vue'
 import {
   isInteger,
   isNumber,
@@ -9,15 +8,12 @@ import {
   isStartWithLetter
 } from '~/utils/common/helpers'
 import { handleFormReject } from '~/utils/vendors/antd/handleFormReject'
-import { ImageUploadState } from '~/types/vendors/antd/ImageUploadStatus'
-import { initStateFactory } from '~/factories/initStateFactory'
+import { useImageUploadStatus } from '~/composables/useImageUpload/useImageUploadStatus'
 
 export const useAddVehicleValidation = () => {
   const { t } = useI18n()
 
-  const { createImgUploadState } = initStateFactory()
-
-  const imageUploadStatus = ref<ImageUploadState>(createImgUploadState())
+  const { imageUploadStatus } = useImageUploadStatus()
 
   const maxRentValue = 10000
   const minNameLength = 4
@@ -42,7 +38,7 @@ export const useAddVehicleValidation = () => {
       )
     }
 
-    await Promise.resolve()
+    return await Promise.resolve()
   }
 
   const checkName = async (_rule: Rule, value: string) => {
@@ -54,7 +50,7 @@ export const useAddVehicleValidation = () => {
       )
     }
 
-    await Promise.resolve()
+    return await Promise.resolve()
   }
 
   const checkDescription = async (_rule: Rule, value: string) => {
@@ -65,7 +61,7 @@ export const useAddVehicleValidation = () => {
       )
     }
 
-    await Promise.resolve()
+    return await Promise.resolve()
   }
 
   const checkImage = async () => {
@@ -95,13 +91,13 @@ export const useAddVehicleValidation = () => {
       )
     }
 
-    await Promise.resolve()
+    return await Promise.resolve()
   }
 
   const checkType = async (_rule: Rule, value: string) => {
     if (isNotEmpty(value)) { return handleFormReject(t(`${localesPath.type}`)) }
 
-    await Promise.resolve()
+    return await Promise.resolve()
   }
 
   const rules: Record<string, Rule[]> = {

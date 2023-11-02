@@ -10,6 +10,7 @@ import { createVehicleRequestBody } from '~/services/types/vehicles'
 import { useShowModal } from '~/composables/useVehicleWrapper/useCases/useShowModal'
 import { useVehicleStore } from '~/stores/VehicleStore'
 import { CreateStatusCode } from '~/types/createStatusCode'
+import { useImageUploadStatus } from '~/composables/useImageUpload/useImageUploadStatus'
 
 export const useAddVehicleForm = () => {
   const { create } = useAddVehicleFormFactory()
@@ -21,13 +22,15 @@ export const useAddVehicleForm = () => {
 
   const selectRef = ref<HTMLImageElement | null>(null)
 
-  const { imageUploadStatus, rules } = useAddVehicleValidation()
+  const { rules } = useAddVehicleValidation()
 
   const { closeModal } = useShowModal()
 
   const disabledButton = ref<boolean>(false)
 
   const { updateFilterParams } = useVehicleStore()
+
+  const { imageUploadStatusUpdate, imageUploadStatus } = useImageUploadStatus()
 
   const { $toast: notify } = useNuxtApp()
 
@@ -38,8 +41,10 @@ export const useAddVehicleForm = () => {
   }
 
   const onImgRemoved = () => {
-    imageUploadStatus.value.isImage = null
-    imageUploadStatus.value.isSize = null
+    imageUploadStatusUpdate({
+      isImage: null,
+      isSize: null
+    })
   }
 
   const normalizePayLoad = (form: UserVehicle): createVehicleRequestBody => {
@@ -87,6 +92,7 @@ export const useAddVehicleForm = () => {
     rules,
     disabledButton,
     handleImageData,
+    imageUploadStatusUpdate,
     onImgRemoved,
     onFinish
   }

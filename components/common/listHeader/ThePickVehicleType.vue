@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import { vehicleTypes } from "~/constants/vehicleTypes";
 import { FilterParams } from '~/types/FilterParams'
 import { eventNames } from '~/constants/events'
 import { useHandleVehiclesTypes } from '~/composables/useHandleVehiclesApi/useHandleVehiclesTypes'

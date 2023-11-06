@@ -1,5 +1,5 @@
 import { vehiclesSortParams } from '~/types/server/vehiclesSortList'
-import { IVehicle } from '~/types/vehicle'
+import { IVehicle } from '~/types/entities/vehicle'
 import { priceNormalize } from '~/utils/priceNormalize'
 export const sortList = (list: IVehicle[], sortParams: vehiclesSortParams) => {
   const { sortType } = sortParams

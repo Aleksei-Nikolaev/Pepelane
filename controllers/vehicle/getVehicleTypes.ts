@@ -1,4 +1,4 @@
-import { availableFilterTypes } from '~/constants/availableFilterTypes'
+import { availableFilterTypes } from '~/constants/server/availableFilterTypes'
 
 export const getVehicleTypes = () => {
   return {

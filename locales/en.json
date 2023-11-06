@@ -34,7 +34,7 @@
   },
   "addVehicleModal": {
     "heading": "Add new vehicle",
-    "form": {
+    "forms": {
       "inputPlaceholder": {
         "name": "Name",
         "description": "Description",

@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { $api } from '~/plugins/api'
 import { vehicleStoreState } from '~/types/store/vehicleStoreState'
 import { getVehiclesRequestParams } from '~/services/types/vehicles'
-import { useDevicePageSize } from '~/composables/useDevicePageSize/useDevicePageSize'
+import { useDevicePageSize } from '~/useCases/pages/useVehicleList/useCases/useDevicePageSize'
 import { normalizeQueryFilter } from '~/utils/normalizeQueryFilter'
 
 export const useVehicleStore = defineStore('VehicleStore', {

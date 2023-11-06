@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TheHeader from '~/components/common/TheHeader.vue'
+import TheHeader from '~/components/common/pageSections/header/TheHeader.vue'
 </script>
 
 <template>
@@ -54,6 +54,11 @@ import TheHeader from '~/components/common/TheHeader.vue'
   justify-content: center;
   align-items: center;
   height: 700px;
+  border: 1px solid var(--base_100);
+
+  @include sm {
+    height: 400px;
+  }
 
   &-message {
     &-main {

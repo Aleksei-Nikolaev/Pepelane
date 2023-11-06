@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import TheHeader from '~/components/common/TheHeader.vue'
-import TheModal from '~/components/common/TheModal.vue'
-import { useShowModal } from '~/composables/useVehicleWrapper/useCases/useShowModal'
+import TheHeader from '~/components/common/pageSections/header/TheHeader.vue'
+import TheModal from '~/components/common/modals/TheModal.vue'
+import { useShowModal } from '~/useCases/modals/useShowModal'
 useHead({
   title: 'Pepelane'
 })

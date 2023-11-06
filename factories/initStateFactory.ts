@@ -1,4 +1,4 @@
-import { ImageUploadState } from '~/components/common/TheImageUpload/types'
+import { ImageUploadState } from '~/components/common/reusable/imageUpload/types'
 
 export const initStateFactory = () => {
   const createImgUploadState = (): ImageUploadState => {

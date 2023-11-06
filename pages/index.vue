@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TheVehicleWrapper from '~/components/common/TheVehicleWrapper.vue'
+import TheVehicleWrapper from '~/components/common/pages/vehicleList/components/TheVehicleListWrapper.vue'
 </script>
 
 <template>

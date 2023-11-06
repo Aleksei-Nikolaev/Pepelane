@@ -1,4 +1,4 @@
-import { FilterParams } from '~/types/FilterParams'
+import { FilterParams } from '~/types/entities/filterParams'
 
 export const normalizeQueryFilter = (filter: Partial<FilterParams>) => {
   if (filter.page) {

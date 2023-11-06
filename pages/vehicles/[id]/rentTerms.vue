@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { IVehicle } from '~/types/vehicle'
-import TheCollapsedText from '~/components/common/TheCollapsedText.vue'
-import { textPlaceHolders } from '~/constants/textPlaceHolders'
+import { IVehicle } from '~/types/entities/vehicle'
+import TheCollapsedText from '~/components/common/reusable/TheCollapsedText.vue'
+import { textPlaceHolders } from '~/constants/pages/vehicleDetailedPage/textPlaceHolders'
 
 defineProps<{
   vehicleData: IVehicle;

@@ -1,1 +1,1 @@
-export * from './staffMembers'
+export * from './pages/vehicleDetailedPage/staffMembers'

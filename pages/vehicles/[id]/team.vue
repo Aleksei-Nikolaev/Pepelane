@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { IVehicle } from '~/types/vehicle'
-import TheCollapsedText from '~/components/common/TheCollapsedText.vue'
-import TheImage from '~/components/common/TheImage.vue'
+import { IVehicle } from '~/types/entities/vehicle'
+import TheCollapsedText from '~/components/common/reusable/TheCollapsedText.vue'
+import TheImage from '~/components/common/reusable/TheImage.vue'
 import { staffMembers } from '~/constants'
 
 defineProps<{

@@ -1,4 +1,4 @@
-import { FilterParams, sortName, sortType } from '~/types/FilterParams'
+import { FilterParams, sortName, sortType } from '~/types/entities/filterParams'
 
 export const filterFactory = () => {
   const createFilter = (params?: Partial<FilterParams>): FilterParams => {

@@ -1,6 +1,6 @@
-import { IVehicle } from '~/types/vehicle'
+import { IVehicle } from '~/types/entities/vehicle'
 import { PaginationMeta } from '~/types/server/pagination'
-import { FilterParams } from '~/types/FilterParams'
+import { FilterParams } from '~/types/entities/filterParams'
 
 export type vehicleStoreState = {
   data: IVehicle[];

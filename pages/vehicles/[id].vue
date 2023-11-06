@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { $api } from '~/plugins/api'
-import TheImage from '~/components/common/TheImage.vue'
-import { useDetailedPageRoutes } from '~/composables/useDetailedPage/useCases/useDetailedPageRoutes.'
-import TheRentForm from '~/components/common/TheRentForm.vue'
+import TheImage from '~/components/common/reusable/TheImage.vue'
+import { useVehicleDetailedPageRoutes } from '~/useCases/pages/useVehicleDetailedPage/useCases/useVehicleDetailedPageRoutes.'
+import TheRentForm from '~/components/common/pages/vehicleDetailedPage/components/TheRentPlate.vue'
 
 const route = useRoute()
 
@@ -13,7 +13,7 @@ const { data: vehicleData } = useAsyncData(`vehicle-${id}`, async () => {
   return data
 })
 
-const { sections } = useDetailedPageRoutes()
+const { sections } = useVehicleDetailedPageRoutes()
 </script>
 
 <template>

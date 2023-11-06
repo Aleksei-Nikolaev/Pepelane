@@ -1,5 +1,5 @@
 import { sortList } from '~/utils/server/listParams/sortList'
-import { vehiclesSortOptions } from '~/constants/sort'
+import { vehiclesSortOptions } from '~/constants/server/sort'
 import { VehicleModel } from '~/models/vehicle.model'
 import { rawSortParams } from '~/helpers/controllers/vehicle/getVehicle/types/getVehicleSort.helper.types'
 import { vehiclesSortParams } from '~/types/server/vehiclesSortList'

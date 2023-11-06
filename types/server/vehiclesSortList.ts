@@ -1,4 +1,4 @@
-import { vehiclesSortOptions } from '~/constants/sort'
+import { vehiclesSortOptions } from '~/constants/server/sort'
 
 type sortType = 'ascending' | 'descending';
 type sortBy = vehiclesSortOptions;

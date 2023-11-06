@@ -1,6 +1,6 @@
 import { QueryValue } from 'ufo'
 import { VehicleModel } from '~/models/vehicle.model'
-import { availableFilterTypes } from '~/constants/availableFilterTypes'
+import { availableFilterTypes } from '~/constants/server/availableFilterTypes'
 import { vehiclesFilterType } from '~/types/server/vehiclesFilterType'
 
 export const getVehicleFilterHelper = (

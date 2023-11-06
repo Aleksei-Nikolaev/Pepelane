@@ -1,7 +1,7 @@
-import { IVehicle } from '~/types/vehicle'
+import { IVehicle } from '~/types/entities/vehicle'
 import { PaginationMeta } from '~/types/server/pagination'
 import { defaultResponseType } from '~/services/types/default'
-import { sortName, sortType } from '~/types/FilterParams'
+import { sortName, sortType } from '~/types/entities/filterParams'
 
 export type getVehiclesResponse = {
   data: IVehicle[];

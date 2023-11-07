@@ -9,7 +9,6 @@ import { useScrollDirection } from '~/useCases/pages/useVehicleList/useCases/use
 import { eventNames } from '~/constants/events'
 import { vehiclesListEmits } from '~/useCases/pages/useVehicleList/types/vehiclesListEmits'
 import { scrollDirection } from '~/constants/pages/vehicleList/scrollDirection'
-import { swipeDirection } from '~/constants/pages/vehicleList/swipeDirection'
 
 export const usePageChange = (
   props: VehiclesListProps,
@@ -44,12 +43,13 @@ export const usePageChange = (
       : pageInc(props.filter.page)
   }
 
-  const handleSwipe = (event: swipeDirection) => {
-    if (event === swipeDirection.LEFT) {
+  const handleSwipe = (lengthX: number, lengthY:number) => {
+    const isHorizontalSwipe = (Math.abs(lengthX) > Math.abs(0.7 * lengthY) && (Math.abs(lengthX) > 30))
+    if (lengthX > 0 && isHorizontalSwipe) {
       pageInc(props.filter.page)
       return
     }
-    if (event === swipeDirection.RIGHT) {
+    if (lengthX < 0 && isHorizontalSwipe) {
       pageDec(props.filter.page)
     }
   }

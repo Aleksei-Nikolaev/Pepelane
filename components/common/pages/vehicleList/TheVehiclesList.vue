@@ -14,6 +14,9 @@ import { useScreenSize } from '~/composables/useScreenSize/useScreenSize'
 const props = defineProps<VehiclesListProps>()
 const emits = defineEmits<vehiclesListEmits>()
 
+const container = ref(null)
+const { isSwiping, lengthY, lengthX } = useSwipe(container)
+
 const scrollDirectionClass = ref(scrollDirection.DOWN)
 
 const { defaultDirection } = useScrollDirection(scrollDirectionClass)
@@ -35,6 +38,14 @@ watch(
   { deep: true }
 )
 
+watch(
+  () => isSwiping.value,
+  () => {
+    if (!isSwiping.value) {
+      debouncedHandleSwipe(lengthX.value, lengthY.value)
+    }
+  })
+
 onMounted(() => {
   emits(eventNames.ELEMENT_REMOVED)
 })
@@ -43,8 +54,6 @@ onMounted(() => {
 <template>
   <div
     ref="container"
-    v-touch:swipe.left="debouncedHandleSwipe"
-    v-touch:swipe.right="debouncedHandleSwipe"
     class="list-container"
     @wheel="debouncedHandleScroll"
   >

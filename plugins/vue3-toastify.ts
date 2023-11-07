@@ -10,7 +10,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     multiple: false,
     transition: toast.TRANSITIONS.SLIDE,
     toastClassName: 'notification',
-    closeButton: false
+    closeButton: false,
+    autoClose: 1000,
   })
 
   return {

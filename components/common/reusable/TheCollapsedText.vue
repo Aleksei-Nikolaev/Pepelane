@@ -17,7 +17,10 @@ const collapseHandle = () => {
     <p class="section__text">
       {{ detailedText }}
     </p>
-    <div v-show="collapsed" class="blur" />
+    <div
+      class="blur"
+      :class="{ hided: !collapsed }"
+    />
   </div>
   <div class="collapsed__icon-container">
     <DownOutlined
@@ -55,12 +58,19 @@ const collapseHandle = () => {
     &-arrow {
       color: var(--main_400);
       font-size: 32px;
+      @include sm {
+        font-size: 24px;
+      }
     }
   }
 }
 
 .rotated {
   transform: rotateX(180deg);
+}
+
+.hided {
+  opacity: 0;
 }
 
 .blur {
@@ -71,5 +81,6 @@ const collapseHandle = () => {
   left: 0px;
   bottom: 0px;
   background-image: linear-gradient(rgba(255, 255, 255, 0), var(--base_0));
+  transition: opacity 0.2s ease-in-out;
 }
 </style>

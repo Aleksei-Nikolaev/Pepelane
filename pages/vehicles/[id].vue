@@ -38,9 +38,9 @@ const { sections } = useVehicleDetailedPageRoutes()
       <Transition name="page__nested" mode="out-in">
         <div :key="route.fullPath" class="vehicle-page__info-box">
           <NuxtPage :vehicle-data="vehicleData" />
-          <TheRentPlate :price="vehicleData.rent" />
         </div>
       </Transition>
+      <TheRentPlate :price="vehicleData.rent" />
     </div>
   </div>
 </template>
@@ -98,6 +98,13 @@ const { sections } = useVehicleDetailedPageRoutes()
   }
 
   &__info {
+    display: flex;
+    flex-direction: column;
+
+    @include sm {
+      padding-bottom: 80px;
+    }
+
     &-name {
       color: var(--base_500);
       font-size: var(--font_size_largest);

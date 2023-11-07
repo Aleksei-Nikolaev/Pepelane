@@ -56,6 +56,7 @@ const { fileList, beforeUpload, handleChange } = useImageUpload(emits)
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
+    width: 24px;
 
     &-container {
       background-color: var(--base_0);

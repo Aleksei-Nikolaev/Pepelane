@@ -13,6 +13,7 @@ const { fileList, beforeUpload, handleChange } = useImageUpload(emits)
 <template>
   <div class="drop-zone">
     <a-upload
+      v-show="props.uploadStatus.fileUploadStatus !== 'uploading'"
       v-model:file-list="fileList"
       list-type="picture-card"
       :max-count="1"

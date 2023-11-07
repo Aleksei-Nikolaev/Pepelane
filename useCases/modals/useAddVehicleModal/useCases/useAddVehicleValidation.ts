@@ -69,12 +69,6 @@ export const useAddVehicleValidation = () => {
 
     if (fileUploadStatus === 'uploading') { return }
 
-    if (fileUploadStatus === null && isImage === null && isSize === null) {
-      return handleFormReject(
-        t(`${localesPath.image}.default`, { imgMaxSize })
-      )
-    }
-
     if (fileUploadStatus === 'removed') {
       return handleFormReject(
         t(`${localesPath.image}.default`, { imgMaxSize })

@@ -19,6 +19,7 @@ const { fileList, beforeUpload, handleChange } = useImageUpload(emits)
       :max-count="1"
       :show-upload-list="{ showPreviewIcon: false, showRemoveIcon: true }"
       :before-upload="beforeUpload"
+      :support-server-render=true
       accept="image/*"
       class="drop-zone__upload"
       @change="handleChange"

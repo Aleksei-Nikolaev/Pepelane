@@ -2,7 +2,7 @@
 import { $api } from '~/plugins/api'
 import TheImage from '~/components/common/reusable/TheImage.vue'
 import { useVehicleDetailedPageRoutes } from '~/useCases/pages/useVehicleDetailedPage/useCases/useVehicleDetailedPageRoutes.'
-import TheRentForm from '~/components/common/pages/vehicleDetailedPage/components/TheRentPlate.vue'
+import TheRentPlate from '~/components/common/pages/vehicleDetailedPage/components/TheRentPlate.vue'
 
 const route = useRoute()
 
@@ -38,7 +38,7 @@ const { sections } = useVehicleDetailedPageRoutes()
       <Transition name="page__nested" mode="out-in">
         <div :key="route.fullPath" class="vehicle-page__info-box">
           <NuxtPage :vehicle-data="vehicleData" />
-          <TheRentForm :price="vehicleData.rent" />
+          <TheRentPlate :price="vehicleData.rent" />
         </div>
       </Transition>
     </div>

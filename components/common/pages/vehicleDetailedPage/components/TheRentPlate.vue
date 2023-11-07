@@ -37,9 +37,11 @@ const onOrder = () => {
   &__wrapper {
     @include sm {
       z-index: 2;
-      position: sticky;
+      position: fixed;
+      width: calc(100% - 2 *var(--padding-mobile-content));
       height: 120px;
       bottom: 0;
+      left: var(--padding-mobile-content);
       background: linear-gradient(to bottom, transparent 1%, var(--base_0) 10%);
     }
   }
@@ -51,7 +53,6 @@ const onOrder = () => {
     display: flex;
     align-items: center;
     padding: 0 32px;
-    margin-top: 40px;
 
     @include md {
       padding: 0 16px;

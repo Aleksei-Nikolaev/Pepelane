@@ -99,6 +99,15 @@ onMounted(() => {
   overflow: hidden;
   position: relative;
   border: 1px solid var(--base_100);
+  min-height: calc(
+      2 * var(--gap) + 2 * var(--padding_list) + 3 * 164px + 2px
+  );
+
+  @include lg {
+    min-height: calc(
+        3 * var(--gap) + 2 * var(--padding_list) + 4 * 164px + 2px
+    );
+  }
 
   &__wrapper {
     display: flex;

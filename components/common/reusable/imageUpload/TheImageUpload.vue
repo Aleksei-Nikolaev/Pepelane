@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { UploadRequestOption } from 'ant-design-vue/es/vc-upload/interface'
 import { ImageUploadEmits, ImageUploadProps } from './types'
 import { useImageUpload } from '~/useCases/reusable/useImageUpload/useImageUpload'
 
@@ -7,6 +8,14 @@ const props = defineProps<ImageUploadProps>()
 const emits = defineEmits<ImageUploadEmits>()
 
 const { fileList, beforeUpload, handleChange } = useImageUpload(emits)
+
+// for unexpected behaviour of antd upload
+const shotDefaultError = async ({ file, onSuccess }: UploadRequestOption) => {
+  if (!file || !onSuccess) { return }
+  await setTimeout(() => {
+    if (file) { onSuccess('ok') }
+  }, 0)
+}
 
 </script>
 
@@ -19,7 +28,9 @@ const { fileList, beforeUpload, handleChange } = useImageUpload(emits)
       :max-count="1"
       :show-upload-list="{ showPreviewIcon: false, showRemoveIcon: true }"
       :before-upload="beforeUpload"
-      :support-server-render=true
+      :support-server-render="true"
+      :capture="null"
+      :custom-request="shotDefaultError"
       accept="image/*"
       class="drop-zone__upload"
       @change="handleChange"

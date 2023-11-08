@@ -44,7 +44,7 @@ export const usePageChange = (
   }
 
   const handleSwipe = (lengthX: number, lengthY:number) => {
-    const isHorizontalSwipe = (Math.abs(lengthX) > Math.abs(0.7 * lengthY) && (Math.abs(lengthX) > 30))
+    const isHorizontalSwipe = (Math.abs(lengthX) > Math.abs(0.7 * lengthY) && (Math.abs(lengthX) > 25))
     if (lengthX > 0 && isHorizontalSwipe) {
       pageInc(props.filter.page)
       return

@@ -19,10 +19,10 @@ export default defineNuxtConfig({
   build: {
     transpile: ['ant-design-vue']
   },
-
-  nitro: {
-    compressPublicAssets: true
-  },
+  //
+  // nitro: {
+  //   compressPublicAssets: true
+  // },
 
   app: {
     head: {

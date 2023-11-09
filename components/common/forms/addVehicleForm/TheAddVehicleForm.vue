@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RenderDOMFunc } from 'ant-design-vue/es/vc-select/BaseSelect'
 import TheImageUpload from '~/components/common/reusable/imageUpload/TheImageUpload.vue'
 import { useAddVehicleForm } from '~/useCases/modals/useAddVehicleModal/useCases/useAddVehicleForm'
 
@@ -36,10 +35,10 @@ const {
     <a-form-item has-feedback name="type">
       <div ref="selectRef" class="drop-menu__dropdown-container" />
       <a-select
-        v-model:value="userVehicleData.type as string"
+        v-model:value="userVehicleData.type"
         :placeholder="$t('addVehicleModal.forms.inputPlaceholder.type')"
         :options="vehicleTypes"
-        :get-popup-container="() => selectRef as unknown as RenderDOMFunc"
+        :get-popup-container="() => selectRef"
       />
     </a-form-item>
     <a-form-item has-feedback name="name">
@@ -62,7 +61,7 @@ const {
     </a-form-item>
     <a-form-item has-feedback name="rent">
       <a-input
-        v-model:value="userVehicleData.rent as number"
+        v-model:value="userVehicleData.rent"
         v-maska
         autocomplete="off"
         :placeholder="$t('addVehicleModal.forms.inputPlaceholder.rent')"

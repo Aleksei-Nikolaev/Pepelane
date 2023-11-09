@@ -14,7 +14,6 @@
     "lint": "npm run lint:js && npm run lint:prettier",
     "lintfix": "prettier --write --list-different . && npm run lint:js --fix",
     "prepare": "husky install",
-    "precommit": "vue-tsc",
     "analyze": "npx nuxi analyze"
   },
   "devDependencies": {

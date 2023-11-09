@@ -29,6 +29,7 @@ const { isLastPage, isFirstPage } = usePagePosition(props)
 
 const { emptyCardsBottom, emptyCardsTop, setEmptyCards } = useEmptyCards()
 const { sm, lg } = useScreenSize()
+const { $device } = useNuxtApp()
 
 setEmptyCards(props)
 
@@ -38,13 +39,15 @@ watch(
   { deep: true }
 )
 
-watch(
-  () => isSwiping.value,
-  () => {
-    if (!isSwiping.value) {
-      debouncedHandleSwipe(lengthX.value, lengthY.value)
-    }
-  })
+if ($device.isMobileOrTablet) {
+  watch(
+    () => isSwiping.value,
+    () => {
+      if (!isSwiping.value) {
+        debouncedHandleSwipe(lengthX.value, lengthY.value)
+      }
+    })
+}
 
 onMounted(() => {
   emits(eventNames.ELEMENT_REMOVED)

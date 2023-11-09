@@ -14,7 +14,7 @@ const emits = defineEmits<{
 <template>
   <a-radio-group
     :value="sectionName"
-    :options="infoSections"
+    :options="infoSections as unknown as string[]"
     option-type="button"
     button-style="solid"
     class="filter-container__section"

@@ -14,10 +14,10 @@
     "lint": "npm run lint:js && npm run lint:prettier",
     "lintfix": "prettier --write --list-different . && npm run lint:js --fix",
     "prepare": "husky install",
-    "precommit": "vue-tsc"
+    "precommit": "vue-tsc",
+    "analyze": "npx nuxi analyze"
   },
   "devDependencies": {
-    "@ant-design-vue/nuxt": "^1.1.2",
     "@nuxt/devtools": "latest",
     "@nuxt/image": "^1.0.0-rc.1",
     "@nuxtjs/device": "^3.1.1",
@@ -28,10 +28,11 @@
     "eslint": "^8.52.0",
     "eslint-plugin-vue": "^9.18.1",
     "husky": "^8.0.3",
-    "less": "^4.1.3",
+    "less": "^4.2.0",
     "less-loader": "^11.1.3",
     "sass": "^1.62.1",
-    "sass-loader": "^13.3.1"
+    "sass-loader": "^13.3.1",
+    "unplugin-vue-components": "^0.25.2"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",

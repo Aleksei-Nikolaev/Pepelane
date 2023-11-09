@@ -2,9 +2,6 @@
 import TheHeader from '~/components/common/pageSections/header/TheHeader.vue'
 import TheModal from '~/components/common/modals/TheModal.vue'
 import { useShowModal } from '~/useCases/modals/useShowModal'
-useHead({
-  title: 'Pepelane'
-})
 
 const { showModal } = useShowModal()
 </script>

@@ -17,7 +17,7 @@ const { defaultRoute } = useVehicleDetailedPageRoutes()
     class="link-wrapper"
   >
     <div class="card-container">
-      <TheImage :url="vehicle.preview" class="card-container__image" />
+      <TheImage :url="vehicle.preview" class="card-container__image" :alt="`Picture of ${vehicle.name}`" />
       <div class="card-container__info">
         <p class="card-container__info__name">
           {{ vehicle.name }}

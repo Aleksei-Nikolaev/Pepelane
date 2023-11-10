@@ -41,12 +41,12 @@ watch(
 
 if ($device.isMobileOrTablet) {
   watch(
-      () => isSwiping.value,
-      () => {
-        if (!isSwiping.value) {
-          debouncedHandleSwipe(lengthX.value, lengthY.value)
-        }
-      })
+    () => isSwiping.value,
+    () => {
+      if (!isSwiping.value) {
+        debouncedHandleSwipe(lengthX.value, lengthY.value)
+      }
+    })
 }
 
 onMounted(() => {

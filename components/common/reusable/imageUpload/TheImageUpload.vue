@@ -29,7 +29,7 @@ const shotDefaultError = async ({ file, onSuccess }: UploadRequestOption) => {
       :show-upload-list="{ showPreviewIcon: false, showRemoveIcon: true }"
       :before-upload="beforeUpload"
       :support-server-render="true"
-      :capture="null"
+      :capture="null as unknown as boolean"
       :custom-request="shotDefaultError"
       accept="image/*"
       class="drop-zone__upload"

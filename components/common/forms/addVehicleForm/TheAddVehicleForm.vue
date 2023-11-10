@@ -35,10 +35,10 @@ const {
     <a-form-item has-feedback name="type">
       <div ref="selectRef" class="drop-menu__dropdown-container" />
       <a-select
-        v-model:value="userVehicleData.type"
+        v-model:value="userVehicleData.type as string"
         :placeholder="$t('addVehicleModal.forms.inputPlaceholder.type')"
         :options="vehicleTypes"
-        :get-popup-container="() => selectRef"
+        :get-popup-container="() => selectRef as HTMLImageElement"
       />
     </a-form-item>
     <a-form-item has-feedback name="name">
@@ -61,7 +61,7 @@ const {
     </a-form-item>
     <a-form-item has-feedback name="rent">
       <a-input
-        v-model:value="userVehicleData.rent"
+        v-model:value="userVehicleData.rent as number"
         v-maska
         autocomplete="off"
         :placeholder="$t('addVehicleModal.forms.inputPlaceholder.rent')"

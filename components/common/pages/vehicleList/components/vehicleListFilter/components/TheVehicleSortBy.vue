@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { SelectProps } from 'ant-design-vue'
+import { SelectValue } from 'ant-design-vue/es/select'
 import { sortName } from '~/types/entities/filterParams'
 import { eventNames } from '~/constants/events'
 
@@ -8,7 +9,7 @@ defineProps<{
 }>()
 
 const emits = defineEmits<{
-  (eventName: eventNames.UPDATE_VALUE, value: sortName): void;
+  (eventName: eventNames.UPDATE_VALUE, value: SelectValue): void;
 }>()
 
 const options: SelectProps['options'] = [

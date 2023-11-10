@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import Components from 'unplugin-vue-components/vite'
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import appConfig from './core/config'
 
 export default defineNuxtConfig({
@@ -13,6 +15,10 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/device'
   ],
+
+  build: {
+    transpile: ['ant-design-vue']
+  },
 
   css: ['normalize.css/normalize.css', '~/assets/styles/global.scss'],
 
@@ -42,6 +48,11 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    plugins: [
+      Components({
+        resolvers: [AntDesignVueResolver({ importStyle: 'less', resolveIcons: true })]
+      })
+    ],
     css: {
       preprocessorOptions: {
         less: {

@@ -20,6 +20,19 @@ export default defineNuxtConfig({
     transpile: ['ant-design-vue']
   },
 
+  nitro: {
+    compressPublicAssets: true
+  },
+
+  app: {
+    head: {
+      title: 'Pepelane',
+      htmlAttrs: {
+        lang: 'en'
+      }
+    }
+  },
+
   css: ['normalize.css/normalize.css', '~/assets/styles/global.scss'],
 
   i18n: {
@@ -56,6 +69,9 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         less: {
+          modifyVars: {
+            'primary-color': '#4959ff'
+          },
           javascriptEnabled: true
         },
         scss: {

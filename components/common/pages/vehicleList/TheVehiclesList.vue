@@ -111,6 +111,7 @@ onMounted(() => {
   overflow: hidden;
   position: relative;
   border: 1px solid var(--base_100);
+  min-height: calc(164px + 2 * var(--padding_list));
 
   &__wrapper {
     display: flex;

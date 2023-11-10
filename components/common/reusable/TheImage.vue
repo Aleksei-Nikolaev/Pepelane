@@ -3,8 +3,8 @@ import { Skeletor } from 'vue-skeletor'
 import 'vue-skeletor/dist/vue-skeletor.css'
 
 type TheImageProps = {
-  url: string;
-  alt: string;
+  url: string,
+  alt: string
 };
 
 defineProps<TheImageProps>()

@@ -6,7 +6,7 @@ const image = '/img/face.jpg'
 <template>
   <div class="user-info__container">
     <span class="user-info__name">Alexey Nikolaev</span>
-    <TheImage class="user-info__image" :url="image" />
+    <TheImage class="user-info__image" :url="image" :alt="'user_avatar'"/>
   </div>
 </template>
 

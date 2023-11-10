@@ -4,6 +4,7 @@ import 'vue-skeletor/dist/vue-skeletor.css'
 
 type TheImageProps = {
   url: string;
+  alt: string;
 };
 
 defineProps<TheImageProps>()
@@ -28,6 +29,7 @@ const imageLoaded = () => {
       v-show="isImageLoaded"
       ref="img"
       :src="url"
+      :alt="alt"
       class="image__container__image"
       @load="imageLoaded"
     >

@@ -18,7 +18,7 @@ const { sections } = useVehicleDetailedPageRoutes()
 
 <template>
   <div v-if="vehicleData" class="vehicle-page__container">
-    <TheImage :url="vehicleData.image" class="vehicle-page__image" />
+    <TheImage :url="vehicleData.image" class="vehicle-page__image" :alt="`Picture of ${vehicleData.name}`" />
     <div class="vehicle-page__info">
       <h1 id="name" class="vehicle-page__info-name">
         {{ vehicleData.name }}

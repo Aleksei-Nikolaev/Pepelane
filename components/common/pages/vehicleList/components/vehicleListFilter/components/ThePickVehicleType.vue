@@ -17,6 +17,7 @@ const { vehicleFilterTypes } = useVehicleTypes()
 <template>
   <div>
     <a-radio-group
+      v-show="vehicleFilterTypes.length > 1"
       :value="value"
       :options="vehicleFilterTypes"
       option-type="button"

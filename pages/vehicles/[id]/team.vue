@@ -20,7 +20,7 @@ defineProps<{
       :key="member.id"
       class="team__member-box"
     >
-      <TheImage class="team__member-photo" :url="`/img/${member.id}.png`" />
+      <TheImage class="team__member-photo" :url="`/img/${member.id}.png`" :alt="`Picture of ${member.title}`" />
       <div class="team__member-info">
         <p class="section__text-bold team__member-info-name">
           {{ member.name }}

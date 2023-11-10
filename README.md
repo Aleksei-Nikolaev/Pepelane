@@ -1,42 +1,44 @@
-# Nuxt 3 Minimal Starter
+# Pepelane
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+I'm Alexey Nikolaev and that's my pet project
 
 ## Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# yarn
-yarn install
-
 # npm
 npm install
-
-# pnpm
-pnpm install
 ```
-
 ## Development Server
-
-Start the development server on `http://localhost:3000`
-
 ```bash
 npm run dev
+
+Do not forget change your .env:
+FRONTEND_API_BASE_URL: http://localhost:3000/api/
+
+Start the development server on `http://localhost:3000`
 ```
 
-## Production
 
-Build the application for production:
-
+### Production
 ```bash
+#Build the application for production:
+
 npm run build
-```
 
-Locally preview production build:
+#Locally preview production build:
+
+npm run start
+```
+### Web access
 
 ```bash
-npm run preview
+#You can reach the deployed project via link below
+
+https://pepelane-2dc853221600.herokuapp.com/
+
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+

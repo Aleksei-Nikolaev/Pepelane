@@ -20,7 +20,7 @@ const { isSwiping, lengthY, lengthX } = useSwipe(container)
 const scrollDirectionClass = ref(scrollDirection.DOWN)
 
 const { defaultDirection } = useScrollDirection(scrollDirectionClass)
-const { debouncedHandleScroll, debouncedHandleSwipe } = usePageChange(
+const { handleScroll, debouncedHandleSwipe } = usePageChange(
   props,
   emits,
   scrollDirectionClass
@@ -58,7 +58,7 @@ onMounted(() => {
   <div
     ref="container"
     class="list-container"
-    @wheel="() => (renderItems) ?debouncedHandleScroll : null"
+    @wheel="(event: WheelEvent) => (renderItems) ? handleScroll(event) : null"
   >
     <Transition name="empty-top">
       <div

@@ -54,11 +54,11 @@ export const usePageChange = (
     }
   }
 
-  const debouncedHandleScroll = debounce(handleScroll, 600)
+  // const debouncedHandleScroll = debounce(handleScroll, 200)
   const debouncedHandleSwipe = debounce(handleSwipe, 200)
 
   return {
-    debouncedHandleScroll,
-    debouncedHandleSwipe
+    debouncedHandleSwipe,
+    handleScroll
   }
 }

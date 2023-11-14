@@ -15,10 +15,10 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/device'
   ],
-  //
-  // build: {
-  //   transpile: ['ant-design-vue']
-  // },
+
+  build: {
+    transpile: ['ant-design-vue']
+  },
 
   nitro: {
     compressPublicAssets: true

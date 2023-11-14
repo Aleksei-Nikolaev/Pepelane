@@ -40,7 +40,9 @@ const { sections } = useVehicleDetailedPageRoutes()
           <NuxtPage :vehicle-data="vehicleData" />
         </div>
       </Transition>
-      <TheRentPlate :price="vehicleData.rent" />
+      <Transition name="page__nested" mode="out-in">
+      <TheRentPlate :key="route.fullPath" :price="vehicleData.rent" />
+      </Transition>
     </div>
   </div>
 </template>
@@ -78,12 +80,12 @@ const { sections } = useVehicleDetailedPageRoutes()
   }
 
   &__image {
-    width: 36vw;
-    height: 36vw;
+    width: 700px;
+    height: 700px;
     border-radius: var(--border_radius_small);
     margin-right: 64px;
 
-    @include md {
+    @include xl {
       width: 35vw;
       height: 35vw;
       margin-right: 40px;

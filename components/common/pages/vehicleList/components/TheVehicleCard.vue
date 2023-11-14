@@ -36,9 +36,9 @@ const { defaultRoute } = useVehicleDetailedPageRoutes()
 <style scoped lang="scss">
 .link-wrapper {
   width: calc((100% - 2 * var(--gap)) / 3);
-  height: 164px;
   background: var(--base_0);
   border-radius: var(--border_radius_medium);
+  height: 164px;
 
   @include lg {
     width: calc((100% - var(--gap)) / 2);

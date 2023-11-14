@@ -43,7 +43,7 @@ if ($device.isMobileOrTablet) {
   watch(
     () => isSwiping.value,
     () => {
-      if (!isSwiping.value) {
+      if (!isSwiping.value && props.renderItems) {
         debouncedHandleSwipe(lengthX.value, lengthY.value)
       }
     })
@@ -58,7 +58,7 @@ onMounted(() => {
   <div
     ref="container"
     class="list-container"
-    @wheel="debouncedHandleScroll"
+    @wheel="() => (renderItems) ?debouncedHandleScroll : null"
   >
     <Transition name="empty-top">
       <div
@@ -111,7 +111,11 @@ onMounted(() => {
   overflow: hidden;
   position: relative;
   border: 1px solid var(--base_100);
-  min-height: calc(164px + 2 * var(--padding_list));
+  min-height: calc(3 * 164px + 2 * var(--padding_list) + 2 * var(--gap) + 2px);
+
+  @include lg {
+    min-height: calc(4 * 164px + 2 * var(--padding_list) + 3 * var(--gap) + 2px);
+  }
 
   &__wrapper {
     display: flex;

@@ -18,7 +18,7 @@ export const useAddVehicleValidation = () => {
   const maxRentValue = 10000
   const minNameLength = 4
   const minDescriptionLength = 8
-  const imgMaxSize = 5
+  const imgMaxSize = 10
   const regexLetter = /^[A-Za-z]/
 
   const localesPath = {

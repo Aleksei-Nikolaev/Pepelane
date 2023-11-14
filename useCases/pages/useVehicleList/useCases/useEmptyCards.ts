@@ -15,9 +15,10 @@ export const useEmptyCards = () => {
     const { pageSize, totalItems, page } = props.meta
 
     const leftCards = totalItems - pageSize * page
+    const cardsToFirst = pageSize * (page - 1)
 
     const renderCards = isLastPage.value
-      ? totalItems - pageSize * (page - 1)
+      ? totalItems - cardsToFirst
       : pageSize
 
     const checkFirstLast = () => {
@@ -26,7 +27,7 @@ export const useEmptyCards = () => {
     }
 
     if (sm.value) {
-      emptyCardsTop.value = renderCards
+      emptyCardsTop.value = renderCards > 4 ? renderCards : 4
       emptyCardsBottom.value = renderCards < leftCards ? renderCards : leftCards
 
       checkFirstLast()
@@ -38,7 +39,7 @@ export const useEmptyCards = () => {
       const ceiledRenderCards = ceilCard(renderCards)
       const ceiledLeftCards = ceilCard(leftCards)
 
-      emptyCardsTop.value = ceiledRenderCards
+      emptyCardsTop.value = ceiledRenderCards > 4 ? ceiledRenderCards : 4
       emptyCardsBottom.value =
           ceiledRenderCards < ceiledLeftCards ? ceiledRenderCards : ceiledLeftCards
 

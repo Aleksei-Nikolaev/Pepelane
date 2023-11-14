@@ -42,6 +42,12 @@ const switchColor = () => {
   &__skeleton {
     width: 96%;
     height: 28px;
+
+    @include sm {
+      width: 26px;
+      height: 26px;
+      border-radius: 13px;
+    }
   }
 
   &__label {

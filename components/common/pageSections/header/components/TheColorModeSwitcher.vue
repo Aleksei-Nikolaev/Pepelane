@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Skeletor } from 'vue-skeletor'
+
 const colorMode = useColorMode()
 
 const switchColor = () => {
@@ -12,7 +14,6 @@ const switchColor = () => {
   <div class="color-mode__container" @click="switchColor()">
     <client-only>
       <nuxt-icon
-        v-if="colorMode.value"
         class="color-mode__icon"
         :name="colorMode.value"
         filled
@@ -21,6 +22,7 @@ const switchColor = () => {
         {{ $t(`header.colorMode.${colorMode.value}`) }}
       </span>
     </client-only>
+    <Skeletor v-show="colorMode.unknown" class="color-mode__skeleton" />
   </div>
 </template>
 
@@ -35,6 +37,11 @@ const switchColor = () => {
     @include sm {
       width: auto;
     }
+  }
+
+  &__skeleton {
+    width: 96%;
+    height: 28px;
   }
 
   &__label {

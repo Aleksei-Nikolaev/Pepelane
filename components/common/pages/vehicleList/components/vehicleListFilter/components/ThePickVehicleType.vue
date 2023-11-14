@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Skeletor } from 'vue-skeletor'
 import { FilterParams } from '~/types/entities/filterParams'
 import { eventNames } from '~/constants/events'
 import { useVehicleTypes } from '~/composables/useVehicleTypes/useVehicleTypes'
@@ -25,10 +26,24 @@ const { vehicleFilterTypes } = useVehicleTypes()
       class="radio-group"
       @change="emits(eventNames.UPDATE_VALUE, $event.target?.value)"
     />
+    <Skeletor v-show="vehicleFilterTypes.length <= 1" class="radio-group__skeleton" />
   </div>
 </template>
 
 <style scoped lang="scss">
+.radio-group {
+  width: 400px;
+  &__skeleton {
+    height: 32px;
+    width: 400px;
+    border-radius: var(--border_radius_micro);
+
+    @include sm {
+      width: 100%;
+    }
+  }
+}
+
 :deep(.ant-radio-group) {
   user-select: none;
   @include sm {

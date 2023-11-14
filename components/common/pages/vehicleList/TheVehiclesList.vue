@@ -75,7 +75,7 @@ onMounted(() => {
     <Transition
       :name="scrollDirectionClass"
       @after-leave="emits(eventNames.ELEMENT_REMOVED)"
-      @after-enter="defaultDirection"
+      @before-enter="defaultDirection"
     >
       <div v-if="renderItems" class="list-container__wrapper">
         <TheVehicleCard

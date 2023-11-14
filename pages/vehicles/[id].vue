@@ -41,7 +41,7 @@ const { sections } = useVehicleDetailedPageRoutes()
         </div>
       </Transition>
       <Transition name="page__nested" mode="out-in">
-      <TheRentPlate :key="route.fullPath" :price="vehicleData.rent" />
+        <TheRentPlate :key="route.fullPath" :price="vehicleData.rent" />
       </Transition>
     </div>
   </div>

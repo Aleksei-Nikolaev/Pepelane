@@ -36,7 +36,6 @@ const { showModal } = useShowModal()
   width: 1440px;
   margin: 0 auto;
   padding: 48px 64px;
-  
 
   @include xl {
     width: 100%;

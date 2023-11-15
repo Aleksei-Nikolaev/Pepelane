@@ -32,10 +32,10 @@ const { vehicleFilterTypes } = useVehicleTypes()
 
 <style scoped lang="scss">
 .radio-group {
-  width: 400px;
+  width: 420px;
   &__skeleton {
     height: 32px;
-    width: 400px;
+    width: 420px;
     border-radius: var(--border_radius_micro);
 
     @include sm {

@@ -12,6 +12,8 @@ npm install
 ```
 ## Development Server
 ```bash
+To start in dev mode please comment build property in nuxt.config.ts
+
 npm run dev
 
 Do not forget change your .env:
@@ -36,7 +38,7 @@ npm run start
 ```bash
 #You can reach the deployed project via link below
 
-https://pepelane-2dc853221600.herokuapp.com/
+https://pepelane-dc3edbf3f5e0.herokuapp.com/
 
 ```
 

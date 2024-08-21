@@ -70,5 +70,9 @@
     "vehicleAdded": "The vehicle was successfully added",
     "vehicleAddedError": "Server error: Vehicle wasn't added",
     "vehicleOrdered": "Thank you! We'll call you back \uD83D\uDE0E"
+  },
+  "authorInfo": {
+    "name": "Aleksei Nikolaev",
+    "greetings": "Welcome to Pepelane. My name is Aleksei Nikolaev, and this website serves as a showcase of my web development skills. It reflects my commitment to clean design and efficient functionality. Thank you for visiting. You can find my contacts below."
   }
 }

@@ -8,6 +8,9 @@ const { closeModal, modal } = useShowModal()
 const modals = {
   [Modals.ADD_VEHICLE]: defineAsyncComponent(
     () => import('~/components/common/modals/components/TheAddVehicleModal.vue')
+  ),
+  [Modals.AUTHOR_INFO]: defineAsyncComponent(
+      () => import('~/components/common/modals/components/TheAuthorInfoModal.vue')
   )
 }
 

@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import TheImage from '~/components/common/reusable/TheImage.vue'
+import {Modals} from "~/constants/modals/modals";
+import {useShowModal} from "~/useCases/modals/useShowModal";
+
+const { openModal } = useShowModal()
+
 const image = '/img/face.jpg'
 </script>
 
 <template>
-  <div class="user-info__container">
-    <span class="user-info__name">Alexey Nikolaev</span>
+  <div
+      class="user-info__container"
+      @click="openModal(Modals.AUTHOR_INFO)"
+  >
+    <span class="user-info__name">Aleksei Nikolaev</span>
     <TheImage class="user-info__image" :url="image" :alt="'user_avatar'" />
   </div>
 </template>
@@ -20,6 +28,7 @@ const image = '/img/face.jpg'
     @include sm {
       margin-left: 0;
     }
+    cursor: pointer;
   }
 
   &__name {

@@ -38,7 +38,7 @@ const collapseHandle = () => {
   &-container {
     display: flex;
     position: relative;
-    transition: max-height 0.2s ease-in-out;
+    transition: max-height 0.3s ease-in-out;
     overflow: hidden;
     max-height: 500px;
   }

@@ -1,6 +1,6 @@
 # Pepelane
 
-I'm Alexey Nikolaev and that's my pet project
+I'm Aleksei Nikolaev and that's my pet project
 
 ## Setup
 

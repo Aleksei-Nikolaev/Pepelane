@@ -5,6 +5,7 @@ import { VehiclesListProps } from '~/useCases/pages/useVehicleList/types/vehicle
 export const useEmptyCards = () => {
   const emptyCardsTop = ref(3)
   const emptyCardsBottom = ref(3)
+  const { $device } = useNuxtApp()
 
   const setEmptyCards = (props: VehiclesListProps) => {
     const { sm, lg } = useScreenSize()
@@ -29,21 +30,28 @@ export const useEmptyCards = () => {
     if (sm.value) {
       emptyCardsTop.value = renderCards > 4 ? renderCards : 4
       emptyCardsBottom.value = renderCards < leftCards ? renderCards : leftCards
-
       checkFirstLast()
       return
     }
+
+
 
     if (lg.value) {
       const ceilCard = (cardAmount: number) => Math.ceil(cardAmount / 2)
       const ceiledRenderCards = ceilCard(renderCards)
       const ceiledLeftCards = ceilCard(leftCards)
 
-      emptyCardsTop.value = ceiledRenderCards > 4 ? ceiledRenderCards : 4
       emptyCardsBottom.value =
           ceiledRenderCards < ceiledLeftCards ? ceiledRenderCards : ceiledLeftCards
 
-      checkFirstLast()
+      if ($device.isMobile) {
+        emptyCardsTop.value = ceiledRenderCards > 2 ? ceiledRenderCards : 2
+        checkFirstLast()
+        return
+      }
+
+      emptyCardsTop.value = ceiledRenderCards > 4 ? ceiledRenderCards : 4
+            checkFirstLast()
       return
     }
 

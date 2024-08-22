@@ -75,7 +75,7 @@ const image = '/img/face.jpg'
     margin-bottom: 100px;
 
     @include sm {
-      margin-bottom: 10px;
+      margin-bottom: 50px;
     }
   }
 
@@ -133,7 +133,6 @@ const image = '/img/face.jpg'
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    //text-align: left;
   }
 }
 

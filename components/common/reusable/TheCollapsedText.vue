@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { DownOutlined } from '@ant-design/icons-vue'
 
-defineProps<{
+const props = defineProps<{
   detailedText: string;
 }>()
 
 const collapsed = ref(true)
+
+const longText = props.detailedText.length > 250
+if (!longText) collapsed.value = false
 
 const collapseHandle = () => {
   collapsed.value = !collapsed.value
@@ -18,12 +21,14 @@ const collapseHandle = () => {
       {{ detailedText }}
     </p>
     <div
+      v-if="longText"
       class="blur"
       :class="{ hided: !collapsed }"
     />
   </div>
   <div class="collapsed__icon-container">
     <DownOutlined
+      v-if="longText"
       class="collapsed__icon-arrow"
       :class="{ rotated: !collapsed }"
       @click="collapseHandle"

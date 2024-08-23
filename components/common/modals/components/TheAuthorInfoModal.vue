@@ -120,7 +120,6 @@ const image = '/img/face.jpg'
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    margin-left: 16px;
     margin-bottom: 100px;
 
     &__container {

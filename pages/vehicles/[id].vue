@@ -3,6 +3,11 @@ import { $api } from '~/plugins/api'
 import TheImage from '~/components/common/reusable/TheImage.vue'
 import { useVehicleDetailedPageRoutes } from '~/useCases/pages/useVehicleDetailedPage/useCases/useVehicleDetailedPageRoutes.'
 import TheRentPlate from '~/components/common/pages/vehicleDetailedPage/components/TheRentPlate.vue'
+import {IVehicle} from "~/types/entities/vehicle";
+
+defineProps<{
+  showModal: boolean;
+}>()
 
 const route = useRoute()
 
@@ -41,7 +46,11 @@ const { sections } = useVehicleDetailedPageRoutes()
         </div>
       </Transition>
       <Transition name="page__nested" mode="out-in">
-        <TheRentPlate :key="route.fullPath" :price="vehicleData.rent" />
+        <TheRentPlate
+            v-show="!showModal"
+            :key="route.fullPath"
+            :price="vehicleData.rent"
+        />
       </Transition>
     </div>
   </div>

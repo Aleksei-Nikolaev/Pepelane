@@ -13,7 +13,8 @@ const { showModal } = useShowModal()
       <div class="page">
         <NuxtLayout>
           <NuxtPage
-            :transition="{
+              :show-modal="showModal"
+              :transition="{
               name: 'page',
               mode: 'out-in',
             }"

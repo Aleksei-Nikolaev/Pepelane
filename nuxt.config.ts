@@ -16,9 +16,9 @@ export default defineNuxtConfig({
     '@nuxtjs/device'
   ],
 
-  // build: {
-  //   transpile: ['ant-design-vue']
-  // },
+  build: {
+    transpile: ['ant-design-vue']
+  },
 
   nitro: {
     compressPublicAssets: true

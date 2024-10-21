@@ -26,7 +26,7 @@ const image = '/img/face.jpg'
       {{ $t("authorInfo.greetings") }}
     </div>
     <div class="modal__contact-container">
-      <a href="tel: 07482025912" class="modal__link">Phone: 07482025912</a>
+      <a href="tel: 07482025912" class="modal__link">Phone: +447482025912</a>
       <a href="mailto: nikolaev.alex.ig@gmail.com" class="modal__link">Email: alex.nikolaev.ig@gmail.com</a>
     </div>
   </OnClickOutside>

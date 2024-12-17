@@ -27,7 +27,7 @@ export const useVehicleStore = defineStore('VehicleStore', {
       this.filterParams = Object.assign(this.filterParams, useDevicePageSize())
     },
 
-    updateFilterParams (filter: Partial<vehicleStoreState['filterParams']>) {
+     updateFilterParams (filter: Partial<vehicleStoreState['filterParams']>) {
       normalizeQueryFilter(filter)
       this.filterParams = Object.assign(this.filterParams, filter)
     }

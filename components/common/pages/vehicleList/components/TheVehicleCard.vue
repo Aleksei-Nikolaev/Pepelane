@@ -12,7 +12,7 @@ const { defaultRoute } = useVehicleDetailedPageRoutes()
 
 <template>
   <NuxtLink
-    :to="`vehicles/${vehicle.id}/${defaultRoute}`"
+    :to="`/vehicles/${vehicle.id}/${defaultRoute}`"
     :rel="vehicle.id"
     class="link-wrapper"
   >

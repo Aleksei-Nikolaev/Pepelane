@@ -30,7 +30,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en'
       }
-    }
+    },
   },
 
   css: ['normalize.css/normalize.css', '~/assets/styles/global.scss'],

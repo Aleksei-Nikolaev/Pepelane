@@ -42,7 +42,7 @@ const { showModal } = useShowModal()
     width: 100%;
   }
   @include sm {
-    padding: 0 0;
+    padding: 10px 10px;
   }
 }
 .page {
